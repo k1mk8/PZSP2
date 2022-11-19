@@ -15,5 +15,7 @@ namespace apka.Data
         }
 
         public DbSet<apka.Models.Patient> Patient { get; set; } = default!;
+
+        public DbSet<apka.Models.ClinicalDiagnosis> ClinicalDiagnosis { get; set; }
     }
 }
