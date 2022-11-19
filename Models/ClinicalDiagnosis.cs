@@ -8,8 +8,8 @@ namespace apka.Models
 		public int Id { get; set; }
 
 
-		[Display(Name = "Nazwa rozpoznania")]
-		public string? DiagnosisName { get; set; }
+		[Display(Name = "Nazwa")]
+		public string? Name { get; set; }
 
 
 		[Display(Name = "Uwagi")]
