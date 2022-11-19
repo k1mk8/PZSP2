@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using apka.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<apkaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("apkaContext") ?? throw new InvalidOperationException("Connection string 'apkaContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
