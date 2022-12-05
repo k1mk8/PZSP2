@@ -7,10 +7,6 @@ namespace apka2.Models
 		public int Id { get; set; }
 
 
-		[Display(Name = "ECMO")]
-		public bool IsECMO { get; set; }
-
-
 		[Display(Name = "Zakonczony planowo")]
 		public bool EndedOnSchedule { get; set; }
 
