@@ -23,6 +23,14 @@ namespace apka2.Models
 		public string? ReasonOfUnplannedTermination { get; set; }
 
 
+		[Display(Name = "Zgon pacjenta")]
+		public bool PatientDied { get; set; }
+
+
+		[Display(Name = "Data zgonu")]
+		public DateTime? DateOfDeath { get; set; }
+
+
 		[Display(Name = "Uwagi")]
 		public string? Remarks { get; set; }
 	}
