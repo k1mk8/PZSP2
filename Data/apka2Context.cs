@@ -15,5 +15,7 @@ namespace apka2.Data
         }
 
         public DbSet<apka2.Models.Patient> Patient { get; set; } = default!;
+
+        public DbSet<apka2.Models.ClinicalCenter> ClinicalCenter { get; set; }
     }
 }
