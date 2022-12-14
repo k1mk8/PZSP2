@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using apka2.Data;
 using apka2.Models;
 
@@ -157,5 +159,64 @@ namespace apka2.Controllers
         {
           return _context.Doctor.Any(e => e.Id == id);
         }
+
+        public IActionResult LogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogIn(string Username, string Password)
+        {
+            var person = await _context.Doctor
+                .FirstOrDefaultAsync(p => p.Username == Username);
+
+            if (person == null || Password != person.Password)
+            {
+                return RedirectToAction("ErrorInvalidCredentials");
+            }
+
+            HttpContext.Session.SetInt32(SessionData.SessionKeyUserId, person.Id);
+            var b = person.IsAdmin ? 1 : 0;
+            HttpContext.Session.SetInt32(SessionData.SessionKeyIsAdmin, b); 
+            return RedirectToAction("MyAccount");
+        }
+
+        public async Task<IActionResult> MyAccount()
+        {
+            if (!IsUserLoggedIn())
+            {
+                return RedirectToAction("PleaseLogIn", "Home");
+            }
+
+            var user = await _context.Doctor
+                .FirstOrDefaultAsync(m => m.Id == HttpContext.Session.GetInt32(SessionData.SessionKeyUserId));
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        public bool IsUserLoggedIn()
+        {
+            if (string.IsNullOrWhiteSpace(HttpContext.Session.GetInt32(SessionData.SessionKeyUserId).ToString()))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<IActionResult> LogOut()
+        {
+            HttpContext.Session.Remove(SessionData.SessionKeyUserId);
+            HttpContext.Session.Remove(SessionData.SessionKeyIsAdmin);
+            return RedirectToAction("LogIn");
+        }
+
+
     }
 }
