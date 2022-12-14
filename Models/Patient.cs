@@ -8,7 +8,7 @@ namespace apka2.Models
 		public int Id { get; set; }
 
 
-		[Display(Name = "Inicjaly")]
+		[Display(Name = "Inicjały")]
 		public string? Initials { get; set; }
 
 
@@ -23,19 +23,15 @@ namespace apka2.Models
 
 
 		[DataType(DataType.Date)]
-		[Display(Name = "Data rozpoczecia CKRT")]
+		[Display(Name = "Data rozpoczęcia CKRT")]
 		public DateTime StartOfCKRTDate { get; set; }
 
 
-		[Display(Name = "Niewydolnosc watroby")]
+		[Display(Name = "Niewydolność wątroby")]
 		public bool HasLiverFailure { get; set; }
 
 
-		[Display(Name = "Istotne klinicznie zaburzenia krzepniecia")]
-		public bool HasClinicallySignificantCoagulationDisorders { get; set; }
-
-
-		[Display(Name = "Masa ciala")]
+		[Display(Name = "Masa ciała")]
 		[Column(TypeName = "decimal(6, 2)")]
 		public decimal Weight { get; set; }
 
@@ -43,6 +39,10 @@ namespace apka2.Models
 		[Display(Name = "Wzrost")]
 		[Column(TypeName = "decimal(6, 2)")]
 		public decimal Height { get; set; }
+
+
+		[Display(Name = "Data zgonu")]
+		public DateTime DateOfDeath { get; set; }
 
 
 		[Display(Name = "Uwagi")]
