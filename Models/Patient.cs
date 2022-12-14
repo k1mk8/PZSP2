@@ -42,7 +42,7 @@ namespace apka2.Models
 
 
 		[Display(Name = "Data zgonu")]
-		public DateTime DateOfDeath { get; set; }
+		public DateTime? DateOfDeath { get; set; }
 
 
 		[Display(Name = "Uwagi")]
