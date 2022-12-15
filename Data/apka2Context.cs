@@ -20,8 +20,6 @@ namespace apka2.Data
 
         public DbSet<apka2.Models.ClinicalDiagnosis> ClinicalDiagnosis { get; set; }
 
-        public DbSet<apka2.Models.Procedure> Procedure { get; set; }
-
         public DbSet<apka2.Models.Doctor> Doctor { get; set; }
     }
 }

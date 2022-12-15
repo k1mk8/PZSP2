@@ -92,6 +92,11 @@ namespace apka2.Controllers
             return View(doctor);
         }
 
+        public IActionResult ConfirmRegistration()
+        {
+            return View();
+        }
+
         // GET: Doctors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -107,11 +112,6 @@ namespace apka2.Controllers
             }
             return View(doctor);
         }
-        public IActionResult ConfirmRegistration()
-        {
-            return View();
-        }
-
 
         // POST: Doctors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
