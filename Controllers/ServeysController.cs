@@ -54,7 +54,7 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PatientId,DoctorId,ECMO,Anuria,ArterialHypertension,Overhydration,AKI,Creatinine,Urea,IonDisorder,MetabolicAcidosis,ExogenousPoison,SepticShock,LowerNephroneSyndrom,Anticoagulation,TypeOfVascularAccess,CatheterThickness,CatheterLength,VascularAccessSite")] Servey servey)
+        public async Task<IActionResult> Create([Bind("Id,PatientId,DoctorId,ServeyDate,ECMO,Anuria,ArterialHypertension,Overhydration,AKI,Creatinine,Urea,IonDisorder,MetabolicAcidosis,ExogenousPoison,SepticShock,LowerNephroneSyndrom,Anticoagulation,TypeOfVascularAccess,CatheterThickness,CatheterLength,VascularAccessSite")] Servey servey)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PatientId,DoctorId,ECMO,Anuria,ArterialHypertension,Overhydration,AKI,Creatinine,Urea,IonDisorder,MetabolicAcidosis,ExogenousPoison,SepticShock,LowerNephroneSyndrom,Anticoagulation,TypeOfVascularAccess,CatheterThickness,CatheterLength,VascularAccessSite")] Servey servey)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PatientId,DoctorId,ServeyDate,ECMO,Anuria,ArterialHypertension,Overhydration,AKI,Creatinine,Urea,IonDisorder,MetabolicAcidosis,ExogenousPoison,SepticShock,LowerNephroneSyndrom,Anticoagulation,TypeOfVascularAccess,CatheterThickness,CatheterLength,VascularAccessSite")] Servey servey)
         {
             if (id != servey.Id)
             {

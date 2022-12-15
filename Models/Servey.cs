@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Data;
 
 namespace apka2.Models
 {
@@ -7,6 +8,11 @@ namespace apka2.Models
         public int Id { get; set; }
         public int PatientId  { get; set; }
         public int DoctorId { get; set; }
+
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Data przeprowadzenia ankiety")]
+        public DateTime ServeyDate { get; set; }
 
 
         [Display(Name = "ECMO")]
