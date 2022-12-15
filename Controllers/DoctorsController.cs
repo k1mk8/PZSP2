@@ -67,6 +67,31 @@ namespace apka2.Controllers
             return View(doctor);
         }
 
+        public IActionResult CreateAccount()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateAccount([Bind("Id,Name,SecondName,Surname,IsAdmin,Username,Password,Description")] Doctor doctor)
+        {
+            var potential_conflict_user = await _context.Doctor
+                .FirstOrDefaultAsync(m => m.Username == doctor.Username);
+            if (potential_conflict_user != null)
+            {
+                return RedirectToAction("ErrorUsernameOccupied");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(doctor);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(ConfirmRegistration));
+            }
+            return View(doctor);
+        }
+
         // GET: Doctors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -82,6 +107,11 @@ namespace apka2.Controllers
             }
             return View(doctor);
         }
+        public IActionResult ConfirmRegistration()
+        {
+            return View();
+        }
+
 
         // POST: Doctors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.

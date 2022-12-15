@@ -1,7 +1,8 @@
-﻿@model apka2.Models.Doctor
+﻿@model Doctor
 
 @{
     ViewData["Title"] = "LogIn";
+    Layout = "~/Views/Shared/_LogInLayout.cshtml";
 }
 
 <h1>Logowanie</h1>
@@ -26,6 +27,10 @@
         </form>
     </div>
 </div>
+
+<p>
+    Nie masz jeszcze konta? Załóż je <a asp-controller="Doctors" asp-action="CreateAccount" methods="get">tutaj</a>.
+</p>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

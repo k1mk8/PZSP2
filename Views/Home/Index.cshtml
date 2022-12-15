@@ -1,10 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LogInLayout.cshtml";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Witamy na stronie projektu "Ogólnopolski Rejest Ciągłych Metod Nerkozastępczych u Dzieci"</h1>
+    <h2>Witamy na stronie projektu "Ogólnopolski Rejest Ciągłych Metod Nerkozastępczych u Dzieci"</h2>
     <p>
         <a asp-controller="Doctors" asp-action="LogIn" methods="get">Zaloguj się</a>
+    </p>
+    <p>
+        <a asp-controller="Doctors" asp-action="CreateAccount" methods="get">Załóż konto</a>
     </p>
 </div>
