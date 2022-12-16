@@ -217,7 +217,7 @@ namespace apka2.Controllers
         {
             if (!IsUserLoggedIn())
             {
-                return RedirectToAction("PleaseLogIn", "Home");
+                return RedirectToAction("LogIn");
             }
 
             var user = await _context.Doctor
