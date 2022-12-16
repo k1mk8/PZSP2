@@ -3,14 +3,10 @@
 @{
     ViewData["Title"] = "MyAccount";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>
-    <a asp-controller="Doctors" asp-action="LogOut" methods="get">Wyloguj się</a>
-</p>
+<h4>Moje konto</h4>
 
 <div>
-    <h4>User</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -20,10 +16,10 @@
             @Html.DisplayFor(model => model.Username)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            Imię (imiona)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.SecondName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Surname)
@@ -35,5 +31,6 @@
 </div>
 
 <p>
-    <a asp-controller="Doctors" asp-action="Delete" methods="get">Delete account</a>
+    <a asp-controller="Doctors" asp-action="Delete" methods="get" class="btn btn-danger">Usuń konto</a> |
+    <a asp-controller="Doctors" asp-action="LogOut" methods="get">Wyloguj się</a>
 </p>
