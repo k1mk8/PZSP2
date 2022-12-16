@@ -204,7 +204,8 @@ namespace apka2.Controllers
 
             if (person == null || Password != person.Password)
             {
-                return RedirectToAction("ErrorInvalidCredentials");
+                ModelState.AddModelError(string.Empty, "Błędny login lub hasło");
+                return View();
             }
 
             HttpContext.Session.SetInt32(SessionData.SessionKeyUserId, person.Id);
