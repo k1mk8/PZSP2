@@ -8,7 +8,7 @@ namespace apka2.Models
         public int SurveyId { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Data przeprowadzenia zabiegu")]
+        [Display(Name = "Data rozpoczęcia zabiegu")]
         public DateTime ProcedureDate { get; set; }
 
         [Display(Name = "ECMO")]
@@ -25,7 +25,7 @@ namespace apka2.Models
         [Display(Name = "Metoda oczyszczania pozaustrojowego")]
         public string? ExtracorporealClearingMethod { get; set; }
 
-        [Display(Name = "KoncentratCytrynianów")]
+        [Display(Name = "Koncentrat cytrynianów")]
         public string? CitrateConcentrate { get; set; }
 
 
