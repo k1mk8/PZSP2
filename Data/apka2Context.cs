@@ -23,5 +23,9 @@ namespace apka2.Data
         public DbSet<apka2.Models.Doctor> Doctor { get; set; }
 
         public DbSet<apka2.Models.Servey> Servey { get; set; }
+
+        public DbSet<apka2.Models.Procedure> Procedure { get; set; }
+
+        public DbSet<apka2.Models.ProcedureSession> ProcedureSession { get; set; }
     }
 }
