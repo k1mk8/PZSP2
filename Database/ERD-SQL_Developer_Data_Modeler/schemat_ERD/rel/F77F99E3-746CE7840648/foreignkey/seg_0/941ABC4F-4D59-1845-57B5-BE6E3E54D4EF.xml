@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="941ABC4F-4D59-1845-57B5-BE6E3E54D4EF" containerWithKeyObject="65F339FA-DCFA-D744-C486-1DC3C777FEAF" localFKIndex="F0CCE9A7-9FC0-6499-4F03-381D2304CE5F" name="ZAB_PZZAB_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>E9807A36-D55D-55E5-8ED1-A08E415607D0</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<referredTableLongName>PRZYCZYNA_ZAKONCZENIA_ZABIEGU</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>80DB6CF8-92B3-A77D-F179-EEF10E0337D1</referredTableID>
+<keyObject>8B858845-47AE-983C-51C0-88121DCAF916</keyObject>
+<referredKeyID>8B858845-47AE-983C-51C0-88121DCAF916</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>KOD_PRZYCZYNY</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

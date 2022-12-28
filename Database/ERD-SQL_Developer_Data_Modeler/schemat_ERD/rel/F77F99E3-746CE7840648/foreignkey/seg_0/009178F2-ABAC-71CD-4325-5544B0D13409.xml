@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="009178F2-ABAC-71CD-4325-5544B0D13409" containerWithKeyObject="65F339FA-DCFA-D744-C486-1DC3C777FEAF" localFKIndex="6C2BA017-0F45-CE0F-F089-B1DD3B7E0A6B" name="ZAB_ANKT_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>19620AB7-2491-4934-ECFE-B4F1EA21C6A2</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<referredTableLongName>ANKIETY</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>828B86E8-1CD0-476A-AD9E-F42EDEE99E9C</referredTableID>
+<keyObject>B0491064-6ACA-4078-3BD6-BA7FCE868F60</keyObject>
+<referredKeyID>B0491064-6ACA-4078-3BD6-BA7FCE868F60</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>KOD_PACJENTA,KOD_TYPU_ANKIETY,DATA_I_CZAS_WYKONANIA</refColNames>
+<transferable>false</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

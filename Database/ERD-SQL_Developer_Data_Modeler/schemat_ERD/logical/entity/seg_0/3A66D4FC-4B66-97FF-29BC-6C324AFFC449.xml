@@ -1,0 +1,152 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="3A66D4FC-4B66-97FF-29BC-6C324AFFC449" name="WARTOSC_PARAMETRU_SESJI_ZABIEGU">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-07 19:41:21 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="LICZBA_PORZADKOWA" id="6808BE1E-374D-9BE1-3FC3-CFAC59344E85">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-07 19:41:52 UTC</createdTime>
+<generatorID>9ED5DD70-9415-7213-0B95-1FC0ED9A7D37</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>C2906482-367B-529C-616A-77088C254128</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_PACJENTA" id="4F9C6B03-DF0A-E70C-E5ED-84FBDCB1FC6A">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-07 19:41:52 UTC</createdTime>
+<generatorID>9ED5DD70-9415-7213-0B95-1FC0ED9A7D37</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>C1239D32-5670-C9BC-83A7-0AE39684B1F5</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="WARTOSC" id="19269B04-C9D1-D686-876C-5C5191AEDDC6">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-07 19:46:02 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="UWAGI" id="8817DFB9-38F6-8930-245A-3291A1E85809">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-07 19:46:13 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_TYPU" id="32BB70C4-66BB-8296-CC4D-F50BF6AAEC76">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-07 20:53:25 UTC</createdTime>
+<generatorID>9ED5DD70-9415-7213-0B95-1FC0ED9A7D37</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>F94AC9FB-4A90-4396-BC09-0748AF9BC20A</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_PARAMETRU" id="E1EA35C6-A5CC-9CFA-AEA4-AD9C0754BFF0">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 18:20:11 UTC</createdTime>
+<generatorID>AC2CF497-1DB1-3396-C3C0-E737C60C207B</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>4D6ACDD9-AADE-833D-48DA-E0DFC50F724C</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_TYPU11" id="9EC11F11-B82C-3295-88B7-D1F5903608B8">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 18:42:58 UTC</createdTime>
+<generatorID>9ED5DD70-9415-7213-0B95-1FC0ED9A7D37</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>33B27A15-2CED-5181-936C-619F918AB2FE</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DATA_I_CZAS_ROZPOCZECIA" id="481D6359-8436-E843-FE4F-A6304FC1A8B2">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 18:42:58 UTC</createdTime>
+<generatorID>9ED5DD70-9415-7213-0B95-1FC0ED9A7D37</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>9269C8EE-6A9C-3EEC-B827-CF29D2BB5BAA</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="5CC0AF00-578A-9006-137F-969A1045FC59" name="WARTOSC_PARAMETRU_ZABIEGU PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-07 19:41:52 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>6808BE1E-374D-9BE1-3FC3-CFAC59344E85</attributeRef>
+<attributeRef>4F9C6B03-DF0A-E70C-E5ED-84FBDCB1FC6A</attributeRef>
+<attributeRef>32BB70C4-66BB-8296-CC4D-F50BF6AAEC76</attributeRef>
+<attributeRef>9EC11F11-B82C-3295-88B7-D1F5903608B8</attributeRef>
+<attributeRef>481D6359-8436-E843-FE4F-A6304FC1A8B2</attributeRef>
+<attributeRef>E1EA35C6-A5CC-9CFA-AEA4-AD9C0754BFF0</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

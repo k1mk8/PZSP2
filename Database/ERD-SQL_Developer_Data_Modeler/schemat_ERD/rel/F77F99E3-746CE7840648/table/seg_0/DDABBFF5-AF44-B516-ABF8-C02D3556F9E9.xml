@@ -1,0 +1,133 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="DDABBFF5-AF44-B516-ABF8-C02D3556F9E9" name="PARAMETRY">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>52CD6FA2-9B44-8B75-E671-0DD79869B79D</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<ordsAlias>parametr</ordsAlias>
+<abbreviation>PRM</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="KOD_TYPU" id="87515CC5-5DCD-1D28-69B0-A560810DC0B6">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-20 20:41:00 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="DC55AF3C-776C-272D-E966-C2C125648B7F" referredColumn="7C30F164-026C-C9E2-3FCD-8CE50FD3E8FB"/>
+</associations>
+</Column>
+<Column name="DYSKRYMINATOR_TYPU" id="6731E393-8FD4-8FC8-FBAC-2A94516E1732">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:30:14 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="DC55AF3C-776C-272D-E966-C2C125648B7F" referredColumn="9D3EA26F-138D-8FD2-0FEC-7CDA83AAF7FC"/>
+</associations>
+</Column>
+<Column name="KOD_PARAMETRU" id="4193FC9D-8586-BC5E-9943-A2DD206668B3">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>4D6ACDD9-AADE-833D-48DA-E0DFC50F724C</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>5 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NAZWA" id="E2671DB1-3BF2-4689-4089-DEBB43501BEC">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>EACCE814-B12C-9B1F-498E-DF28058FFAF9</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TYP_DANYCH" id="24462006-D66F-CC5E-F575-F9DC273EB303">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>1A53E8CB-8818-AF3D-AC0A-8699A224F0D2</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CZY_ZALECANE_WYPELNIENIE" id="20570907-70E6-7C52-7A58-0749A1402586">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>789B3C4E-BCF8-98A6-E8C9-8267DDD11748</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="OPIS" id="7777BFBD-C4D0-C580-9BDC-9C21A8948B8F">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>D6D61CC4-F3A3-7F14-1B2E-7360EAD49949</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="AC04BB36-7096-62E3-7279-2C5244B05794" name="PRM_PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>C2447327-ACE9-D4F1-7C57-14804D929C11</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="87515CC5-5DCD-1D28-69B0-A560810DC0B6"/>
+<colUsage columnID="6731E393-8FD4-8FC8-FBAC-2A94516E1732"/>
+<colUsage columnID="4193FC9D-8586-BC5E-9943-A2DD206668B3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AA5A8F1D-4D92-4A7C-C99A-08B62669B281" name="PRM_TYP_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-20 20:41:00 UTC</createdTime>
+<generatorID>4D2DD6F1-ED7A-37A0-DFA5-66BB567DA746</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="87515CC5-5DCD-1D28-69B0-A560810DC0B6"/>
+<colUsage columnID="6731E393-8FD4-8FC8-FBAC-2A94516E1732"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

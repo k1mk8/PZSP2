@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="BCBFDD9E-F5D9-60A2-95F0-36CBC45F2368" name="PARAMETR_SESJI_ZABIEGU">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 18:17:12 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<hierarchicalParent>52CD6FA2-9B44-8B75-E671-0DD79869B79D</hierarchicalParent>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="KOD_TYPU" id="C8944140-D23C-C704-2E47-3AD4FCA5E86B">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 20:04:26 UTC</createdTime>
+<generatorID>CF20C5BE-9C22-8504-BA53-928813C3294E</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>DDD3B4C2-F49E-3287-72A7-03AA2B90888C</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="7856785A-B6F4-CE61-1765-2CD6F14EDD89" name="PARAMETR_SESJI_ZABIEGU PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 20:04:26 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>C8944140-D23C-C704-2E47-3AD4FCA5E86B</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

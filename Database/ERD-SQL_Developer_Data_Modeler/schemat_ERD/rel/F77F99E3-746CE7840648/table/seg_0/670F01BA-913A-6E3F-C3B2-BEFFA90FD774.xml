@@ -1,0 +1,186 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="670F01BA-913A-6E3F-C3B2-BEFFA90FD774" name="WAR_PARAM_ZABIEGOW">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>6ECB4775-4021-FA3B-0654-BA0578D42DEB</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<ordsAlias>wartosc_parametru_zabiegu</ordsAlias>
+<abbreviation>WPZ</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="KOD_PACJENTA" id="DE265141-51EE-F780-F1FC-437F57626879">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>5C8D14D2-9E32-4DCC-2BA1-76BCB3B44988</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A542EC30-735B-6ADA-4E62-D29272A5CCE5" referredColumn="9C22E138-DE96-9CB7-12A7-602633679C0E"/>
+</associations>
+</Column>
+<Column name="KOD_TYPU_ZABIEGU" id="8479AA1E-F26D-5CA6-8D71-9626BE285921">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:34:37 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="12A422E4-0AF9-E6A0-0A15-24860CE54885" referredColumn="87515CC5-5DCD-1D28-69B0-A560810DC0B6"/>
+<colAssociation fkAssociation="A542EC30-735B-6ADA-4E62-D29272A5CCE5" referredColumn="3EF59F85-8AEA-AACC-307D-3C5E32E3DE06"/>
+</associations>
+</Column>
+<Column name="DYSKRYMINATOR_TYPU_ZABIEGU" id="589C9211-B932-E0F8-E3D2-F78F8B465883">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:34:37 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="12A422E4-0AF9-E6A0-0A15-24860CE54885" referredColumn="6731E393-8FD4-8FC8-FBAC-2A94516E1732"/>
+<colAssociation fkAssociation="A542EC30-735B-6ADA-4E62-D29272A5CCE5" referredColumn="0F0E5843-F36F-7DD1-5E6C-F1D7A2B1BCAC"/>
+</associations>
+</Column>
+<Column name="DATA_I_CZAS_ZABIEGU" id="AC1F5590-7A21-CCA9-F130-208CB03E23EC">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>791D5082-9BC1-4588-362A-463526D243D1</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A542EC30-735B-6ADA-4E62-D29272A5CCE5" referredColumn="1C392BE7-D8E3-7070-EEDB-70AD7F5C2C9A"/>
+</associations>
+</Column>
+<Column name="KOD_PARAMETRU" id="B20D5492-4D73-8180-EEA9-8BA8821D3B21">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 15:01:03 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="12A422E4-0AF9-E6A0-0A15-24860CE54885" referredColumn="4193FC9D-8586-BC5E-9943-A2DD206668B3"/>
+</associations>
+</Column>
+<Column name="WARTOSC_LICZBA" id="D1AEBAC5-1D63-A206-2183-6794326B3A56">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>38D983E2-E225-E0DD-0D0D-85845E13F30C</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="WARTOSC_TESKT" id="96809CE8-A45B-1D38-342B-421329DDF81B">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 18:56:33 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="OPIS" id="EF081F20-CCCD-63D5-0E23-5DCDCFC3DFAD">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>CAAF51F3-1C1A-9373-1D6E-AB768262CE76</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="00D37563-4B4A-D8FE-E01C-1709BF00C72F" name="WPZ_PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>2656D73D-A52F-D065-D821-946E61EC955A</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DE265141-51EE-F780-F1FC-437F57626879"/>
+<colUsage columnID="8479AA1E-F26D-5CA6-8D71-9626BE285921"/>
+<colUsage columnID="589C9211-B932-E0F8-E3D2-F78F8B465883"/>
+<colUsage columnID="AC1F5590-7A21-CCA9-F130-208CB03E23EC"/>
+<colUsage columnID="B20D5492-4D73-8180-EEA9-8BA8821D3B21"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DFE20C3A-5D26-18DE-9FC3-E178C1801C14" name="WPZ_TYP_IDX">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 15:07:53 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8479AA1E-F26D-5CA6-8D71-9626BE285921"/>
+<colUsage columnID="589C9211-B932-E0F8-E3D2-F78F8B465883"/>
+<colUsage columnID="B20D5492-4D73-8180-EEA9-8BA8821D3B21"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="04585246-2594-6E5A-604F-6401C9DBBFB9" name="WPZ_ZAB_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>BB92DDDB-FD94-A4EA-49F8-8C7E4D102BB5</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DE265141-51EE-F780-F1FC-437F57626879"/>
+<colUsage columnID="8479AA1E-F26D-5CA6-8D71-9626BE285921"/>
+<colUsage columnID="589C9211-B932-E0F8-E3D2-F78F8B465883"/>
+<colUsage columnID="AC1F5590-7A21-CCA9-F130-208CB03E23EC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CFCA5189-5541-F9D2-D98B-E516B9873713" name="WPZ_PRM_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 15:01:03 UTC</createdTime>
+<generatorID>C2447327-ACE9-D4F1-7C57-14804D929C11</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8479AA1E-F26D-5CA6-8D71-9626BE285921"/>
+<colUsage columnID="589C9211-B932-E0F8-E3D2-F78F8B465883"/>
+<colUsage columnID="B20D5492-4D73-8180-EEA9-8BA8821D3B21"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

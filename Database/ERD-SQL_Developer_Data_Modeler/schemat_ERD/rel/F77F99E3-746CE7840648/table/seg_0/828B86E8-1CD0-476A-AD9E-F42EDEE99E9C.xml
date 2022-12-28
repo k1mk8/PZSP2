@@ -1,0 +1,170 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="828B86E8-1CD0-476A-AD9E-F42EDEE99E9C" name="ANKIETY">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>3AE4DEC6-DC93-76B1-48F4-FF0CFC1DD3DD</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<ordsAlias>ankieta</ordsAlias>
+<abbreviation>ANKT</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="KOD_PACJENTA" id="C19C1C5D-5F74-C8A7-9208-C8A983D12834">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>2633141F-0E7B-762B-A5D7-513398B9B531</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="008DDD42-7155-0DAB-5F77-EE5118550545" referredColumn="447482F2-46F3-2DEB-ADC9-7248656D68AC"/>
+</associations>
+</Column>
+<Column name="KOD_TYPU_ANKIETY" id="BD668DA0-92D4-E547-0C95-478D32F92CB8">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-20 20:27:47 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8075105F-FA4E-753A-9561-D34129ECE0D9" referredColumn="7C30F164-026C-C9E2-3FCD-8CE50FD3E8FB"/>
+</associations>
+</Column>
+<Column name="DYSKRYMINATOR_TYPU_ANKIETY" id="EAE8C257-17C5-98B9-6C38-8B6FF4F94EB0">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:30:14 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8075105F-FA4E-753A-9561-D34129ECE0D9" referredColumn="9D3EA26F-138D-8FD2-0FEC-7CDA83AAF7FC"/>
+</associations>
+</Column>
+<Column name="DATA_I_CZAS_WYKONANIA" id="3FE4F106-2041-AD21-43C9-739F5687E67D">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>67FDF2F0-44A8-D8A9-18C6-3366B7BA0C76</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="KOD_LEKARZA" id="6C0B31D7-9CE6-51F9-ABCB-D427813792C3">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>242ED439-4533-38D5-B53D-703B86A033BF</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B7D6D00A-22E5-5952-927C-4BBEF66EC56D" referredColumn="E04AB8C5-78ED-9509-402A-170A07823BF3"/>
+</associations>
+</Column>
+<Column name="OPIS" id="6159133A-F6A7-CB77-55F5-DBA5A2C9D12D">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>8F028D38-9D74-F5FD-67B9-4575BF097C8A</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B0491064-6ACA-4078-3BD6-BA7FCE868F60" name="ANKT_PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>EC6A1E06-A754-8F25-AC62-268C69B18016</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C19C1C5D-5F74-C8A7-9208-C8A983D12834"/>
+<colUsage columnID="BD668DA0-92D4-E547-0C95-478D32F92CB8"/>
+<colUsage columnID="EAE8C257-17C5-98B9-6C38-8B6FF4F94EB0"/>
+<colUsage columnID="3FE4F106-2041-AD21-43C9-739F5687E67D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3059327F-0B9C-DB65-E913-CC28D66945F9" name="ANKT_LKRZ_IDX">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 22:41:03 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6C0B31D7-9CE6-51F9-ABCB-D427813792C3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="898482F9-D400-366C-EF29-4716832D2817" name="ANKT_TYP_IDX">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 22:41:14 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BD668DA0-92D4-E547-0C95-478D32F92CB8"/>
+<colUsage columnID="EAE8C257-17C5-98B9-6C38-8B6FF4F94EB0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E7A44C53-6E53-42D5-D2D7-ADD4A9603345" name="ANKT_PACJ_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>A0BAC821-D714-4409-50B6-1FD083393475</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C19C1C5D-5F74-C8A7-9208-C8A983D12834"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6B141F02-9AEF-C367-341D-EB6D2A27BCD5" name="ANKT_LKRZ_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>2F36F40C-8C4A-A335-6B33-7C80806E1CB0</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6C0B31D7-9CE6-51F9-ABCB-D427813792C3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FB9B4005-96B4-FEA8-85CE-7025AAE9E285" name="ANKT_TYP_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-20 20:27:47 UTC</createdTime>
+<generatorID>4D2DD6F1-ED7A-37A0-DFA5-66BB567DA746</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BD668DA0-92D4-E547-0C95-478D32F92CB8"/>
+<colUsage columnID="EAE8C257-17C5-98B9-6C38-8B6FF4F94EB0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

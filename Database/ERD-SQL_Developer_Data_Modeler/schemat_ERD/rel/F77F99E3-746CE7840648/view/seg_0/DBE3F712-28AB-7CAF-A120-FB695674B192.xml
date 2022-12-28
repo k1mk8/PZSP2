@@ -1,0 +1,9 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableView class="oracle.dbtools.crest.model.design.relational.TableView" directorySegmentName="seg_0" id="DBE3F712-28AB-7CAF-A120-FB695674B192" name="HEPARYNA_NIEFRAKCJONOWANA">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 22:57:40 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<ordsAlias>view_3</ordsAlias>
+<userDefined>false</userDefined>
+<parsed>true</parsed>
+</TableView>

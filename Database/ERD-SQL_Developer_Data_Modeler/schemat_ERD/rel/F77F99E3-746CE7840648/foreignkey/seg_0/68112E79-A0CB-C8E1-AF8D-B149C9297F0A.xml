@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="68112E79-A0CB-C8E1-AF8D-B149C9297F0A" containerWithKeyObject="830745E5-524A-0399-4E1F-914E16B96795" localFKIndex="DAAAFC11-2F68-509D-FB1E-38AFEDF5CD65" name="PACJ_OSK_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>3EDE49F2-7DF8-AFE7-CD62-B0C8A98363D2</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<referredTableLongName>OSRODEK_KLINICZNY</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>9AFFC842-24EF-0021-538B-A32DD1502A26</referredTableID>
+<keyObject>E4C31540-F759-FB4F-D881-7A2DE2E23B85</keyObject>
+<referredKeyID>E4C31540-F759-FB4F-D881-7A2DE2E23B85</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>KOD_OSRODKA</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
