@@ -1,0 +1,30 @@
+﻿@model apka2.Models.ClinicalDiagnosis
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h4>Szcegóły rozpoznania klinicznego</h4>
+
+<div>
+    <h4>ClinicalDiagnosis</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edytuj</a> |
+    <a asp-action="Index">Powrót do listy</a>
+</div>

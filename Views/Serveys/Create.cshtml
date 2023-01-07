@@ -1,0 +1,129 @@
+﻿@model apka2.Models.Servey
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Dodaj ankietę</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PatientId" class="control-label"></label>
+                <input asp-for="PatientId" class="form-control" />
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServeyDate" class="control-label"></label>
+                <input asp-for="ServeyDate" class="form-control" />
+                <span asp-validation-for="ServeyDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ECMO" /> @Html.DisplayNameFor(model => model.ECMO)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Anuria" /> @Html.DisplayNameFor(model => model.Anuria)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ArterialHypertension" /> @Html.DisplayNameFor(model => model.ArterialHypertension)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Overhydration" /> @Html.DisplayNameFor(model => model.Overhydration)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="AKI" /> @Html.DisplayNameFor(model => model.AKI)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Creatinine" class="control-label"></label>
+                <input asp-for="Creatinine" class="form-control" />
+                <span asp-validation-for="Creatinine" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Urea" class="control-label"></label>
+                <input asp-for="Urea" class="form-control" />
+                <span asp-validation-for="Urea" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IonDisorder" /> @Html.DisplayNameFor(model => model.IonDisorder)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="MetabolicAcidosis" /> @Html.DisplayNameFor(model => model.MetabolicAcidosis)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ExogenousPoison" /> @Html.DisplayNameFor(model => model.ExogenousPoison)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SepticShock" /> @Html.DisplayNameFor(model => model.SepticShock)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="LowerNephroneSyndrom" /> @Html.DisplayNameFor(model => model.LowerNephroneSyndrom)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Anticoagulation" class="control-label"></label>
+                <p class="form-control">
+                    @Html.DropDownListFor(m => m.Anticoagulation,
+                        new SelectList(new List<string>{
+                            "Heparyna niefracjonowana",
+                            "Heparyna drobnocząsteczkowa",
+                            "Cytrynian",
+                            "Bez antykoagulacji"
+                        }), "Wybierz rodzaj")
+                </p>
+                <span asp-validation-for="Anticoagulation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeOfVascularAccess" class="control-label"></label>
+                <input asp-for="TypeOfVascularAccess" class="form-control" />
+                <span asp-validation-for="TypeOfVascularAccess" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatheterThickness" class="control-label"></label>
+                <input asp-for="CatheterThickness" class="form-control" />
+                <span asp-validation-for="CatheterThickness" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatheterLength" class="control-label"></label>
+                <input asp-for="CatheterLength" class="form-control" />
+                <span asp-validation-for="CatheterLength" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VascularAccessSite" class="control-label"></label>
+                <input asp-for="VascularAccessSite" class="form-control" />
+                <span asp-validation-for="VascularAccessSite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Utwórz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Powrót do listy ankiet</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

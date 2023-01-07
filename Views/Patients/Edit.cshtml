@@ -1,0 +1,72 @@
+﻿@model apka2.Models.Patient
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Edytuj dane pacjenta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Initials" class="control-label"></label>
+                <input asp-for="Initials" class="form-control" />
+                <span asp-validation-for="Initials" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HospitalizationDate" class="control-label"></label>
+                <input asp-for="HospitalizationDate" class="form-control" />
+                <span asp-validation-for="HospitalizationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartOfCKRTDate" class="control-label"></label>
+                <input asp-for="StartOfCKRTDate" class="form-control" />
+                <span asp-validation-for="StartOfCKRTDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="HasLiverFailure" /> @Html.DisplayNameFor(model => model.HasLiverFailure)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label"></label>
+                <input asp-for="Weight" class="form-control" />
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Height" class="control-label"></label>
+                <input asp-for="Height" class="form-control" />
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfDeath" class="control-label"></label>
+                <input asp-for="DateOfDeath" class="form-control" />
+                <span asp-validation-for="DateOfDeath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label"></label>
+                <input asp-for="Remarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Zapisz zmiany" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Powrót do listy pacjentów</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

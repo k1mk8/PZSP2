@@ -1,0 +1,155 @@
+﻿@model IEnumerable<apka2.Models.ProcedureSession>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProcedureId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SessionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeparinBolusDose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ACT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeparinDose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FraxiparinDose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FraxiparinDosingTiming)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AntiXa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CitratesConcentration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CalciumCompensationPercent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IonizedCalcium)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalCalcium)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HCO3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Citrate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CalciumCompensationMol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QBDose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QDDose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Predilution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Postdilution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UFDose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TMP)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProcedureId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SessionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeparinBolusDose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ACT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeparinDose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FraxiparinDose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FraxiparinDosingTiming)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AntiXa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CitratesConcentration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CalciumCompensationPercent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IonizedCalcium)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalCalcium)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HCO3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Citrate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CalciumCompensationMol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QBDose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QDDose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Predilution)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Postdilution)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UFDose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TMP)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

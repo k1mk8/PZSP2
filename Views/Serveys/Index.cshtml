@@ -1,0 +1,47 @@
+﻿@model IEnumerable<apka2.Models.Servey>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista ankiet medycznych</h1>
+
+<p>
+    <a asp-action="Create">Dodaj nową ankietę</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServeyDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Anticoagulation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServeyDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Anticoagulation)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
