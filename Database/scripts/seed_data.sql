@@ -53,7 +53,7 @@ INSERT INTO database."TYPES" ("TYPE_DISCRIMINATOR", "NAME") VALUES ('C', 'Bezpo�
 -- PARAMETERS --
 -- Cytryniany - ustawienia zabiegu
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (1, 'P', 'Filtr', 0);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (1, 'P', 'ECMO', 1);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (1, 'P', 'ECMO', 2);
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (1, 'P', 'Czas trwania zabiegu [h]', 1);
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (1, 'P', 'Koncentrat cytrynianów', 0);
 -- Cytryniany - ustawienia sesji poczatkowej
@@ -107,7 +107,7 @@ INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "D
 
 -- Heparyna niefrakcjonowana - ustawienia zabiegu
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (7, 'P', 'Filtr', 0);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (7, 'P', 'ECMO', 1);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (7, 'P', 'ECMO', 2);
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (7, 'P', 'Czas trwania zabiegu [h]', 1);
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (7, 'P', 'Metoda oczyszczenia pozaustrojowego', 0);
 -- Heparyna niefrakcjonowana - ustawienia sesji poczatkowej
@@ -153,7 +153,7 @@ INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "D
 
 -- Heparyna drobnocząsteczkowa - ustawienia zabiegu
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (13, 'P', 'Filtr', 0);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (13, 'P', 'ECMO', 1);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (13, 'P', 'ECMO', 2);
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (13, 'P', 'Czas trwania zabiegu [h]', 1);
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (13, 'P', 'Metoda oczyszczenia pozaustrojowego', 0);
 -- Heparyna drobnocząsteczkowa - ustawienia sesji poczatkowej
@@ -203,7 +203,7 @@ INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "D
 
 -- Bez antykoagulacji
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (19, 'P', 'Filtr', 0);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (19, 'P', 'ECMO', 0);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (19, 'P', 'ECMO', 2);
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (19, 'P', 'Czas trwania zabiegu [h]', 1);
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (19, 'P', 'Metoda oczyszczenia pozaustrojowego', 0);
 -- Bez antykoagulacji - ustawienia sesji poczatkowej
@@ -238,18 +238,18 @@ INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "D
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (24, 'S', 'TMP [mmhg]', 1);
 
 -- Bezpośredenie wskazanie do CKRT
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'ECMO', 1);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Bezmocz / skąpomocz', 1);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Nadciśnienie tętnicze', 1);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Przewodnienie', 1);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Obecność AKI', 1);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Kreatynina', 1);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Mocznik', 1);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Zaburzenia jonowe', 1);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Kwasica metaboliczna', 1);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Zatrucie egzogenne', 1);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Wstrząs septyczny', 1);
-INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Zespół zmiażdżenia', 1);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'ECMO', 2);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Bezmocz / skąpomocz', 2);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Nadciśnienie tętnicze', 2);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Przewodnienie', 2);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Obecność AKI', 2);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Kreatynina', 2);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Mocznik', 2);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Zaburzenia jonowe', 2);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Kwasica metaboliczna', 2);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Zatrucie egzogenne', 2);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Wstrząs septyczny', 2);
+INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Zespół zmiażdżenia', 2);
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Antykoagulacja', 0);
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Rodzaj dostępu naczyniowego', 0);
 INSERT INTO database."PARAMETERS" ("TYPE_CODE", "TYPE_DISCRIMINATOR", "NAME", "DATA_TYPE") VALUES (25, 'C', 'Grubość cewnika', 1);

@@ -8,11 +8,8 @@ INSERT INTO database."DOCTORS" ("FIRST_NAME", "LAST_NAME", "IS_DATA_ADMINISTRATO
 	VALUES ('Johnny', 'Bravo', 0, '0123456789', 'johnny@bravo.com');
 
 INSERT INTO database."CLINICAL_DATA" ("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "DATA_COLLECTION_DATE", "DOCTOR_ID")
-	VALUES (1, 25, 'C', NOW(), 1);
+	VALUES (1, 25, 'C', '2023-01-07', 1);
 	
-INSERT INTO database."CLINICAL_DATA_PARAMETERS_VALUES" VALUES (1, 25, 'C', '2023-01-07', 155, 0, NULL, 'Nadciśnienie tętnicze...');
-	
-INSERT INTO database."CLINICAL_DATA_WITH_PARAMETERS_VIEW" VALUES (1, 25, 'C', '2023-01-07', 0, 153, 'ECMO', 1, 1, '', 'ECMO ...');
-INSERT INTO database."CLINICAL_DATA_WITH_PARAMETERS_VIEW" VALUES (1, 25, 'C', '2023-01-07', 0, 154, 'Bezmocz / skąpomocz', 1, 1, '', 'Bezmocz / skąpomocz ...');
-
-SELECT * FROM database."CLINICAL_DATA_WITH_PARAMETERS_VIEW";
+INSERT INTO database."CLINICAL_DATA_PARAMETERS_VALUES" VALUES (1, 25, 'C', '2023-01-07', 161, 0, NULL, NULL, 'Nadciśnienie tętnicze...');
+INSERT INTO database."CLINICAL_DATA_PARAMETERS_VALUES" VALUES (1, 25, 'C', '2023-01-07', 173, NULL, 4, NULL, 'Grubość cewnika...');
+INSERT INTO database."CLINICAL_DATA_PARAMETERS_VALUES" VALUES (1, 25, 'C', '2023-01-07', 175, NULL, NULL, 'Żyła szyjna wewnętrzna prawa', 'Miejsce założenia dostępu naczyniowego...');

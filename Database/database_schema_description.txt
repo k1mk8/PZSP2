@@ -145,6 +145,7 @@ TIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "DATA_
  CLINICAL_DATA_TYPE_DISCRIMINATOR | character varying(1)    |           | not null |
  CLINICAL_DATA_COLLECTION_DATE    | date                    |           | not null |
  PARAMETER_CODE                   | integer                 |           | not null | nextval('database."CLINICAL_DATA_PARAMETERS_VALUES_PARAMETER_CODE_seq"'::regclass)
+ BOOLEAN_VALUE                    | numeric(1,0)            |           |          |
  NUMERIC_VALUE                    | numeric(6,2)            |           |          |
  TEXT_VALUE                       | character varying(100)  |           |          |
  DESCRIPTION                      | character varying(1000) |           |          |
@@ -152,7 +153,10 @@ Indexes:
     "CLDA_PRMVAL_PK" PRIMARY KEY, btree ("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "CLINICAL_DATA_COLLECTION_DATE", "PARAMETER_CODE")
     "CLDA_PRMVAL_PRMS_IDX" btree ("CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "PARAMETER_CODE")
 Check constraints:
+    "CLDA_PRMVAL_BOOLEAN_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NULL OR ("BOOLEAN_VALUE" = ANY (ARRAY[0::numeric, 1::numeric])))
     "CLDA_PRMVAL_PARAMETER_TYPE_DISCR_CHECK" CHECK ("CLINICAL_DATA_TYPE_DISCRIMINATOR"::text = 'C'::text)
+    "CLDA_PRMVAL_SINGLE_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NOT NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS NULL OR "BOOLEAN_VALUE" IS NULL AND "NUMERIC_VALUE" IS NOT NULL AND "TEXT_VALUE" IS NULL OR "BOOLEAN_V
+ALUE" IS NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS NOT NULL)
 Foreign-key constraints:
     "CLDA_PRMVAL_CLDA_FK" FOREIGN KEY ("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "CLINICAL_DATA_COLLECTION_DATE") REFERENCES database."CLINICAL_DATA"("PATIENT_ID", "CLINICAL_DATA_TYPE_COD
 E", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "DATA_COLLECTION_DATE") NOT VALID
@@ -164,24 +168,6 @@ Sequence "database.CLINICAL_DATA_PARAMETERS_VALUES_PARAMETER_CODE_seq"
 ---------+-------+---------+------------+-----------+---------+-------
  integer |     1 |       1 | 2147483647 |         1 | no      |     1
 Owned by: database."CLINICAL_DATA_PARAMETERS_VALUES"."PARAMETER_CODE"
-
-
-                     View "database.CLINICAL_DATA_WITH_PARAMETERS_VIEW"
-              Column              |          Type           | Collation | Nullable | Default
-----------------------------------+-------------------------+-----------+----------+---------
- PATIENT_ID                       | integer                 |           |          |
- CLINICAL_DATA_TYPE_CODE          | integer                 |           |          |
- CLINICAL_DATA_TYPE_DISCRIMINATOR | character varying(1)    |           |          |
- DATA_COLLECTION_DATE             | date                    |           |          |
- IS_DRAFT_VERSION                 | numeric(1,0)            |           |          |
- PARAMETER_CODE                   | integer                 |           |          |
- PARAMETER_NAME                   | character varying(100)  |           |          |
- DATA_TYPE                        | numeric(1,0)            |           |          |
- NUMERIC_VALUE                    | numeric(6,2)            |           |          |
- TEXT_VALUE                       | character varying(100)  |           |          |
- PARAMETER_VALUE_DESCRIPTION      | character varying(1000) |           |          |
-Triggers:
-    "VALIDATE_DATE_FOR_CLINICAL_DATA_PARAMETERS_TRG" INSTEAD OF INSERT ON database."CLINICAL_DATA_WITH_PARAMETERS_VIEW" FOR EACH ROW EXECUTE FUNCTION database."VALIDATE_DATE_FOR_CLINICAL_DATA_PARAMETERS_FUNC"()
 
 
                                                  Table "database.CLINICAL_DIAGNOSES"
@@ -210,7 +196,7 @@ Owned by: database."CLINICAL_DIAGNOSES"."DIAGNOSIS_ID"
  DOCTOR_ID             | integer                 |           | not null | nextval('database."DOCTORS_DOCTOR_ID_seq"'::regclass)
  FIRST_NAME            | character varying(30)   |           | not null |
  LAST_NAME             | character varying(50)   |           | not null |
- IS_DATA_ADMINISTRATOR | numeric(1,0)            |           | not null |
+ IS_DATA_ADMINISTRATOR | numeric(1,0)            |           | not null | 0
  PASSWORD              | character varying(20)   |           | not null |
  MIDDLE_NAME           | character varying(30)   |           |          |
  EMAIL                 | character varying(50)   |           |          |
@@ -282,7 +268,7 @@ Indexes:
     "PRMS_PK" PRIMARY KEY, btree ("TYPE_CODE", "TYPE_DISCRIMINATOR", "PARAMETER_CODE")
     "PRMS_TYPE_DISCR_NAME_UN" UNIQUE CONSTRAINT, btree ("TYPE_DISCRIMINATOR", "NAME", "TYPE_CODE")
 Check constraints:
-    "PRM_DATA_TYPE_DEF_CHECK" CHECK ("DATA_TYPE" = ANY (ARRAY[0::numeric, 1::numeric]))
+    "PRM_DATA_TYPE_DEF_CHECK" CHECK ("DATA_TYPE" = ANY (ARRAY[0::numeric, 1::numeric, 2::numeric]))
     "PRM_IS_REGISTRATION_SUGGESTED_CHECK" CHECK ("IS_PARAMETER_REGISTRATION_SUGGESTED" = ANY (ARRAY[0::numeric, 1::numeric]))
 Foreign-key constraints:
     "PRMS_TYP_FK" FOREIGN KEY ("TYPE_CODE", "TYPE_DISCRIMINATOR") REFERENCES database."TYPES"("TYPE_CODE", "TYPE_DISCRIMINATOR") NOT VALID
@@ -474,6 +460,7 @@ Owned by: database."PROCEDURES_COMPLETIONS_REASONS"."REASON_ID"
  PROCEDURE_TYPE_DISCRIMINATOR | character varying(1)    |           | not null |
  PROCEDURE_DATE               | date                    |           | not null |
  PARAMETER_CODE               | integer                 |           | not null |
+ BOOLEAN_VALUE                | numeric(1,0)            |           |          |
  NUMERIC_VALUE                | numeric(6,2)            |           |          |
  TEXT_VALUE                   | character varying(100)  |           |          |
  DESCRIPTION                  | character varying(1000) |           |          |
@@ -481,7 +468,10 @@ Indexes:
     "PROC_PRMVAL_PK" PRIMARY KEY, btree ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_DATE", "PARAMETER_CODE")
     "PROC_PRMVAL_PRMS_IDX" btree ("PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PARAMETER_CODE")
 Check constraints:
+    "PROC_PRMVAL_BOOLEAN_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NULL OR ("BOOLEAN_VALUE" = ANY (ARRAY[0::numeric, 1::numeric])))
     "PROC_PRMVAL_PARAMETER_TYPE_DISCR_CHECK" CHECK ("PROCEDURE_TYPE_DISCRIMINATOR"::text = 'P'::text)
+    "PROC_PRMVAL_SINGLE_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NOT NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS NULL OR "BOOLEAN_VALUE" IS NULL AND "NUMERIC_VALUE" IS NOT NULL AND "TEXT_VALUE" IS NULL OR "BOOLEAN_V
+ALUE" IS NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS NOT NULL)
 Foreign-key constraints:
     "PROC_PRMVAL_PRMS_FK" FOREIGN KEY ("PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PARAMETER_CODE") REFERENCES database."PARAMETERS"("TYPE_CODE", "TYPE_DISCRIMINATOR", "PARAMETER_CODE") NOT VALID
     "PROC_PRMVAL_PROC_FK" FOREIGN KEY ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_DATE") REFERENCES database."PROCEDURES"("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINA
@@ -531,6 +521,7 @@ PE_DISCRIMINATOR", "ORDINAL_NUMBER") NOT VALID
  SESSION_TYPE_DISCRIMINATOR   | character varying(1)    |           | not null |
  SESSION_ORDINAL_NUMBER       | numeric(3,0)            |           | not null |
  PARAMETER_CODE               | integer                 |           | not null | nextval('database."PROCEDURES_SESSIONS_PARAMETERS_VALUES_PARAMETER_CODE_seq"'::regclass)
+ BOOLEAN_VALUE                | numeric(1,0)            |           |          |
  NUMERIC_VALUE                | numeric(6,2)            |           |          |
  TEXT_VALUE                   | character varying(100)  |           |          |
  DESCRIPTION                  | character varying(1000) |           |          |
@@ -539,7 +530,10 @@ Indexes:
 ER_CODE")
     "PROCSES_PRMVAL_PRMS_IDX" btree ("SESSION_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR", "PARAMETER_CODE")
 Check constraints:
+    "PROCSES_PRMVAL_BOOLEAN_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NULL OR ("BOOLEAN_VALUE" = ANY (ARRAY[0::numeric, 1::numeric])))
     "PROCSES_PRMVAL_PARAMETER_TYPE_DISCR_CHECK" CHECK ("SESSION_TYPE_DISCRIMINATOR"::text = 'S'::text)
+    "PROCSES_PRMVAL_SINGLE_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NOT NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS NULL OR "BOOLEAN_VALUE" IS NULL AND "NUMERIC_VALUE" IS NOT NULL AND "TEXT_VALUE" IS NULL OR "BOOLEA
+N_VALUE" IS NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS NOT NULL)
 Foreign-key constraints:
     "PROCSES_PRMVAL_PRMS_FK" FOREIGN KEY ("SESSION_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR", "PARAMETER_CODE") REFERENCES database."PARAMETERS"("TYPE_CODE", "TYPE_DISCRIMINATOR", "PARAMETER_CODE") NOT VALID
     "PROCSES_PRMVAL_PROCSES_FK" FOREIGN KEY ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_START_DATE", "SESSION_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR", "SESSION_ORDINAL_NUMBER") REFEREN
