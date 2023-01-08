@@ -1,0 +1,150 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="578AD7BC-3E15-78B5-297E-BE220DDEECB9" name="SESJA_ZABIEGU">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-05 21:25:35 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="LICZBA_PORZADKOWA" id="C2906482-367B-529C-616A-77088C254128">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-05 21:25:41 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DATA_I_CZAS_ROZPOCZECIA" id="879D87C1-31E3-BA3A-0025-FF0B3AC8F607">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 18:14:16 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="OPIS" id="FED02B8C-787A-41EE-8B0C-BB8DAE868291">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-05 21:26:12 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_PACJENTA" id="C1239D32-5670-C9BC-83A7-0AE39684B1F5">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-05 21:27:34 UTC</createdTime>
+<generatorID>42612FF8-44B8-E42E-DB8A-CD022EE7483A</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>9777DF48-477B-0C0B-68E7-3DFF6FCD9F76</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_LEKARZA" id="87DF6C2F-8FC3-E60B-BC6E-20982682C600">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-05 21:28:19 UTC</createdTime>
+<generatorID>15622D9A-8BC9-AFDF-9ECF-72957652F631</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>96BF2C44-C87B-1EEB-51D5-E11C4BDB18F4</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>5 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_TYPU" id="F94AC9FB-4A90-4396-BC09-0748AF9BC20A">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-07 20:53:25 UTC</createdTime>
+<generatorID>7F876BD5-6880-CAFD-3719-F759038C831C</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>DDD3B4C2-F49E-3287-72A7-03AA2B90888C</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_TYPU1" id="33B27A15-2CED-5181-936C-619F918AB2FE">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-07 20:53:48 UTC</createdTime>
+<generatorID>42612FF8-44B8-E42E-DB8A-CD022EE7483A</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>FC628B37-E03E-4C96-3C4C-86E9C8FC36B5</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DATA_I_CZAS_ROZPOCZECIA1" id="9269C8EE-6A9C-3EEC-B827-CF29D2BB5BAA">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 18:12:22 UTC</createdTime>
+<generatorID>42612FF8-44B8-E42E-DB8A-CD022EE7483A</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>58173F7E-E028-0D61-F31E-ADEF66CA9587</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="6CF3E413-0CF2-149A-7173-177F93034C98" name="ZABIEG PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-05 21:25:56 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>C2906482-367B-529C-616A-77088C254128</attributeRef>
+<attributeRef>C1239D32-5670-C9BC-83A7-0AE39684B1F5</attributeRef>
+<attributeRef>F94AC9FB-4A90-4396-BC09-0748AF9BC20A</attributeRef>
+<attributeRef>33B27A15-2CED-5181-936C-619F918AB2FE</attributeRef>
+<attributeRef>9269C8EE-6A9C-3EEC-B827-CF29D2BB5BAA</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

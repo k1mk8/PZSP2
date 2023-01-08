@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="A542EC30-735B-6ADA-4E62-D29272A5CCE5" containerWithKeyObject="670F01BA-913A-6E3F-C3B2-BEFFA90FD774" localFKIndex="04585246-2594-6E5A-604F-6401C9DBBFB9" name="WPZ_ZAB_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>BB92DDDB-FD94-A4EA-49F8-8C7E4D102BB5</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<referredTableLongName>ZABIEG</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>65F339FA-DCFA-D744-C486-1DC3C777FEAF</referredTableID>
+<keyObject>2AEDCE78-EA17-22B5-E785-9E11B679B1F5</keyObject>
+<referredKeyID>2AEDCE78-EA17-22B5-E785-9E11B679B1F5</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>KOD_PACJENTA,KOD_TYPU_ZABIEGU,DATA_I_CZAS_ROZPOCZECIA</refColNames>
+<transferable>false</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

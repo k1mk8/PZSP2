@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="0FB2292C-9D33-1AF6-513A-092FB4A6D709" containerWithKeyObject="8A6A91CA-A940-5011-2190-A1D0BA74E3EC" localFKIndex="1D833E57-3244-F8CF-1F8E-0FC3727EE266" name="WPA_ANKTL_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>0DC5E5FB-C0E9-C46C-FC89-9B52C056DF55</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<referredTableLongName>ANKIETA</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>828B86E8-1CD0-476A-AD9E-F42EDEE99E9C</referredTableID>
+<keyObject>B0491064-6ACA-4078-3BD6-BA7FCE868F60</keyObject>
+<referredKeyID>B0491064-6ACA-4078-3BD6-BA7FCE868F60</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>KOD_PACJENTA,KOD_TYPU,DATA_I_CZAS_WYKONANIA</refColNames>
+<transferable>false</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

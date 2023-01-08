@@ -1,0 +1,106 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="3AE4DEC6-DC93-76B1-48F4-FF0CFC1DD3DD" name="ANKIETA">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-13 12:09:29 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="DATA_I_CZAS_WYKONANIA" id="67FDF2F0-44A8-D8A9-18C6-3366B7BA0C76">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-24 19:42:57 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_PACJENTA" id="2633141F-0E7B-762B-A5D7-513398B9B531">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-05 19:47:49 UTC</createdTime>
+<generatorID>A0BAC821-D714-4409-50B6-1FD083393475</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>035AE2D7-AC05-A511-480A-83614CE24776</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_LEKARZA" id="242ED439-4533-38D5-B53D-703B86A033BF">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-05 21:02:25 UTC</createdTime>
+<generatorID>2F36F40C-8C4A-A335-6B33-7C80806E1CB0</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>96BF2C44-C87B-1EEB-51D5-E11C4BDB18F4</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>5 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="OPIS" id="8F028D38-9D74-F5FD-67B9-4575BF097C8A">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-07 19:50:27 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_TYPU" id="96A47340-BD50-33DE-9D6C-9E0484636B42">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-07 20:54:01 UTC</createdTime>
+<generatorID>0E33115A-CC7F-DEBB-0F30-0CE167F8EBC8</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>DDD3B4C2-F49E-3287-72A7-03AA2B90888C</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="EC6A1E06-A754-8F25-AC62-268C69B18016" name="ANKIETA PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-13 12:09:59 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>67FDF2F0-44A8-D8A9-18C6-3366B7BA0C76</attributeRef>
+<attributeRef>2633141F-0E7B-762B-A5D7-513398B9B531</attributeRef>
+<attributeRef>96A47340-BD50-33DE-9D6C-9E0484636B42</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="65A059D1-E2EE-2FD1-6FCB-74CE7796D62E" containerWithKeyObject="9FA97AAD-41BE-108A-46C3-CF1EBC768E16" localFKIndex="5D459C97-1DFF-9939-A9C8-CE6028C98CE6" name="WPSZ_PRM_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:57:46 UTC</createdTime>
+<generatorID>C2447327-ACE9-D4F1-7C57-14804D929C11</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<referredTableLongName>PARAMETRY</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>DDABBFF5-AF44-B516-ABF8-C02D3556F9E9</referredTableID>
+<keyObject>AC04BB36-7096-62E3-7279-2C5244B05794</keyObject>
+<referredKeyID>AC04BB36-7096-62E3-7279-2C5244B05794</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>KOD_TYPU,DYSKRYMINATOR_TYPU,KOD_PARAMETRU</refColNames>
+<transferable>false</transferable>
+<rely>false</rely>
+<discriminatorColumn>6731E393-8FD4-8FC8-FBAC-2A94516E1732</discriminatorColumn>
+<discriminatorValue>S</discriminatorValue>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

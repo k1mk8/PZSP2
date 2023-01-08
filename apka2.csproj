@@ -19,4 +19,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Database\ERD-SQL_Developer_Data_Modeler\schemat_ERD\files\" />
+    <Folder Include="Database\ERD-SQL_Developer_Data_Modeler\schemat_ERD\rel\F77F99E3-746CE7840648\arc\seg_0\" />
+  </ItemGroup>
+
 </Project>

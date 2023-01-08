@@ -1,0 +1,745 @@
+postgres=# \d database.*
+                  Index "database.CLCEN_ADDRESS_UN"
+     Column      |          Type          | Key? |    Definition
+-----------------+------------------------+------+-------------------
+ STREET          | character varying(100) | yes  | "STREET"
+ BUILDING_NUMBER | character varying(5)   | yes  | "BUILDING_NUMBER"
+ LOCALITY        | character varying(100) | yes  | "LOCALITY"
+ POSTAL_CODE     | character varying(6)   | yes  | "POSTAL_CODE"
+ VENUE_NUMBER    | character varying(5)   | yes  | "VENUE_NUMBER"
+unique, btree, for table "database.CLINICAL_CENTERS"
+
+
+           Index "database.CLCEN_NAME_UN"
+ Column |          Type          | Key? | Definition
+--------+------------------------+------+------------
+ NAME   | character varying(100) | yes  | "NAME"
+unique, btree, for table "database.CLINICAL_CENTERS"
+
+
+                 Index "database.CLCEN_PK"
+       Column       |  Type   | Key? |      Definition
+--------------------+---------+------+----------------------
+ CLINICAL_CENTER_ID | integer | yes  | "CLINICAL_CENTER_ID"
+primary key, btree, for table "database.CLINICAL_CENTERS"
+
+
+      Index "database.CLDA_DOCT_IDX"
+  Column   |  Type   | Key? | Definition
+-----------+---------+------+-------------
+ DOCTOR_ID | integer | yes  | "DOCTOR_ID"
+btree, for table "database.CLINICAL_DATA"
+
+
+                                      Index "database.CLDA_PK"
+              Column              |         Type         | Key? |             Definition
+----------------------------------+----------------------+------+------------------------------------
+ PATIENT_ID                       | integer              | yes  | "PATIENT_ID"
+ CLINICAL_DATA_TYPE_DISCRIMINATOR | character varying(1) | yes  | "CLINICAL_DATA_TYPE_DISCRIMINATOR"
+ DATA_COLLECTION_DATE             | date                 | yes  | "DATA_COLLECTION_DATE"
+ CLINICAL_DATA_TYPE_CODE          | integer              | yes  | "CLINICAL_DATA_TYPE_CODE"
+primary key, btree, for table "database.CLINICAL_DATA"
+
+
+                                   Index "database.CLDA_PRMVAL_PK"
+              Column              |         Type         | Key? |             Definition
+----------------------------------+----------------------+------+------------------------------------
+ PATIENT_ID                       | integer              | yes  | "PATIENT_ID"
+ CLINICAL_DATA_TYPE_CODE          | integer              | yes  | "CLINICAL_DATA_TYPE_CODE"
+ CLINICAL_DATA_TYPE_DISCRIMINATOR | character varying(1) | yes  | "CLINICAL_DATA_TYPE_DISCRIMINATOR"
+ CLINICAL_DATA_COLLECTION_DATE    | date                 | yes  | "CLINICAL_DATA_COLLECTION_DATE"
+ PARAMETER_CODE                   | integer              | yes  | "PARAMETER_CODE"
+primary key, btree, for table "database.CLINICAL_DATA_PARAMETERS_VALUES"
+
+
+                                Index "database.CLDA_PRMVAL_PRMS_IDX"
+              Column              |         Type         | Key? |             Definition
+----------------------------------+----------------------+------+------------------------------------
+ CLINICAL_DATA_TYPE_CODE          | integer              | yes  | "CLINICAL_DATA_TYPE_CODE"
+ CLINICAL_DATA_TYPE_DISCRIMINATOR | character varying(1) | yes  | "CLINICAL_DATA_TYPE_DISCRIMINATOR"
+ PARAMETER_CODE                   | integer              | yes  | "PARAMETER_CODE"
+btree, for table "database.CLINICAL_DATA_PARAMETERS_VALUES"
+
+
+                                    Index "database.CLDA_TYP_IDX"
+              Column              |         Type         | Key? |             Definition
+----------------------------------+----------------------+------+------------------------------------
+ CLINICAL_DATA_TYPE_CODE          | integer              | yes  | "CLINICAL_DATA_TYPE_CODE"
+ CLINICAL_DATA_TYPE_DISCRIMINATOR | character varying(1) | yes  | "CLINICAL_DATA_TYPE_DISCRIMINATOR"
+btree, for table "database.CLINICAL_DATA"
+
+
+           Index "database.CLDIAG_NAME_UN"
+ Column |          Type          | Key? | Definition
+--------+------------------------+------+------------
+ NAME   | character varying(200) | yes  | "NAME"
+unique, btree, for table "database.CLINICAL_DIAGNOSES"
+
+
+           Index "database.CLDIAG_PK"
+    Column    |  Type   | Key? |   Definition
+--------------+---------+------+----------------
+ DIAGNOSIS_ID | integer | yes  | "DIAGNOSIS_ID"
+primary key, btree, for table "database.CLINICAL_DIAGNOSES"
+
+
+                                                       Table "database.CLINICAL_CENTERS"
+       Column       |          Type           | Collation | Nullable |                                 Default
+--------------------+-------------------------+-----------+----------+-------------------------------------------------------------------------
+ CLINICAL_CENTER_ID | integer                 |           | not null | nextval('database."CLINICAL_CENTERS_CLINICAL_CENTER_ID_seq"'::regclass)
+ NAME               | character varying(100)  |           | not null |
+ STREET             | character varying(100)  |           | not null |
+ BUILDING_NUMBER    | character varying(5)    |           | not null |
+ LOCALITY           | character varying(100)  |           | not null |
+ POSTAL_CODE        | character varying(6)    |           | not null |
+ VENUE_NUMBER       | character varying(5)    |           |          |
+ DESCRIPTION        | character varying(1000) |           |          |
+Indexes:
+    "CLCEN_PK" PRIMARY KEY, btree ("CLINICAL_CENTER_ID")
+    "CLCEN_ADDRESS_UN" UNIQUE CONSTRAINT, btree ("STREET", "BUILDING_NUMBER", "LOCALITY", "POSTAL_CODE", "VENUE_NUMBER")
+    "CLCEN_NAME_UN" UNIQUE CONSTRAINT, btree ("NAME")
+Referenced by:
+    TABLE "database."PATIENTS"" CONSTRAINT "PAT_CLCEN_FK" FOREIGN KEY ("CLINICAL_CENTER_ID") REFERENCES database."CLINICAL_CENTERS"("CLINICAL_C
+ENTER_ID") NOT VALID
+
+
+     Sequence "database.CLINICAL_CENTERS_CLINICAL_CENTER_ID_seq"
+  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache
+---------+-------+---------+------------+-----------+---------+-------
+ integer |     1 |       1 | 2147483647 |         1 | no      |     1
+Owned by: database."CLINICAL_CENTERS"."CLINICAL_CENTER_ID"
+
+
+                               Table "database.CLINICAL_DATA"
+              Column              |          Type           | Collation | Nullable | Default
+----------------------------------+-------------------------+-----------+----------+---------
+ PATIENT_ID                       | integer                 |           | not null |
+ CLINICAL_DATA_TYPE_CODE          | integer                 |           | not null |
+ CLINICAL_DATA_TYPE_DISCRIMINATOR | character varying(1)    |           | not null |
+ DATA_COLLECTION_DATE             | date                    |           | not null |
+ DOCTOR_ID                        | integer                 |           | not null |
+ IS_DRAFT_VERSION                 | numeric(1,0)            |           | not null | 0
+ DESCRIPTION                      | character varying(1000) |           |          |
+Indexes:
+    "CLDA_PK" PRIMARY KEY, btree ("PATIENT_ID", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "DATA_COLLECTION_DATE", "CLINICAL_DATA_TYPE_CODE")
+    "CLDA_DOCT_IDX" btree ("DOCTOR_ID")
+    "CLDA_TYP_IDX" btree ("CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR")
+Check constraints:
+    "CLDA_IS_DRAFT_CHECK" CHECK ("IS_DRAFT_VERSION" = ANY (ARRAY[0::numeric, 1::numeric]))
+    "CLDA_TYPE_DISCR_CHECK" CHECK ("CLINICAL_DATA_TYPE_DISCRIMINATOR"::text = 'C'::text)
+Foreign-key constraints:
+    "CLDA_DOCT_FK" FOREIGN KEY ("DOCTOR_ID") REFERENCES database."DOCTORS"("DOCTOR_ID") NOT VALID
+    "CLDA_PAT_FK" FOREIGN KEY ("PATIENT_ID") REFERENCES database."PATIENTS"("PATIENT_ID") NOT VALID
+    "CLDA_TYP_FK" FOREIGN KEY ("CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR") REFERENCES database."TYPES"("TYPE_CODE", "TYPE_DI
+SCRIMINATOR") NOT VALID
+Referenced by:
+    TABLE "database."CLINICAL_DATA_PARAMETERS_VALUES"" CONSTRAINT "CLDA_PRMVAL_CLDA_FK" FOREIGN KEY ("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "
+CLINICAL_DATA_TYPE_DISCRIMINATOR", "CLINICAL_DATA_COLLECTION_DATE") REFERENCES database."CLINICAL_DATA"("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE"
+, "CLINICAL_DATA_TYPE_DISCRIMINATOR", "DATA_COLLECTION_DATE") NOT VALID
+    TABLE "database."PROCEDURES"" CONSTRAINT "PROC_CLDA_FK" FOREIGN KEY ("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMIN
+ATOR", "CLINICAL_DATA_COLLECTION_DATE") REFERENCES database."CLINICAL_DATA"("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRI
+MINATOR", "DATA_COLLECTION_DATE") NOT VALID
+
+
+                                                            Table "database.CLINICAL_DATA_PARAMETERS_VALUES"
+              Column              |          Type           | Collation | Nullable |                                      Default
+
+----------------------------------+-------------------------+-----------+----------+-----------------------------------------------------------
+-------------------------
+ PATIENT_ID                       | integer                 |           | not null |
+ CLINICAL_DATA_TYPE_CODE          | integer                 |           | not null |
+ CLINICAL_DATA_TYPE_DISCRIMINATOR | character varying(1)    |           | not null |
+ CLINICAL_DATA_COLLECTION_DATE    | date                    |           | not null |
+ PARAMETER_CODE                   | integer                 |           | not null | nextval('database."CLINICAL_DATA_PARAMETERS_VALUES_PARAMET
+ER_CODE_seq"'::regclass)
+ BOOLEAN_VALUE                    | numeric(1,0)            |           |          |
+ NUMERIC_VALUE                    | numeric(6,2)            |           |          |
+ TEXT_VALUE                       | character varying(100)  |           |          |
+ DESCRIPTION                      | character varying(1000) |           |          |
+Indexes:
+    "CLDA_PRMVAL_PK" PRIMARY KEY, btree ("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "CLINICAL_DATA_COLLECTION
+_DATE", "PARAMETER_CODE")
+    "CLDA_PRMVAL_PRMS_IDX" btree ("CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "PARAMETER_CODE")
+Check constraints:
+    "CLDA_PRMVAL_BOOLEAN_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NULL OR ("BOOLEAN_VALUE" = ANY (ARRAY[0::numeric, 1::numeric])))
+    "CLDA_PRMVAL_PARAMETER_TYPE_DISCR_CHECK" CHECK ("CLINICAL_DATA_TYPE_DISCRIMINATOR"::text = 'C'::text)
+    "CLDA_PRMVAL_SINGLE_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NOT NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS NULL OR "BOOLEAN_VALUE"
+ IS NULL AND "NUMERIC_VALUE" IS NOT NULL AND "TEXT_VALUE" IS NULL OR "BOOLEAN_VALUE" IS NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS NO
+T NULL)
+Foreign-key constraints:
+    "CLDA_PRMVAL_CLDA_FK" FOREIGN KEY ("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "CLINICAL_DATA_COLLECTION_D
+ATE") REFERENCES database."CLINICAL_DATA"("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "DATA_COLLECTION_DATE")
+NOT VALID
+    "CLDA_PRMVAL_PRMS_FK" FOREIGN KEY ("CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "PARAMETER_CODE") REFERENCES database."PA
+RAMETERS"("TYPE_CODE", "TYPE_DISCRIMINATOR", "PARAMETER_CODE") NOT VALID
+
+
+Sequence "database.CLINICAL_DATA_PARAMETERS_VALUES_PARAMETER_CODE_seq"
+  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache
+---------+-------+---------+------------+-----------+---------+-------
+ integer |     1 |       1 | 2147483647 |         1 | no      |     1
+Owned by: database."CLINICAL_DATA_PARAMETERS_VALUES"."PARAMETER_CODE"
+
+
+                                                 Table "database.CLINICAL_DIAGNOSES"
+    Column    |          Type           | Collation | Nullable |                               Default
+--------------+-------------------------+-----------+----------+---------------------------------------------------------------------
+ DIAGNOSIS_ID | integer                 |           | not null | nextval('database."CLINICAL_DIAGNOSES_DIAGNOSIS_ID_seq"'::regclass)
+ NAME         | character varying(200)  |           | not null |
+ DESCRIPTION  | character varying(1000) |           |          |
+Indexes:
+    "CLDIAG_PK" PRIMARY KEY, btree ("DIAGNOSIS_ID")
+    "CLDIAG_NAME_UN" UNIQUE CONSTRAINT, btree ("NAME")
+Referenced by:
+    TABLE "database."PATIENTS_CLINICAL_DIAGNOSES"" CONSTRAINT "PATCLDIAG_CLDIAG_FK" FOREIGN KEY ("DIAGNOSIS_ID") REFERENCES database."CLINICAL_
+DIAGNOSES"("DIAGNOSIS_ID") NOT VALID
+
+
+       Sequence "database.CLINICAL_DIAGNOSES_DIAGNOSIS_ID_seq"
+  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache
+---------+-------+---------+------------+-----------+---------+-------
+ integer |     1 |       1 | 2147483647 |         1 | no      |     1
+Owned by: database."CLINICAL_DIAGNOSES"."DIAGNOSIS_ID"
+
+
+                                                    Table "database.DOCTORS"
+        Column         |          Type           | Collation | Nullable |                        Default
+-----------------------+-------------------------+-----------+----------+-------------------------------------------------------
+ DOCTOR_ID             | integer                 |           | not null | nextval('database."DOCTORS_DOCTOR_ID_seq"'::regclass)
+ FIRST_NAME            | character varying(30)   |           | not null |
+ LAST_NAME             | character varying(50)   |           | not null |
+ IS_DATA_ADMINISTRATOR | numeric(1,0)            |           | not null | 0
+ PASSWORD              | character varying(20)   |           | not null |
+ MIDDLE_NAME           | character varying(30)   |           |          |
+ EMAIL                 | character varying(50)   |           |          |
+ DESCRIPTION           | character varying(1000) |           |          |
+Indexes:
+    "DOCT_PK" PRIMARY KEY, btree ("DOCTOR_ID")
+Check constraints:
+    "DOCT_PASSWORD_LENGTH_CHECK" CHECK (length("PASSWORD"::text) >= 8 AND length("PASSWORD"::text) <= 20)
+Referenced by:
+    TABLE "database."CLINICAL_DATA"" CONSTRAINT "CLDA_DOCT_FK" FOREIGN KEY ("DOCTOR_ID") REFERENCES database."DOCTORS"("DOCTOR_ID") NOT VALID
+    TABLE "database."DOCTORS_PATIENTS"" CONSTRAINT "DOCTPAT_DOCT_FK" FOREIGN KEY ("DOCTOR_ID") REFERENCES database."DOCTORS"("DOCTOR_ID") NOT V
+ALID
+    TABLE "database."PROCEDURES_SESSIONS"" CONSTRAINT "PROCSES_DOCT_FK" FOREIGN KEY ("DOCTOR_ID") REFERENCES database."DOCTORS"("DOCTOR_ID") NO
+T VALID
+    TABLE "database."PROCEDURES"" CONSTRAINT "PROC_DOCT_FK" FOREIGN KEY ("DOCTOR_ID") REFERENCES database."DOCTORS"("DOCTOR_ID") NOT VALID
+
+
+              Sequence "database.DOCTORS_DOCTOR_ID_seq"
+  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache
+---------+-------+---------+------------+-----------+---------+-------
+ integer |     1 |       1 | 2147483647 |         1 | no      |     1
+Owned by: database."DOCTORS"."DOCTOR_ID"
+
+
+           Table "database.DOCTORS_PATIENTS"
+   Column   |  Type   | Collation | Nullable | Default
+------------+---------+-----------+----------+---------
+ DOCTOR_ID  | integer |           | not null |
+ PATIENT_ID | integer |           | not null |
+Indexes:
+    "DOCTPAT_PK" PRIMARY KEY, btree ("DOCTOR_ID", "PATIENT_ID")
+    "DOCTPAT_PAT_IDX" btree ("PATIENT_ID")
+Foreign-key constraints:
+    "DOCTPAT_DOCT_FK" FOREIGN KEY ("DOCTOR_ID") REFERENCES database."DOCTORS"("DOCTOR_ID") NOT VALID
+    "DOCTPAT_PAT_FK" FOREIGN KEY ("PATIENT_ID") REFERENCES database."PATIENTS"("PATIENT_ID") NOT VALID
+
+
+      Index "database.DOCTPAT_PAT_IDX"
+   Column   |  Type   | Key? |  Definition
+------------+---------+------+--------------
+ PATIENT_ID | integer | yes  | "PATIENT_ID"
+btree, for table "database.DOCTORS_PATIENTS"
+
+
+        Index "database.DOCTPAT_PK"
+   Column   |  Type   | Key? |  Definition
+------------+---------+------+--------------
+ DOCTOR_ID  | integer | yes  | "DOCTOR_ID"
+ PATIENT_ID | integer | yes  | "PATIENT_ID"
+primary key, btree, for table "database.DOCTORS_PATIENTS"
+
+
+         Index "database.DOCT_PK"
+  Column   |  Type   | Key? | Definition
+-----------+---------+------+-------------
+ DOCTOR_ID | integer | yes  | "DOCTOR_ID"
+primary key, btree, for table "database.DOCTORS"
+
+
+                                                             Table "database.PARAMETERS"
+               Column                |          Type           | Collation | Nullable |                            Default
+
+-------------------------------------+-------------------------+-----------+----------+--------------------------------------------------------
+-------
+ TYPE_CODE                           | integer                 |           | not null |
+ TYPE_DISCRIMINATOR                  | character varying(1)    |           | not null |
+ PARAMETER_CODE                      | integer                 |           | not null | nextval('database."PARAMETERS_PARAMETER_CODE_seq"'::reg
+class)
+ NAME                                | character varying(100)  |           | not null |
+ DATA_TYPE                           | numeric(1,0)            |           | not null |
+ IS_PARAMETER_REGISTRATION_SUGGESTED | numeric(1,0)            |           | not null | 1
+ DESCRIPTION                         | character varying(1000) |           |          |
+Indexes:
+    "PRMS_PK" PRIMARY KEY, btree ("TYPE_CODE", "TYPE_DISCRIMINATOR", "PARAMETER_CODE")
+    "PRMS_TYPE_DISCR_NAME_UN" UNIQUE CONSTRAINT, btree ("TYPE_DISCRIMINATOR", "NAME", "TYPE_CODE")
+Check constraints:
+    "PRM_DATA_TYPE_DEF_CHECK" CHECK ("DATA_TYPE" = ANY (ARRAY[0::numeric, 1::numeric, 2::numeric]))
+    "PRM_IS_REGISTRATION_SUGGESTED_CHECK" CHECK ("IS_PARAMETER_REGISTRATION_SUGGESTED" = ANY (ARRAY[0::numeric, 1::numeric]))
+Foreign-key constraints:
+    "PRMS_TYP_FK" FOREIGN KEY ("TYPE_CODE", "TYPE_DISCRIMINATOR") REFERENCES database."TYPES"("TYPE_CODE", "TYPE_DISCRIMINATOR") NOT VALID
+Referenced by:
+    TABLE "database."CLINICAL_DATA_PARAMETERS_VALUES"" CONSTRAINT "CLDA_PRMVAL_PRMS_FK" FOREIGN KEY ("CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_
+TYPE_DISCRIMINATOR", "PARAMETER_CODE") REFERENCES database."PARAMETERS"("TYPE_CODE", "TYPE_DISCRIMINATOR", "PARAMETER_CODE") NOT VALID
+    TABLE "database."PROCEDURES_SESSIONS_PARAMETERS_VALUES"" CONSTRAINT "PROCSES_PRMVAL_PRMS_FK" FOREIGN KEY ("SESSION_TYPE_CODE", "SESSION_TYP
+E_DISCRIMINATOR", "PARAMETER_CODE") REFERENCES database."PARAMETERS"("TYPE_CODE", "TYPE_DISCRIMINATOR", "PARAMETER_CODE") NOT VALID
+    TABLE "database."PROCEDURES_PARAMETERS_VALUES"" CONSTRAINT "PROC_PRMVAL_PRMS_FK" FOREIGN KEY ("PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRI
+MINATOR", "PARAMETER_CODE") REFERENCES database."PARAMETERS"("TYPE_CODE", "TYPE_DISCRIMINATOR", "PARAMETER_CODE") NOT VALID
+
+
+          Sequence "database.PARAMETERS_PARAMETER_CODE_seq"
+  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache
+---------+-------+---------+------------+-----------+---------+-------
+ integer |     1 |       1 | 2147483647 |         1 | no      |     1
+Owned by: database."PARAMETERS"."PARAMETER_CODE"
+
+
+     Index "database.PATCLDIAG_CLDIAG_IDX"
+    Column    |  Type   | Key? |   Definition
+--------------+---------+------+----------------
+ DIAGNOSIS_ID | integer | yes  | "DIAGNOSIS_ID"
+btree, for table "database.PATIENTS_CLINICAL_DIAGNOSES"
+
+
+         Index "database.PATCLDIAG_PK"
+    Column    |  Type   | Key? |   Definition
+--------------+---------+------+----------------
+ PATIENT_ID   | integer | yes  | "PATIENT_ID"
+ DIAGNOSIS_ID | integer | yes  | "DIAGNOSIS_ID"
+primary key, btree, for table "database.PATIENTS_CLINICAL_DIAGNOSES"
+
+
+                                                    Table "database.PATIENTS"
+        Column        |          Type           | Collation | Nullable |                         Default
+----------------------+-------------------------+-----------+----------+---------------------------------------------------------
+ PATIENT_ID           | integer                 |           | not null | nextval('database."PATIENTS_PATIENT_ID_seq"'::regclass)
+ INITIALS             | character varying(4)    |           | not null |
+ BIRTH_DATE           | date                    |           | not null |
+ HOSPITALISATION_DATE | date                    |           | not null |
+ CKRT_START_DATE      | date                    |           | not null |
+ LIVER_FAILURE        | numeric(1,0)            |           | not null | 0
+ WEIGHT               | numeric(5,2)            |           | not null |
+ HEIGHT               | numeric(3,0)            |           | not null |
+ CLINICAL_CENTER_ID   | integer                 |           | not null |
+ DEATH_DATE           | date                    |           |          |
+ DESCRIPTION          | character varying(1000) |           |          |
+Indexes:
+    "PAT_PK" PRIMARY KEY, btree ("PATIENT_ID")
+    "PAT_CLCEN_IDX" btree ("CLINICAL_CENTER_ID")
+Check constraints:
+    "PAT_LIVER_FAILURE_CHECK" CHECK ("LIVER_FAILURE" = ANY (ARRAY[0::numeric, 1::numeric]))
+Foreign-key constraints:
+    "PAT_CLCEN_FK" FOREIGN KEY ("CLINICAL_CENTER_ID") REFERENCES database."CLINICAL_CENTERS"("CLINICAL_CENTER_ID") NOT VALID
+Referenced by:
+    TABLE "database."CLINICAL_DATA"" CONSTRAINT "CLDA_PAT_FK" FOREIGN KEY ("PATIENT_ID") REFERENCES database."PATIENTS"("PATIENT_ID") NOT VALID
+    TABLE "database."DOCTORS_PATIENTS"" CONSTRAINT "DOCTPAT_PAT_FK" FOREIGN KEY ("PATIENT_ID") REFERENCES database."PATIENTS"("PATIENT_ID") NOT
+ VALID
+    TABLE "database."PATIENTS_CLINICAL_DIAGNOSES"" CONSTRAINT "PATCLDIAG_PAT_FK" FOREIGN KEY ("PATIENT_ID") REFERENCES database."PATIENTS"("PAT
+IENT_ID") NOT VALID
+
+
+      Table "database.PATIENTS_CLINICAL_DIAGNOSES"
+    Column    |  Type   | Collation | Nullable | Default
+--------------+---------+-----------+----------+---------
+ PATIENT_ID   | integer |           | not null |
+ DIAGNOSIS_ID | integer |           | not null |
+Indexes:
+    "PATCLDIAG_PK" PRIMARY KEY, btree ("PATIENT_ID", "DIAGNOSIS_ID")
+    "PATCLDIAG_CLDIAG_IDX" btree ("DIAGNOSIS_ID")
+Foreign-key constraints:
+    "PATCLDIAG_CLDIAG_FK" FOREIGN KEY ("DIAGNOSIS_ID") REFERENCES database."CLINICAL_DIAGNOSES"("DIAGNOSIS_ID") NOT VALID
+    "PATCLDIAG_PAT_FK" FOREIGN KEY ("PATIENT_ID") REFERENCES database."PATIENTS"("PATIENT_ID") NOT VALID
+
+
+             Sequence "database.PATIENTS_PATIENT_ID_seq"
+  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache
+---------+-------+---------+------------+-----------+---------+-------
+ integer |     1 |       1 | 2147483647 |         1 | no      |     1
+Owned by: database."PATIENTS"."PATIENT_ID"
+
+
+               Index "database.PAT_CLCEN_IDX"
+       Column       |  Type   | Key? |      Definition
+--------------------+---------+------+----------------------
+ CLINICAL_CENTER_ID | integer | yes  | "CLINICAL_CENTER_ID"
+btree, for table "database.PATIENTS"
+
+
+          Index "database.PAT_PK"
+   Column   |  Type   | Key? |  Definition
+------------+---------+------+--------------
+ PATIENT_ID | integer | yes  | "PATIENT_ID"
+primary key, btree, for table "database.PATIENTS"
+
+
+                        Index "database.PRMS_PK"
+       Column       |         Type         | Key? |      Definition
+--------------------+----------------------+------+----------------------
+ TYPE_CODE          | integer              | yes  | "TYPE_CODE"
+ TYPE_DISCRIMINATOR | character varying(1) | yes  | "TYPE_DISCRIMINATOR"
+ PARAMETER_CODE     | integer              | yes  | "PARAMETER_CODE"
+primary key, btree, for table "database.PARAMETERS"
+
+
+                 Index "database.PRMS_TYPE_DISCR_NAME_UN"
+       Column       |          Type          | Key? |      Definition
+--------------------+------------------------+------+----------------------
+ TYPE_DISCRIMINATOR | character varying(1)   | yes  | "TYPE_DISCRIMINATOR"
+ NAME               | character varying(100) | yes  | "NAME"
+ TYPE_CODE          | integer                | yes  | "TYPE_CODE"
+unique, btree, for table "database.PARAMETERS"
+
+
+          Index "database.PROCCOMR_NAME_UN"
+ Column |          Type          | Key? | Definition
+--------+------------------------+------+------------
+ NAME   | character varying(100) | yes  | "NAME"
+unique, btree, for table "database.PROCEDURES_COMPLETIONS_REASONS"
+
+
+       Index "database.PROCCOMR_PK"
+  Column   |  Type   | Key? | Definition
+-----------+---------+------+-------------
+ REASON_ID | integer | yes  | "REASON_ID"
+primary key, btree, for table "database.PROCEDURES_COMPLETIONS_REASONS"
+
+
+                                 Table "database.PROCEDURES"
+              Column              |          Type           | Collation | Nullable | Default
+----------------------------------+-------------------------+-----------+----------+---------
+ PATIENT_ID                       | integer                 |           | not null |
+ PROCEDURE_TYPE_CODE              | integer                 |           | not null |
+ PROCEDURE_TYPE_DISCRIMINATOR     | character varying(1)    |           | not null |
+ START_DATE                       | date                    |           | not null |
+ CLINICAL_DATA_TYPE_CODE          | integer                 |           | not null |
+ CLINICAL_DATA_TYPE_DISCRIMINATOR | character varying(1)    |           | not null |
+ CLINICAL_DATA_COLLECTION_DATE    | date                    |           | not null |
+ DOCTOR_ID                        | integer                 |           | not null |
+ IS_DRAFT_VERSION                 | numeric                 |           | not null | 0
+ COMPLETION_REASON_ID             | integer                 |           |          |
+ DESCRIPTION                      | character varying(1000) |           |          |
+Indexes:
+    "PROC_PK" PRIMARY KEY, btree ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "START_DATE")
+    "PROC_CLDA_IDX" btree ("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "CLINICAL_DATA_COLLECTION_DATE")
+    "PROC_DOCT_IDX" btree ("DOCTOR_ID")
+    "PROC_PROCCOMR_IDX" btree ("COMPLETION_REASON_ID")
+    "PROC_TYP_IDX" btree ("PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR")
+Check constraints:
+    "PROC_IS_DRAFT_CHECK" CHECK ("IS_DRAFT_VERSION" = ANY (ARRAY[0::numeric, 1::numeric]))
+    "PROC_TYPE_DISCR_CHECK" CHECK ("PROCEDURE_TYPE_DISCRIMINATOR"::text = 'P'::text)
+Foreign-key constraints:
+    "PROC_CLDA_FK" FOREIGN KEY ("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "CLINICAL_DATA_COLLECTION_DATE") R
+EFERENCES database."CLINICAL_DATA"("PATIENT_ID", "CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR", "DATA_COLLECTION_DATE") NOT VAL
+ID
+    "PROC_DOCT_FK" FOREIGN KEY ("DOCTOR_ID") REFERENCES database."DOCTORS"("DOCTOR_ID") NOT VALID
+    "PROC_PROCCOMR_FK" FOREIGN KEY ("COMPLETION_REASON_ID") REFERENCES database."PROCEDURES_COMPLETIONS_REASONS"("REASON_ID") NOT VALID
+    "PROC_TYP_FK" FOREIGN KEY ("PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR") REFERENCES database."TYPES"("TYPE_CODE", "TYPE_DISCRIMINA
+TOR") NOT VALID
+Referenced by:
+    TABLE "database."PROCEDURES_SESSIONS"" CONSTRAINT "PROCSES_PROC_FK" FOREIGN KEY ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCR
+IMINATOR", "PROCEDURE_DATE") REFERENCES database."PROCEDURES"("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "START_DATE"
+) NOT VALID
+    TABLE "database."PROCEDURES_PARAMETERS_VALUES"" CONSTRAINT "PROC_PRMVAL_PROC_FK" FOREIGN KEY ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDU
+RE_TYPE_DISCRIMINATOR", "PROCEDURE_DATE") REFERENCES database."PROCEDURES"("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR",
+ "START_DATE") NOT VALID
+
+
+                                               Table "database.PROCEDURES_COMPLETIONS_REASONS"
+   Column    |          Type           | Collation | Nullable |                                   Default
+-------------+-------------------------+-----------+----------+------------------------------------------------------------------------------
+ REASON_ID   | integer                 |           | not null | nextval('database."PROCEDURES_COMPLETIONS_REASONS_REASON_ID_seq"'::regclass)
+ NAME        | character varying(100)  |           | not null |
+ DESCRIPTION | character varying(1000) |           |          |
+Indexes:
+    "PROCCOMR_PK" PRIMARY KEY, btree ("REASON_ID")
+    "PROCCOMR_NAME_UN" UNIQUE CONSTRAINT, btree ("NAME")
+Referenced by:
+    TABLE "database."PROCEDURES"" CONSTRAINT "PROC_PROCCOMR_FK" FOREIGN KEY ("COMPLETION_REASON_ID") REFERENCES database."PROCEDURES_COMPLETION
+S_REASONS"("REASON_ID") NOT VALID
+
+
+   Sequence "database.PROCEDURES_COMPLETIONS_REASONS_REASON_ID_seq"
+  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache
+---------+-------+---------+------------+-----------+---------+-------
+ integer |     1 |       1 | 2147483647 |         1 | no      |     1
+Owned by: database."PROCEDURES_COMPLETIONS_REASONS"."REASON_ID"
+
+
+                      Table "database.PROCEDURES_PARAMETERS_VALUES"
+            Column            |          Type           | Collation | Nullable | Default
+------------------------------+-------------------------+-----------+----------+---------
+ PATIENT_ID                   | integer                 |           | not null |
+ PROCEDURE_TYPE_CODE          | integer                 |           | not null |
+ PROCEDURE_TYPE_DISCRIMINATOR | character varying(1)    |           | not null |
+ PROCEDURE_DATE               | date                    |           | not null |
+ PARAMETER_CODE               | integer                 |           | not null |
+ BOOLEAN_VALUE                | numeric(1,0)            |           |          |
+ NUMERIC_VALUE                | numeric(6,2)            |           |          |
+ TEXT_VALUE                   | character varying(100)  |           |          |
+ DESCRIPTION                  | character varying(1000) |           |          |
+Indexes:
+    "PROC_PRMVAL_PK" PRIMARY KEY, btree ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_DATE", "PARAMETER_CODE
+")
+    "PROC_PRMVAL_PRMS_IDX" btree ("PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PARAMETER_CODE")
+Check constraints:
+    "PROC_PRMVAL_BOOLEAN_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NULL OR ("BOOLEAN_VALUE" = ANY (ARRAY[0::numeric, 1::numeric])))
+    "PROC_PRMVAL_PARAMETER_TYPE_DISCR_CHECK" CHECK ("PROCEDURE_TYPE_DISCRIMINATOR"::text = 'P'::text)
+    "PROC_PRMVAL_SINGLE_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NOT NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS NULL OR "BOOLEAN_VALUE"
+ IS NULL AND "NUMERIC_VALUE" IS NOT NULL AND "TEXT_VALUE" IS NULL OR "BOOLEAN_VALUE" IS NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS NO
+T NULL)
+Foreign-key constraints:
+    "PROC_PRMVAL_PRMS_FK" FOREIGN KEY ("PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PARAMETER_CODE") REFERENCES database."PARAMETERS
+"("TYPE_CODE", "TYPE_DISCRIMINATOR", "PARAMETER_CODE") NOT VALID
+    "PROC_PRMVAL_PROC_FK" FOREIGN KEY ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_DATE") REFERENCES databa
+se."PROCEDURES"("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "START_DATE") NOT VALID
+
+
+                          Table "database.PROCEDURES_SESSIONS"
+            Column            |          Type           | Collation | Nullable | Default
+------------------------------+-------------------------+-----------+----------+---------
+ PATIENT_ID                   | integer                 |           | not null |
+ PROCEDURE_TYPE_CODE          | integer                 |           | not null |
+ PROCEDURE_TYPE_DISCRIMINATOR | character varying(1)    |           | not null |
+ PROCEDURE_DATE               | date                    |           | not null |
+ SESSION_TYPE_CODE            | integer                 |           | not null |
+ SESSION_TYPE_DISCRIMINATOR   | character varying(1)    |           | not null |
+ ORDINAL_NUMBER               | numeric(3,0)            |           | not null |
+ SESSION_START_DATE           | date                    |           | not null |
+ DOCTOR_ID                    | integer                 |           | not null |
+ IS_DRAFT_VERSION             | numeric(1,0)            |           | not null | 0
+ DESCRIPTION                  | character varying(1000) |           |          |
+Indexes:
+    "PROCSES_PK" PRIMARY KEY, btree ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_DATE", "SESSION_TYPE_CODE"
+, "SESSION_TYPE_DISCRIMINATOR", "ORDINAL_NUMBER")
+    "PROCSES_DOCT_IDX" btree ("DOCTOR_ID")
+    "PROCSES_TYP_IDX" btree ("SESSION_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR")
+Check constraints:
+    "PROCSES_IS_DRAFT_CHECK" CHECK ("IS_DRAFT_VERSION" = ANY (ARRAY[0::numeric, 1::numeric]))
+    "PROCSES_TYPE_DISCR_CHECK" CHECK ("SESSION_TYPE_DISCRIMINATOR"::text = 'S'::text)
+Foreign-key constraints:
+    "PROCSES_DOCT_FK" FOREIGN KEY ("DOCTOR_ID") REFERENCES database."DOCTORS"("DOCTOR_ID") NOT VALID
+    "PROCSES_PROC_FK" FOREIGN KEY ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_DATE") REFERENCES database."
+PROCEDURES"("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "START_DATE") NOT VALID
+    "PROCSES_TYP_FK" FOREIGN KEY ("SESSION_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR") REFERENCES database."TYPES"("TYPE_CODE", "TYPE_DISCRIMINAT
+OR") NOT VALID
+Referenced by:
+    TABLE "database."PROCEDURES_SESSIONS_PARAMETERS_VALUES"" CONSTRAINT "PROCSES_PRMVAL_PROCSES_FK" FOREIGN KEY ("PATIENT_ID", "PROCEDURE_TYPE_
+CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_START_DATE", "SESSION_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR", "SESSION_ORDINAL_NUMBER") REF
+ERENCES database."PROCEDURES_SESSIONS"("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_DATE", "SESSION_TYPE_COD
+E", "SESSION_TYPE_DISCRIMINATOR", "ORDINAL_NUMBER") NOT VALID
+
+
+                                                          Table "database.PROCEDURES_SESSIONS_PARAMETERS_VALUES"
+            Column            |          Type           | Collation | Nullable |                                         Default
+
+------------------------------+-------------------------+-----------+----------+---------------------------------------------------------------
+---------------------------
+ PATIENT_ID                   | integer                 |           | not null |
+ PROCEDURE_TYPE_CODE          | integer                 |           | not null |
+ PROCEDURE_TYPE_DISCRIMINATOR | character varying(1)    |           | not null |
+ PROCEDURE_START_DATE         | date                    |           | not null |
+ SESSION_TYPE_CODE            | integer                 |           | not null |
+ SESSION_TYPE_DISCRIMINATOR   | character varying(1)    |           | not null |
+ SESSION_ORDINAL_NUMBER       | numeric(3,0)            |           | not null |
+ PARAMETER_CODE               | integer                 |           | not null | nextval('database."PROCEDURES_SESSIONS_PARAMETERS_VALUES_PARAM
+ETER_CODE_seq"'::regclass)
+ BOOLEAN_VALUE                | numeric(1,0)            |           |          |
+ NUMERIC_VALUE                | numeric(6,2)            |           |          |
+ TEXT_VALUE                   | character varying(100)  |           |          |
+ DESCRIPTION                  | character varying(1000) |           |          |
+Indexes:
+    "PROCSES_PRMVAL_PK" PRIMARY KEY, btree ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_START_DATE", "SESSI
+ON_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR", "SESSION_ORDINAL_NUMBER", "PARAMETER_CODE")
+    "PROCSES_PRMVAL_PRMS_IDX" btree ("SESSION_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR", "PARAMETER_CODE")
+Check constraints:
+    "PROCSES_PRMVAL_BOOLEAN_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NULL OR ("BOOLEAN_VALUE" = ANY (ARRAY[0::numeric, 1::numeric])))
+    "PROCSES_PRMVAL_PARAMETER_TYPE_DISCR_CHECK" CHECK ("SESSION_TYPE_DISCRIMINATOR"::text = 'S'::text)
+    "PROCSES_PRMVAL_SINGLE_VALUE_CHECK" CHECK ("BOOLEAN_VALUE" IS NOT NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS NULL OR "BOOLEAN_VAL
+UE" IS NULL AND "NUMERIC_VALUE" IS NOT NULL AND "TEXT_VALUE" IS NULL OR "BOOLEAN_VALUE" IS NULL AND "NUMERIC_VALUE" IS NULL AND "TEXT_VALUE" IS
+ NOT NULL)
+Foreign-key constraints:
+    "PROCSES_PRMVAL_PRMS_FK" FOREIGN KEY ("SESSION_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR", "PARAMETER_CODE") REFERENCES database."PARAMETERS"
+("TYPE_CODE", "TYPE_DISCRIMINATOR", "PARAMETER_CODE") NOT VALID
+    "PROCSES_PRMVAL_PROCSES_FK" FOREIGN KEY ("PATIENT_ID", "PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_START_DATE", "SESS
+ION_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR", "SESSION_ORDINAL_NUMBER") REFERENCES database."PROCEDURES_SESSIONS"("PATIENT_ID", "PROCEDURE_TYPE
+_CODE", "PROCEDURE_TYPE_DISCRIMINATOR", "PROCEDURE_DATE", "SESSION_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR", "ORDINAL_NUMBER") NOT VALID
+
+
+Sequence "database.PROCEDURES_SESSIONS_PARAMETERS_VALUES_PARAMETER_CODE_seq"
+  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache
+---------+-------+---------+------------+-----------+---------+-------
+ integer |     1 |       1 | 2147483647 |         1 | no      |     1
+Owned by: database."PROCEDURES_SESSIONS_PARAMETERS_VALUES"."PARAMETER_CODE"
+
+
+    Index "database.PROCSES_DOCT_IDX"
+  Column   |  Type   | Key? | Definition
+-----------+---------+------+-------------
+ DOCTOR_ID | integer | yes  | "DOCTOR_ID"
+btree, for table "database.PROCEDURES_SESSIONS"
+
+
+                                 Index "database.PROCSES_PK"
+            Column            |         Type         | Key? |           Definition
+------------------------------+----------------------+------+--------------------------------
+ PATIENT_ID                   | integer              | yes  | "PATIENT_ID"
+ PROCEDURE_TYPE_CODE          | integer              | yes  | "PROCEDURE_TYPE_CODE"
+ PROCEDURE_TYPE_DISCRIMINATOR | character varying(1) | yes  | "PROCEDURE_TYPE_DISCRIMINATOR"
+ PROCEDURE_DATE               | date                 | yes  | "PROCEDURE_DATE"
+ SESSION_TYPE_CODE            | integer              | yes  | "SESSION_TYPE_CODE"
+ SESSION_TYPE_DISCRIMINATOR   | character varying(1) | yes  | "SESSION_TYPE_DISCRIMINATOR"
+ ORDINAL_NUMBER               | numeric(3,0)         | yes  | "ORDINAL_NUMBER"
+primary key, btree, for table "database.PROCEDURES_SESSIONS"
+
+
+                             Index "database.PROCSES_PRMVAL_PK"
+            Column            |         Type         | Key? |           Definition
+------------------------------+----------------------+------+--------------------------------
+ PATIENT_ID                   | integer              | yes  | "PATIENT_ID"
+ PROCEDURE_TYPE_CODE          | integer              | yes  | "PROCEDURE_TYPE_CODE"
+ PROCEDURE_TYPE_DISCRIMINATOR | character varying(1) | yes  | "PROCEDURE_TYPE_DISCRIMINATOR"
+ PROCEDURE_START_DATE         | date                 | yes  | "PROCEDURE_START_DATE"
+ SESSION_TYPE_CODE            | integer              | yes  | "SESSION_TYPE_CODE"
+ SESSION_TYPE_DISCRIMINATOR   | character varying(1) | yes  | "SESSION_TYPE_DISCRIMINATOR"
+ SESSION_ORDINAL_NUMBER       | numeric(3,0)         | yes  | "SESSION_ORDINAL_NUMBER"
+ PARAMETER_CODE               | integer              | yes  | "PARAMETER_CODE"
+primary key, btree, for table "database.PROCEDURES_SESSIONS_PARAMETERS_VALUES"
+
+
+                        Index "database.PROCSES_PRMVAL_PRMS_IDX"
+           Column           |         Type         | Key? |          Definition
+----------------------------+----------------------+------+------------------------------
+ SESSION_TYPE_CODE          | integer              | yes  | "SESSION_TYPE_CODE"
+ SESSION_TYPE_DISCRIMINATOR | character varying(1) | yes  | "SESSION_TYPE_DISCRIMINATOR"
+ PARAMETER_CODE             | integer              | yes  | "PARAMETER_CODE"
+btree, for table "database.PROCEDURES_SESSIONS_PARAMETERS_VALUES"
+
+
+                            Index "database.PROCSES_TYP_IDX"
+           Column           |         Type         | Key? |          Definition
+----------------------------+----------------------+------+------------------------------
+ SESSION_TYPE_CODE          | integer              | yes  | "SESSION_TYPE_CODE"
+ SESSION_TYPE_DISCRIMINATOR | character varying(1) | yes  | "SESSION_TYPE_DISCRIMINATOR"
+btree, for table "database.PROCEDURES_SESSIONS"
+
+
+                                   Index "database.PROC_CLDA_IDX"
+              Column              |         Type         | Key? |             Definition
+----------------------------------+----------------------+------+------------------------------------
+ PATIENT_ID                       | integer              | yes  | "PATIENT_ID"
+ CLINICAL_DATA_TYPE_CODE          | integer              | yes  | "CLINICAL_DATA_TYPE_CODE"
+ CLINICAL_DATA_TYPE_DISCRIMINATOR | character varying(1) | yes  | "CLINICAL_DATA_TYPE_DISCRIMINATOR"
+ CLINICAL_DATA_COLLECTION_DATE    | date                 | yes  | "CLINICAL_DATA_COLLECTION_DATE"
+btree, for table "database.PROCEDURES"
+
+
+      Index "database.PROC_DOCT_IDX"
+  Column   |  Type   | Key? | Definition
+-----------+---------+------+-------------
+ DOCTOR_ID | integer | yes  | "DOCTOR_ID"
+btree, for table "database.PROCEDURES"
+
+
+                                  Index "database.PROC_PK"
+            Column            |         Type         | Key? |           Definition
+------------------------------+----------------------+------+--------------------------------
+ PATIENT_ID                   | integer              | yes  | "PATIENT_ID"
+ PROCEDURE_TYPE_CODE          | integer              | yes  | "PROCEDURE_TYPE_CODE"
+ PROCEDURE_TYPE_DISCRIMINATOR | character varying(1) | yes  | "PROCEDURE_TYPE_DISCRIMINATOR"
+ START_DATE                   | date                 | yes  | "START_DATE"
+primary key, btree, for table "database.PROCEDURES"
+
+
+                               Index "database.PROC_PRMVAL_PK"
+            Column            |         Type         | Key? |           Definition
+------------------------------+----------------------+------+--------------------------------
+ PATIENT_ID                   | integer              | yes  | "PATIENT_ID"
+ PROCEDURE_TYPE_CODE          | integer              | yes  | "PROCEDURE_TYPE_CODE"
+ PROCEDURE_TYPE_DISCRIMINATOR | character varying(1) | yes  | "PROCEDURE_TYPE_DISCRIMINATOR"
+ PROCEDURE_DATE               | date                 | yes  | "PROCEDURE_DATE"
+ PARAMETER_CODE               | integer              | yes  | "PARAMETER_CODE"
+primary key, btree, for table "database.PROCEDURES_PARAMETERS_VALUES"
+
+
+                            Index "database.PROC_PRMVAL_PRMS_IDX"
+            Column            |         Type         | Key? |           Definition
+------------------------------+----------------------+------+--------------------------------
+ PROCEDURE_TYPE_CODE          | integer              | yes  | "PROCEDURE_TYPE_CODE"
+ PROCEDURE_TYPE_DISCRIMINATOR | character varying(1) | yes  | "PROCEDURE_TYPE_DISCRIMINATOR"
+ PARAMETER_CODE               | integer              | yes  | "PARAMETER_CODE"
+btree, for table "database.PROCEDURES_PARAMETERS_VALUES"
+
+
+               Index "database.PROC_PROCCOMR_IDX"
+        Column        |  Type   | Key? |       Definition
+----------------------+---------+------+------------------------
+ COMPLETION_REASON_ID | integer | yes  | "COMPLETION_REASON_ID"
+btree, for table "database.PROCEDURES"
+
+
+                                Index "database.PROC_TYP_IDX"
+            Column            |         Type         | Key? |           Definition
+------------------------------+----------------------+------+--------------------------------
+ PROCEDURE_TYPE_CODE          | integer              | yes  | "PROCEDURE_TYPE_CODE"
+ PROCEDURE_TYPE_DISCRIMINATOR | character varying(1) | yes  | "PROCEDURE_TYPE_DISCRIMINATOR"
+btree, for table "database.PROCEDURES"
+
+
+                                                  Table "database.TYPES"
+       Column       |          Type           | Collation | Nullable |                       Default
+--------------------+-------------------------+-----------+----------+-----------------------------------------------------
+ TYPE_CODE          | integer                 |           | not null | nextval('database."TYPES_TYPE_CODE_seq"'::regclass)
+ TYPE_DISCRIMINATOR | character varying(1)    |           | not null |
+ NAME               | character varying(100)  |           | not null |
+ DESCRIPTION        | character varying(1000) |           |          |
+Indexes:
+    "TYP_PK" PRIMARY KEY, btree ("TYPE_CODE", "TYPE_DISCRIMINATOR")
+    "TYP_NAME_UN" UNIQUE CONSTRAINT, btree ("NAME")
+Check constraints:
+    "TYP_AVAILABLE_TYPE_DISCR_CHECK" CHECK ("TYPE_DISCRIMINATOR"::text = ANY (ARRAY['C'::character varying, 'P'::character varying, 'S'::charac
+ter varying]::text[]))
+Referenced by:
+    TABLE "database."CLINICAL_DATA"" CONSTRAINT "CLDA_TYP_FK" FOREIGN KEY ("CLINICAL_DATA_TYPE_CODE", "CLINICAL_DATA_TYPE_DISCRIMINATOR") REFER
+ENCES database."TYPES"("TYPE_CODE", "TYPE_DISCRIMINATOR") NOT VALID
+    TABLE "database."PARAMETERS"" CONSTRAINT "PRMS_TYP_FK" FOREIGN KEY ("TYPE_CODE", "TYPE_DISCRIMINATOR") REFERENCES database."TYPES"("TYPE_CO
+DE", "TYPE_DISCRIMINATOR") NOT VALID
+    TABLE "database."PROCEDURES_SESSIONS"" CONSTRAINT "PROCSES_TYP_FK" FOREIGN KEY ("SESSION_TYPE_CODE", "SESSION_TYPE_DISCRIMINATOR") REFERENC
+ES database."TYPES"("TYPE_CODE", "TYPE_DISCRIMINATOR") NOT VALID
+    TABLE "database."PROCEDURES"" CONSTRAINT "PROC_TYP_FK" FOREIGN KEY ("PROCEDURE_TYPE_CODE", "PROCEDURE_TYPE_DISCRIMINATOR") REFERENCES datab
+ase."TYPES"("TYPE_CODE", "TYPE_DISCRIMINATOR") NOT VALID
+
+
+               Sequence "database.TYPES_TYPE_CODE_seq"
+  Type   | Start | Minimum |  Maximum   | Increment | Cycles? | Cache
+---------+-------+---------+------------+-----------+---------+-------
+ integer |     1 |       1 | 2147483647 |         1 | no      |     1
+Owned by: database."TYPES"."TYPE_CODE"
+
+
+            Index "database.TYP_NAME_UN"
+ Column |          Type          | Key? | Definition
+--------+------------------------+------+------------
+ NAME   | character varying(100) | yes  | "NAME"
+unique, btree, for table "database.TYPES"
+
+
+                         Index "database.TYP_PK"
+       Column       |         Type         | Key? |      Definition
+--------------------+----------------------+------+----------------------
+ TYPE_CODE          | integer              | yes  | "TYPE_CODE"
+ TYPE_DISCRIMINATOR | character varying(1) | yes  | "TYPE_DISCRIMINATOR"
+primary key, btree, for table "database.TYPES"
+
+
+postgres=#

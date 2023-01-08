@@ -1,0 +1,177 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="F9871718-01BD-25AA-A5EC-912D295B836D" name="PACJENT">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-08 19:23:04 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="KOD_PACJENTA" id="035AE2D7-AC05-A511-480A-83614CE24776">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-08 19:40:58 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="INICJALY" id="0B394F0C-E9D5-E497-DE17-05C1769CB517">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-08 19:24:43 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>4</dataTypeSize>
+<ownDataTypeParameters>4,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DATA_URODZENIA" id="FC5F3779-F0F8-C283-5EA6-0A80B42B61A9">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-08 19:25:58 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DATA_HOSPITALIZACJI" id="FBA57B58-5DF5-557E-C0C0-71697237AFF0">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-08 19:27:31 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DATA_ROZPOCZECIA_CKRT" id="1FD61650-603A-57E9-D504-6E87837A88C3">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-08 19:27:52 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="NIEWYDOLNOSC_WATROBY" id="8767DEB7-2B33-1CAE-3DE1-A86EED97FF03">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-13 12:20:17 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>1</dataTypePrecision>
+<ownDataTypeParameters>,1,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="MASA_CIALA" id="CF4E3B04-8479-F5E3-BE5B-162479C451AB">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-13 12:20:38 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,5,2</ownDataTypeParameters>
+</Attribute>
+<Attribute name="WZROST" id="25E1CE2E-3136-96B1-87EA-2245BDE95B07">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-13 12:21:08 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DATA_ZGONU" id="39CDCC55-C5DD-B8F1-7E0F-0AEFEB0D612D">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-05 19:46:57 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="UWAGI" id="722FE8FE-1163-7F94-E2D9-AC2600BB70D6">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-13 12:24:57 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="KOD_OSRODKA" id="C5118F2A-2970-861B-6226-A5DCB6A0CF23">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-13 12:34:28 UTC</createdTime>
+<generatorID>3EDE49F2-7DF8-AFE7-CD62-B0C8A98363D2</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<referedAttribute>7FC12693-2D7C-9298-1796-CEE97AEE4684</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>3 CHAR</dataTypeSize>
+<ownDataTypeParameters>3 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="E6B21F8D-EF2A-0145-D00A-43F1606E9109" name="PACJENT PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-11-08 19:41:20 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<engineerTo>
+<item key="F77F99E3-3927-317A-0967-746CE7840648" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>035AE2D7-AC05-A511-480A-83614CE24776</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

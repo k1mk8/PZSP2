@@ -1,0 +1,63 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E06F7723-6B17-73FD-29C7-E23ABC8063A5" name="ROZPOZNANIA_KLINICZNE">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>19C57183-5782-45FE-340F-E69B25BA09D4</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<ordsAlias>rozpoznanie_kliniczne</ordsAlias>
+<abbreviation>ROZPKL</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="KOD_ROZPOZNANIA" id="ABF03980-3383-7AF0-A810-7D27E3A05F36">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>950D0A90-0A98-553C-2FA1-2C9E94BB15BE</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>3 CHAR</dataTypeSize>
+<ownDataTypeParameters>3 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NAZWA" id="A0ED55A9-AC6B-D0AD-57D7-315BC2FF8444">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>271DA238-7704-ECBE-7537-3FDBB5D74F90</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200 CHAR</dataTypeSize>
+<ownDataTypeParameters>200 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UWAGI" id="EFEBD61F-13E9-2206-EB6F-0410BB23DDE8">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>EC330FD9-D665-A568-27BF-D050D0F4E2E1</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CA6130B6-C9F1-29D2-2F82-C13577058E42" name="ROZPKL_PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<indexColumnUsage>
+<colUsage columnID="ABF03980-3383-7AF0-A810-7D27E3A05F36"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

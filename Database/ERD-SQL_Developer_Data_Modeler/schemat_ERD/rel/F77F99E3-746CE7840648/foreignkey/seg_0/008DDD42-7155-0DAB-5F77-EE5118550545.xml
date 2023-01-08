@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="008DDD42-7155-0DAB-5F77-EE5118550545" containerWithKeyObject="828B86E8-1CD0-476A-AD9E-F42EDEE99E9C" localFKIndex="E7A44C53-6E53-42D5-D2D7-ADD4A9603345" name="ANKT_PACJ_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>A0BAC821-D714-4409-50B6-1FD083393475</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<referredTableLongName>PACJENT</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>830745E5-524A-0399-4E1F-914E16B96795</referredTableID>
+<keyObject>518EAF88-5CEF-F96B-3B38-D6BE9B42F091</keyObject>
+<referredKeyID>518EAF88-5CEF-F96B-3B38-D6BE9B42F091</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>KOD_PACJENTA</refColNames>
+<transferable>false</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

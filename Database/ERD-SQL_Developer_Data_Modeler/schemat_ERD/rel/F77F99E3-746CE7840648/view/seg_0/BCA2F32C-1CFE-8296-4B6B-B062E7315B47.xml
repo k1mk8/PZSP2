@@ -1,0 +1,9 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableView class="oracle.dbtools.crest.model.design.relational.TableView" directorySegmentName="seg_0" id="BCA2F32C-1CFE-8296-4B6B-B062E7315B47" name="CYTRYNIANY">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 22:52:43 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<ordsAlias>view_2</ordsAlias>
+<userDefined>false</userDefined>
+<parsed>true</parsed>
+</TableView>

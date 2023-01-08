@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6E81964F-8A5F-656B-D926-0508DEF75EAA" name="TYPY">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>5313620F-0D10-76BA-EC78-BCFEFC288693</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<ordsAlias>typ</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="KOD_TYPU" id="7C30F164-026C-C9E2-3FCD-8CE50FD3E8FB">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>DDD3B4C2-F49E-3287-72A7-03AA2B90888C</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>5 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DYSKRYMINATOR_TYPU" id="9D3EA26F-138D-8FD2-0FEC-7CDA83AAF7FC">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-20 20:21:15 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>1 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NAZWA" id="99CC4EDA-5AA3-D21C-A0A9-551403F8BA88">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>A72DA204-5C25-9301-A87F-573D471BBCBE</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="OPIS" id="9480C6D5-FA66-45E4-8585-097B86343A50">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>ECDAE95B-9EC0-12A0-5D41-66F9DD6B928D</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="FF915386-DE61-3BB7-DC8E-CF6677224A9A" name="TYP_PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>4D2DD6F1-ED7A-37A0-DFA5-66BB567DA746</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7C30F164-026C-C9E2-3FCD-8CE50FD3E8FB"/>
+<colUsage columnID="9D3EA26F-138D-8FD2-0FEC-7CDA83AAF7FC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

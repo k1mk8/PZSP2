@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="54561154-29F2-D5A7-A94C-5F4A49D95767" containerWithKeyObject="830745E5-524A-0399-4E1F-914E16B96795" localFKIndex="3E16A7D7-B9D6-C9E7-7A8C-6496CCFDA5FA" name="PACJ_ROZPKL_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>A9D81768-E898-72AE-2569-808EAE41525B</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<referredTableLongName>ROZPOZNANIE_KLINICZNE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>E06F7723-6B17-73FD-29C7-E23ABC8063A5</referredTableID>
+<keyObject>CA6130B6-C9F1-29D2-2F82-C13577058E42</keyObject>
+<referredKeyID>CA6130B6-C9F1-29D2-2F82-C13577058E42</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>KOD_ROZPOZNANIA</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,243 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="65F339FA-DCFA-D744-C486-1DC3C777FEAF" name="ZABIEGI">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>C7378074-CD39-B52C-D4F7-88665AE1B4E3</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<ordsAlias>zabieg</ordsAlias>
+<abbreviation>ZAB</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="KOD_PACJENTA" id="9C22E138-DE96-9CB7-12A7-602633679C0E">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>9777DF48-477B-0C0B-68E7-3DFF6FCD9F76</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="009178F2-ABAC-71CD-4325-5544B0D13409" referredColumn="C19C1C5D-5F74-C8A7-9208-C8A983D12834"/>
+<colAssociation fkAssociation="558360A3-F411-E547-EE27-FA747E0780A0" referredColumn="447482F2-46F3-2DEB-ADC9-7248656D68AC"/>
+</associations>
+</Column>
+<Column name="KOD_TYPU_ZABIEGU" id="3EF59F85-8AEA-AACC-307D-3C5E32E3DE06">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-20 20:31:23 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8123B732-0C66-FF0F-C72F-B34DAED48507" referredColumn="7C30F164-026C-C9E2-3FCD-8CE50FD3E8FB"/>
+</associations>
+</Column>
+<Column name="DYSKRYMINATOR_TYPU_ZABIEGU" id="0F0E5843-F36F-7DD1-5E6C-F1D7A2B1BCAC">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:30:14 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8123B732-0C66-FF0F-C72F-B34DAED48507" referredColumn="9D3EA26F-138D-8FD2-0FEC-7CDA83AAF7FC"/>
+</associations>
+</Column>
+<Column name="DATA_I_CZAS_ROZPOCZECIA" id="1C392BE7-D8E3-7070-EEDB-70AD7F5C2C9A">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>58173F7E-E028-0D61-F31E-ADEF66CA9587</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="KOD_TYPU_ANKIETY" id="D8263111-D2C9-8BF7-1E45-1D93FF4FC629">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:31:38 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="009178F2-ABAC-71CD-4325-5544B0D13409" referredColumn="BD668DA0-92D4-E547-0C95-478D32F92CB8"/>
+</associations>
+</Column>
+<Column name="DYSKRYMINATOR_TYPU_ANKIETY" id="5F590681-33C1-4263-C52A-3C76EB667442">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:31:38 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="009178F2-ABAC-71CD-4325-5544B0D13409" referredColumn="EAE8C257-17C5-98B9-6C38-8B6FF4F94EB0"/>
+</associations>
+</Column>
+<Column name="DATA_WYKONANIA_ANKIETY" id="862717D6-FDC5-F9DE-5695-0EF7E9199F90">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>3D3F3FFA-8401-F430-911D-22C2FBEB58E3</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="009178F2-ABAC-71CD-4325-5544B0D13409" referredColumn="3FE4F106-2041-AD21-43C9-739F5687E67D"/>
+</associations>
+</Column>
+<Column name="PRZYCZYNA_ZAKONCZENIA_ZABIEGU" id="CDFA2C5F-0E22-070B-9578-36F1C5713EAE">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>F5091749-B40A-827E-924E-FCCCE0C4AE48</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>4 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="941ABC4F-4D59-1845-57B5-BE6E3E54D4EF" referredColumn="1481E821-1F4A-8A00-D8CB-5690164209B2"/>
+</associations>
+</Column>
+<Column name="OPIS" id="606C3F97-5CE1-88A9-0CE1-525584A507CF">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>DB1B1592-A0B8-11D6-0DB8-A30C24DC0D82</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2AEDCE78-EA17-22B5-E785-9E11B679B1F5" name="ZAB_PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>8C7B9A38-6DD4-7DA8-B1ED-B4E4CDD6D4F1</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9C22E138-DE96-9CB7-12A7-602633679C0E"/>
+<colUsage columnID="3EF59F85-8AEA-AACC-307D-3C5E32E3DE06"/>
+<colUsage columnID="0F0E5843-F36F-7DD1-5E6C-F1D7A2B1BCAC"/>
+<colUsage columnID="1C392BE7-D8E3-7070-EEDB-70AD7F5C2C9A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="25608134-B6AB-BF48-0A8E-066B61D2B58A" name="ZAB_PZZAB_IDX">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-20 20:33:10 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CDFA2C5F-0E22-070B-9578-36F1C5713EAE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7368F8C2-EE70-2772-15A4-7DBDA995FC8C" name="ZAB_ANKT_IDX">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 22:39:39 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9C22E138-DE96-9CB7-12A7-602633679C0E"/>
+<colUsage columnID="D8263111-D2C9-8BF7-1E45-1D93FF4FC629"/>
+<colUsage columnID="5F590681-33C1-4263-C52A-3C76EB667442"/>
+<colUsage columnID="862717D6-FDC5-F9DE-5695-0EF7E9199F90"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="045EC7E1-5B2E-A63D-DEEC-2F302F10F2DA" name="ZAB_TYP_IDX">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-20 20:33:22 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3EF59F85-8AEA-AACC-307D-3C5E32E3DE06"/>
+<colUsage columnID="0F0E5843-F36F-7DD1-5E6C-F1D7A2B1BCAC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A8211F51-AD4E-A13C-BF4A-A846C13AF751" name="ZAB_PACJ_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>8C2A34CC-0F49-7242-0B87-60F8444C2898</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9C22E138-DE96-9CB7-12A7-602633679C0E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F0CCE9A7-9FC0-6499-4F03-381D2304CE5F" name="ZAB_PZZAB_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>E9807A36-D55D-55E5-8ED1-A08E415607D0</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CDFA2C5F-0E22-070B-9578-36F1C5713EAE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6C2BA017-0F45-CE0F-F089-B1DD3B7E0A6B" name="ZAB_ANKT_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>19620AB7-2491-4934-ECFE-B4F1EA21C6A2</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9C22E138-DE96-9CB7-12A7-602633679C0E"/>
+<colUsage columnID="D8263111-D2C9-8BF7-1E45-1D93FF4FC629"/>
+<colUsage columnID="5F590681-33C1-4263-C52A-3C76EB667442"/>
+<colUsage columnID="862717D6-FDC5-F9DE-5695-0EF7E9199F90"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6FBC4A99-F25C-CD3A-939D-5AF26F5CE7A7" name="ZAB_TYP_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-20 20:31:23 UTC</createdTime>
+<generatorID>4D2DD6F1-ED7A-37A0-DFA5-66BB567DA746</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3EF59F85-8AEA-AACC-307D-3C5E32E3DE06"/>
+<colUsage columnID="0F0E5843-F36F-7DD1-5E6C-F1D7A2B1BCAC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

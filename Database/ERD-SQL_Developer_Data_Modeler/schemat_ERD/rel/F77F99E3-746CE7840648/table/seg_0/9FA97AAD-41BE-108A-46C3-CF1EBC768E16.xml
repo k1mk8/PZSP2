@@ -1,0 +1,238 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="9FA97AAD-41BE-108A-46C3-CF1EBC768E16" name="WAR_PARAM_SESJI_ZABIEGOW">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>3A66D4FC-4B66-97FF-29BC-6C324AFFC449</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<ordsAlias>wartosc_parametru_sesji_zabiegu</ordsAlias>
+<abbreviation>WPSZ</abbreviation>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="KOD_PACJENTA" id="779117F9-E964-A1A7-9A11-991EA4A209F5">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>4F9C6B03-DF0A-E70C-E5ED-84FBDCB1FC6A</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E8518CE9-32FA-2084-7B59-A6E150AC0772" referredColumn="7751C3DF-C87B-0322-E7D4-DF217FFB6DD1"/>
+</associations>
+</Column>
+<Column name="KOD_TYPU_ZABIEGU" id="64A40BB6-F7F8-6522-9EE8-FFEA83FAC7A4">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:44:18 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E8518CE9-32FA-2084-7B59-A6E150AC0772" referredColumn="CEF2928B-76DC-37FC-F97C-0DECAB37585D"/>
+</associations>
+</Column>
+<Column name="DYSKRYMINATOR_TYPU_ZABIEGU" id="7AFE4B16-161A-EC2C-9B1D-B36BEC558DCC">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:44:39 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E8518CE9-32FA-2084-7B59-A6E150AC0772" referredColumn="8DEA3EAD-86C9-98E7-7B13-610853D92FA7"/>
+</associations>
+</Column>
+<Column name="DATA_I_CZAS_ZABIEGU" id="CA8C71EF-FF66-58C6-E6A0-48B0F76BCD47">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>481D6359-8436-E843-FE4F-A6304FC1A8B2</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E8518CE9-32FA-2084-7B59-A6E150AC0772" referredColumn="DFDBE28D-5036-96B2-078B-BD590C2E6348"/>
+</associations>
+</Column>
+<Column name="KOD_TYPU_SESJI" id="5E0C8293-650C-15B7-746D-A621F66EE77D">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:45:18 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E8518CE9-32FA-2084-7B59-A6E150AC0772" referredColumn="AF412B0A-F1B1-959C-35AD-E200C68D15CE"/>
+<colAssociation fkAssociation="65A059D1-E2EE-2FD1-6FCB-74CE7796D62E" referredColumn="87515CC5-5DCD-1D28-69B0-A560810DC0B6"/>
+</associations>
+</Column>
+<Column name="DYSKRYMINATOR_TYPU_SESJI" id="36173E32-123D-D245-D9AB-ACCE29E4C070">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:45:18 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E8518CE9-32FA-2084-7B59-A6E150AC0772" referredColumn="B643B322-C9F6-EC94-340C-8292070988FF"/>
+<colAssociation fkAssociation="65A059D1-E2EE-2FD1-6FCB-74CE7796D62E" referredColumn="6731E393-8FD4-8FC8-FBAC-2A94516E1732"/>
+</associations>
+</Column>
+<Column name="LICZBA_PORZADKOWA" id="07D1E1DF-9751-764C-23BD-DB45D923C31E">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>6808BE1E-374D-9BE1-3FC3-CFAC59344E85</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E8518CE9-32FA-2084-7B59-A6E150AC0772" referredColumn="2E07476C-DA25-B264-D984-B69983C7BFFB"/>
+</associations>
+</Column>
+<Column name="KOD_PARAMETRU" id="D71E6F00-41C0-9AE0-6407-033C00EDF8CB">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:57:46 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="65A059D1-E2EE-2FD1-6FCB-74CE7796D62E" referredColumn="4193FC9D-8586-BC5E-9943-A2DD206668B3"/>
+</associations>
+</Column>
+<Column name="WARTOSC_LICZBA" id="0AAB08CF-7F57-729E-894B-EFE059F6BDEE">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>19269B04-C9D1-D686-876C-5C5191AEDDC6</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="WARTOSC_TEKST" id="D4D3952F-1FF8-0C6D-4342-3FDB72F0FCF5">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 18:55:51 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100 CHAR</dataTypeSize>
+<ownDataTypeParameters>100 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UWAGI" id="27E81576-2A08-1415-8EA8-677970D75ACE">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>8817DFB9-38F6-8930-245A-3291A1E85809</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000 CHAR</dataTypeSize>
+<ownDataTypeParameters>1000 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E0138F39-DF25-8B6E-5872-8565E9F7C552" name="WPSZ_PK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>5CC0AF00-578A-9006-137F-969A1045FC59</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="779117F9-E964-A1A7-9A11-991EA4A209F5"/>
+<colUsage columnID="64A40BB6-F7F8-6522-9EE8-FFEA83FAC7A4"/>
+<colUsage columnID="7AFE4B16-161A-EC2C-9B1D-B36BEC558DCC"/>
+<colUsage columnID="CA8C71EF-FF66-58C6-E6A0-48B0F76BCD47"/>
+<colUsage columnID="5E0C8293-650C-15B7-746D-A621F66EE77D"/>
+<colUsage columnID="36173E32-123D-D245-D9AB-ACCE29E4C070"/>
+<colUsage columnID="07D1E1DF-9751-764C-23BD-DB45D923C31E"/>
+<colUsage columnID="D71E6F00-41C0-9AE0-6407-033C00EDF8CB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D1745C81-33E0-F562-5728-7F7857D0DC5A" name="WPSZ_PRM_IDX">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 15:07:31 UTC</createdTime>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5E0C8293-650C-15B7-746D-A621F66EE77D"/>
+<colUsage columnID="36173E32-123D-D245-D9AB-ACCE29E4C070"/>
+<colUsage columnID="D71E6F00-41C0-9AE0-6407-033C00EDF8CB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CEF3408A-449F-7694-B933-79D3DD6A9CE9" name="WPRS_SESZAB_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-18 21:09:56 UTC</createdTime>
+<generatorID>9ED5DD70-9415-7213-0B95-1FC0ED9A7D37</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="779117F9-E964-A1A7-9A11-991EA4A209F5"/>
+<colUsage columnID="64A40BB6-F7F8-6522-9EE8-FFEA83FAC7A4"/>
+<colUsage columnID="7AFE4B16-161A-EC2C-9B1D-B36BEC558DCC"/>
+<colUsage columnID="CA8C71EF-FF66-58C6-E6A0-48B0F76BCD47"/>
+<colUsage columnID="5E0C8293-650C-15B7-746D-A621F66EE77D"/>
+<colUsage columnID="36173E32-123D-D245-D9AB-ACCE29E4C070"/>
+<colUsage columnID="07D1E1DF-9751-764C-23BD-DB45D923C31E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5D459C97-1DFF-9939-A9C8-CE6028C98CE6" name="WPSZ_PRM_FK">
+<createdBy>Mateusz</createdBy>
+<createdTime>2022-12-21 14:57:46 UTC</createdTime>
+<generatorID>C2447327-ACE9-D4F1-7C57-14804D929C11</generatorID>
+<ownerDesignName>schemat_ERD</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5E0C8293-650C-15B7-746D-A621F66EE77D"/>
+<colUsage columnID="36173E32-123D-D245-D9AB-ACCE29E4C070"/>
+<colUsage columnID="D71E6F00-41C0-9AE0-6407-033C00EDF8CB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

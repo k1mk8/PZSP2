@@ -1,0 +1,5 @@
+sudo docker run --name pzsp2-db -p 5432:5432 \
+-v /root/postgresql/data/:/var/lib/postgresql/data \
+--restart=always \
+-e POSTGRES_PASSWORD=mysecretpassword \
+-d postgres
