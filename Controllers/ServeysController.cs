@@ -46,6 +46,14 @@ namespace apka2.Controllers
         // GET: Serveys/Create
         public IActionResult Create()
         {
+            IList<int> patients = new List<int>();
+            foreach (Patient patient in _context.Patient)
+            {
+                patients.Add(patient.Id);
+            }
+
+            ViewData["patients"] = patients;
+
             return View();
         }
 
