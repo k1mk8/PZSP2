@@ -13,7 +13,6 @@ namespace apka2.Controllers
     public class ProceduresController : Controller
     {
         private readonly apka2Context _context;
-        private int surveyId { get; set; }
 
         public ProceduresController(apka2Context context)
         {
@@ -58,9 +57,7 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
-            this.surveyId = (int)id;
-            Console.WriteLine(surveyId);
-
+            // TODO: save survey ID and pass it into procedure in POST Create()
             ViewData["anticoagulation"] = survery.Anticoagulation;
 
             return survery.Anticoagulation switch
@@ -93,10 +90,6 @@ namespace apka2.Controllers
         {
             if (ModelState.IsValid)
             {
-                Console.WriteLine(surveyId);
-                procedure.SurveyId = this.surveyId;
-                Console.WriteLine(procedure.SurveyId);
-
                 _context.Add(procedure);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
