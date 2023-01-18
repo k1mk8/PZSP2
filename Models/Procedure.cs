@@ -5,6 +5,8 @@ namespace apka2.Models
     public class Procedure
     {
         public int Id { get; set; }
+
+        [Display(Name = "Id ankiety")]
         public int SurveyId { get; set; }
 
         [DataType(DataType.Date)]

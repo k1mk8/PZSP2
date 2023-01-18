@@ -241,7 +241,7 @@ namespace apka2.Controllers
             return true;
         }
 
-        public async Task<IActionResult> LogOut()
+        public IActionResult LogOut()
         {
             HttpContext.Session.Remove(SessionData.SessionKeyUserId);
             HttpContext.Session.Remove(SessionData.SessionKeyIsAdmin);

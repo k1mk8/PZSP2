@@ -13,6 +13,7 @@ namespace apka2.Controllers
     public class ProceduresController : Controller
     {
         private readonly apka2Context _context;
+        private int surveyId { get; set; }
 
         public ProceduresController(apka2Context context)
         {
@@ -43,11 +44,45 @@ namespace apka2.Controllers
             return View(procedure);
         }
 
-        // GET: Procedures/Create
-        public IActionResult Create()
+        // GET: Procedures/Create/4
+        public async Task<IActionResult> CreateAsync(int? id)
+        {
+            if (id == null || _context.Survey == null)
+            {
+                return NotFound();
+            }
+
+            var survery = await _context.Survey.FindAsync(id);
+            if (survery == null)
+            {
+                return NotFound();
+            }
+
+            this.surveyId = (int)id;
+            Console.WriteLine(surveyId);
+
+            ViewData["anticoagulation"] = survery.Anticoagulation;
+
+            return survery.Anticoagulation switch
+            {
+                "Cytrynian" => RedirectToAction(nameof(Start_C)),
+                _ => RedirectToAction(nameof(Start_HN_HD_BA)),
+            };
+        }
+
+        // GET: Procedures/Start_C
+        public IActionResult Start_C()
         {
             return View();
         }
+
+        // GET: Procedures/Start_HN_HD_BA
+        public IActionResult Start_HN_HD_BA()
+        {
+            return View();
+        }
+
+
 
         // POST: Procedures/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -58,6 +93,10 @@ namespace apka2.Controllers
         {
             if (ModelState.IsValid)
             {
+                Console.WriteLine(surveyId);
+                procedure.SurveyId = this.surveyId;
+                Console.WriteLine(procedure.SurveyId);
+
                 _context.Add(procedure);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

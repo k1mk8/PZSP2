@@ -1,4 +1,4 @@
-﻿@model IEnumerable<apka2.Models.Servey>
+﻿@model IEnumerable<apka2.Models.Survey>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,10 +13,13 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.PatientId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ServeyDate)
+                @Html.DisplayNameFor(model => model.SurveyDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Anticoagulation)
@@ -28,18 +31,23 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.PatientId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ServeyDate)
+                @Html.DisplayFor(modelItem => item.SurveyDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Anticoagulation)
             </td>
             <td>
+                <a asp-controller="Procedures" asp-action="Create"
+                   asp-route-id="@item.Id" methods="get">Rozpocznij zabieg</a> |
                 <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
             </td>
         </tr>
 }

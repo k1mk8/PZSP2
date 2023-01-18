@@ -1,29 +1,30 @@
-﻿@model apka2.Models.Servey
+﻿@model apka2.Models.Survey
 
 @{
-    ViewData["Title"] = "Create";
-    var patients = ViewData["patients"] as IList<int>;
+    ViewData["Title"] = "Edit";
 }
 
-<h4>Dodaj ankietę</h4>
+<h4>Edytuj dane ankiety</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="PatientId" class="control-label"></label>
-                <p class="form-control">
-                    @Html.DropDownListFor(m => m.PatientId,
-                    new SelectList(patients),
-                    "Wybierz pacjenta")
-                </p>
+                <input asp-for="PatientId" class="form-control" />
                 <span asp-validation-for="PatientId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ServeyDate" class="control-label"></label>
-                <input asp-for="ServeyDate" class="form-control" />
-                <span asp-validation-for="ServeyDate" class="text-danger"></span>
+                <label asp-for="DoctorId" class="control-label"></label>
+                <input asp-for="DoctorId" class="form-control" />
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SurveyDate" class="control-label"></label>
+                <input asp-for="SurveyDate" class="form-control" />
+                <span asp-validation-for="SurveyDate" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -87,15 +88,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Anticoagulation" class="control-label"></label>
-                <p class="form-control">
-                    @Html.DropDownListFor(m => m.Anticoagulation,
-                        new SelectList(new List<string>{
-                            "Heparyna niefracjonowana",
-                            "Heparyna drobnocząsteczkowa",
-                            "Cytrynian",
-                            "Bez antykoagulacji"
-                        }), "Wybierz rodzaj")
-                </p>
+                <input asp-for="Anticoagulation" class="form-control" />
                 <span asp-validation-for="Anticoagulation" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -119,7 +112,7 @@
                 <span asp-validation-for="VascularAccessSite" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Utwórz" class="btn btn-primary" />
+                <input type="submit" value="Zapisz zmiany" class="btn btn-primary" />
             </div>
         </form>
     </div>
