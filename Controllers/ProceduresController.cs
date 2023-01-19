@@ -106,15 +106,13 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> End(int id, [Bind("SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
+        public async Task<IActionResult> End(int id, [Bind("Id,Anticoagulation,SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
         {
-            // TODO: ogarnać jak zmieniac tylko niektore atrybuty
+
             if (id != procedure.Id)
             {
                 return NotFound();
             }
-
-            Console.WriteLine(id);
 
             procedure.WasEnded = true;
             if (ModelState.IsValid)
@@ -135,7 +133,7 @@ namespace apka2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Details), id);
+                return RedirectToAction(nameof(Details), new { id });
             }
             return View(procedure);
         }
@@ -162,7 +160,7 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,WasEnded,Anticoagulation,SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
         {
             if (id != procedure.Id)
             {
@@ -187,7 +185,7 @@ namespace apka2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id });
             }
             return View(procedure);
         }
