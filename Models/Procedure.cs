@@ -6,6 +6,12 @@ namespace apka2.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "Zakończono zabieg")]
+        public bool WasEnded { get; set; }
+
+        [Display(Name = "Antykoagulacja")]
+        public string? Anticoagulation { get; set; }
+
         [Display(Name = "Id ankiety")]
         public int SurveyId { get; set; }
 
@@ -20,7 +26,7 @@ namespace apka2.Models
         public string? Filter { get; set; }
 
         [Display(Name = "Czas trwania zabiegu [h]")]
-        public decimal ProcedureTime { get; set; }
+        public decimal? ProcedureTime { get; set; }
 
 
         // Zależnie od metody jedno z pól do ukrycia
@@ -44,7 +50,7 @@ namespace apka2.Models
         public bool PatientDeath { get; set; }
 
         [Display(Name = "Data i godzina zgonu")]
-        public DateTime DeathDate { get; set; }
+        public DateTime? DeathDate { get; set; }
 
         [Display(Name = "Uwagi")]
         public string? Remarks { get; set; }

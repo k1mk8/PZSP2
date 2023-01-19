@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Anticoagulation)
             </td>
             <td>
-                <a asp-controller="Procedures" asp-action="Create"
+                <a asp-controller="Procedures" asp-action="Start"
                    asp-route-id="@item.Id" methods="get">Rozpocznij zabieg</a> |
                 <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |

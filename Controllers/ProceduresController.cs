@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using apka2.Data;
 using apka2.Models;
+using apka2.Migrations;
 
 namespace apka2.Controllers
 {
@@ -43,8 +44,8 @@ namespace apka2.Controllers
             return View(procedure);
         }
 
-        // GET: Procedures/Create/4
-        public async Task<IActionResult> CreateAsync(int? id)
+        // GET: Procedures/Start/4
+        public async Task<IActionResult> Start(int? id)
         {
             if (id == null || _context.Survey == null)
             {
@@ -57,37 +58,24 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
-            // TODO: save survey ID and pass it into procedure in POST Create()
+            TempData["surveyId"] = survery.Id;
+            TempData["anticoagulation"] = survery.Anticoagulation;
             ViewData["anticoagulation"] = survery.Anticoagulation;
 
-            return survery.Anticoagulation switch
-            {
-                "Cytrynian" => RedirectToAction(nameof(Start_C)),
-                _ => RedirectToAction(nameof(Start_HN_HD_BA)),
-            };
-        }
-
-        // GET: Procedures/Start_C
-        public IActionResult Start_C()
-        {
             return View();
         }
 
-        // GET: Procedures/Start_HN_HD_BA
-        public IActionResult Start_HN_HD_BA()
-        {
-            return View();
-        }
-
-
-
-        // POST: Procedures/Create
+        // POST: Procedures/Start
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
+        public async Task<IActionResult> Start([Bind("SurveyId,WasEnded,Anticoagulation,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
         {
+            procedure.SurveyId = (int)TempData["surveyId"];
+            procedure.WasEnded = false;
+            procedure.Anticoagulation = (string)TempData["anticoagulation"];
+
             if (ModelState.IsValid)
             {
                 _context.Add(procedure);
@@ -96,6 +84,62 @@ namespace apka2.Controllers
             }
             return View(procedure);
         }
+
+        // GET: Procedures/End/5
+        public async Task<IActionResult> End(int? id)
+        {
+            if (id == null || _context.Procedure == null)
+            {
+                return NotFound();
+            }
+
+            var procedure = await _context.Procedure.FindAsync(id);
+            if (procedure == null)
+            {
+                return NotFound();
+            }
+            return View(procedure);
+        }
+
+        // POST: Procedures/End/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> End(int id, [Bind("SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
+        {
+            // TODO: ogarnać jak zmieniac tylko niektore atrybuty
+            if (id != procedure.Id)
+            {
+                return NotFound();
+            }
+
+            Console.WriteLine(id);
+
+            procedure.WasEnded = true;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(procedure);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProcedureExists(procedure.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Details), id);
+            }
+            return View(procedure);
+        }
+
 
         // GET: Procedures/Edit/5
         public async Task<IActionResult> Edit(int? id)

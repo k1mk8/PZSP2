@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apka2.Data;
 
@@ -11,9 +12,11 @@ using apka2.Data;
 namespace apka2.Migrations
 {
     [DbContext(typeof(apka2Context))]
-    partial class apka2ContextModelSnapshot : ModelSnapshot
+    [Migration("20230119012216_ProcedureAntiCoag")]
+    partial class ProcedureAntiCoag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,7 +170,7 @@ namespace apka2.Migrations
                     b.Property<string>("Anticoagulation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("BloodReturn")
+                    b.Property<bool?>("BloodReturn")
                         .HasColumnType("bit");
 
                     b.Property<string>("CitrateConcentrate")
@@ -185,7 +188,7 @@ namespace apka2.Migrations
                     b.Property<string>("Filter")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("PatientDeath")
+                    b.Property<bool?>("PatientDeath")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("ProcedureDate")
@@ -203,7 +206,7 @@ namespace apka2.Migrations
                     b.Property<string>("TerminationReason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("UnplanedTermination")
+                    b.Property<bool?>("UnplanedTermination")
                         .HasColumnType("bit");
 
                     b.Property<bool>("WasEnded")
