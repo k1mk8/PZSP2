@@ -119,13 +119,18 @@ namespace apka2.Controllers
                 return View();
             }
 
+            doctor.IsAccepted = false;
+
             if (ModelState.IsValid)
             {
                 doctor.Password = hashPassword(doctor.Password);
 
                 var admins = _context.Doctor
                     .Where(m => m.IsAdmin == true);
-                
+
+                _context.Add(doctor);
+                await _context.SaveChangesAsync();
+
                 if (admins != null)
                 {
                     SmtpClient client = new SmtpClient("smtpServer");
@@ -158,9 +163,6 @@ namespace apka2.Controllers
                         return RedirectToAction("LogIn");
                     }
                 }
-                _context.Add(doctor);
-                await _context.SaveChangesAsync();
-
             }
             return View(doctor);
         }
