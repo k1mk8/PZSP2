@@ -206,6 +206,9 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
+            ViewData["sessions"] = _context.ProcedureSession.
+                Where(m => m.ProcedureId == id);
+
             return View(procedure);
         }
 
