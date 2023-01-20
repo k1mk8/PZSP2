@@ -2,13 +2,11 @@
 
 @{
     ViewData["Title"] = "Details";
-    var procedureId = (int)ViewData["procedureId"];
 }
 
-<h1>Details</h1>
+<h1>Dane sesji zabiegu</h1>
 
 <div>
-    <h4>ProcedureSession</h4>
     <hr />
     <dl class="row">
         @switch (Model.SessionType)
@@ -157,8 +155,8 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edytuj</a> |
     <a asp-controller="Procedures"
        asp-action="Details"
-       asp-route-id="@procedureId">Wróć</a>
+       asp-route-id="@Model.ProcedureId">Wróć</a>
 </div>

@@ -26,7 +26,7 @@ namespace apka2.Controllers
         }
 
         // GET: ProcedureSessions/Details/5
-        public async Task<IActionResult> Details(int? id, int? procedureId)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ProcedureSession == null)
             {
@@ -39,8 +39,6 @@ namespace apka2.Controllers
             {
                 return NotFound();
             }
-
-            ViewData["procedureId"] = procedureId;
 
             return View(procedureSession);
         }

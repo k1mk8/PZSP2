@@ -194,8 +194,10 @@
                             <a asp-controller="ProcedureSessions"
                             asp-action="Details" 
                             asp-route-id="@session.Id"
-                            asp-route-procedureId="@Model.Id"
-                            >Szczegóły</a>
+                            >Szczegóły</a> |
+                            <a asp-controller="ProcedureSessions"
+                            asp-action="Delete"
+                            asp-route-id="@session.Id">Usuń</a>
                         </td>
                     </tr>
                     cnt++;
