@@ -153,6 +153,10 @@ namespace apka2.Controllers
                     {
                         return RedirectToAction("LogIn");
                     }
+                    catch (InvalidOperationException)
+                    {
+                        return RedirectToAction("LogIn");
+                    }
                 }
                 _context.Add(doctor);
                 await _context.SaveChangesAsync();
