@@ -27,6 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAccepted)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -49,9 +52,15 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.IsAccepted)
+            </td>
+            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                    if (modelItem => item.IsAccepted) { |
+                <a asp-action="Accept" asp-route-id="@item.Id">Akceptuj</a>
+                }
             </td>
         </tr>
 }

@@ -58,6 +58,26 @@ namespace apka2.Controllers
             return View(doctor);
         }
 
+        public async Task<IActionResult> Accept(int? id)
+        {
+            if (id == null || _context.Doctor == null)
+            {
+                return NotFound();
+            }
+
+            var doctor = await _context.Doctor
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+            doctor.IsAccepted = true;
+            _context.Update(doctor);
+            await _context.SaveChangesAsync();
+
+            return View();
+        }
+
         // GET: Doctors/Create
         public IActionResult Create()
         {
@@ -95,7 +115,8 @@ namespace apka2.Controllers
                 .FirstOrDefaultAsync(m => m.Username == doctor.Username);
             if (potential_conflict_user != null)
             {
-                return RedirectToAction("ErrorUsernameOccupied");
+                ModelState.AddModelError(string.Empty, "Nazwa użytkownika zajęta");
+                return View();
             }
 
             if (ModelState.IsValid)
@@ -107,13 +128,16 @@ namespace apka2.Controllers
                 
                 if (admins != null)
                 {
-                    SmtpClient client = new SmtpClient("mion.elka.pw.edu.pl");
+                    SmtpClient client = new SmtpClient("smtpServer");
                     client.Credentials = new NetworkCredential("login", "password");
                     MailMessage mailMessage = new MailMessage();
 
                     foreach (var admin in admins)
                     {
-                        mailMessage.To.Add(admin.EmailAddress);
+                        if (admin != null)
+                        {
+                            mailMessage.To.Add(admin.EmailAddress);
+                        }
                     }
                     mailMessage.Subject = "Prośba o potwierdzenie rejestracji użytkownika";
                     mailMessage.Body = "Do systemu wpłynęła prośba o rejestrację użytkownika " + doctor.Username;
@@ -258,6 +282,11 @@ namespace apka2.Controllers
             if (Password != person.Password)
             {
                 ModelState.AddModelError(string.Empty, "Błędny login lub hasło");
+                return View();
+            }
+            if (person.IsAccepted == false)
+            {
+                ModelState.AddModelError(string.Empty, "Użytkownik nie został zaakceptowany");
                 return View();
             }
 
