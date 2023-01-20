@@ -7,8 +7,10 @@ namespace apka2.Models
         public int Id { get; set; }
         public int ProcedureId { get; set; }
         public string? SessionType { get; set; }
-        public bool initial { get; set; }
+        public bool Initial { get; set; }
 
+        [Display(Name = "Data i godzina początku sesji zabiegu")]
+        public DateTime? StartSessionDate { get; set; }
 
         // Dla heparyny niefrakcjonowanej, początek
         [Display(Name = "Heparyna - bolus początkowy [mg]")]

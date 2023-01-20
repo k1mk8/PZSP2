@@ -13,10 +13,16 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="ProcedureId" />
             <input type="hidden" asp-for="SessionType" />
+            <input type="hidden" asp-for="Initial" />
+            <div class="form-group">
+                <label asp-for="StartSessionDate" class="control-label"></label>
+                <input asp-for="StartSessionDate" class="form-control" />
+                <span asp-validation-for="StartSessionDate" class="text-danger"></span>
+            </div>
             @switch (Model.SessionType)
             {
                 case "Cytrynian":
-                    @if (Model.initial)
+                    @if (Model.Initial)
                     {
                         <div class="form-group">
                             <label asp-for="CitratesConcentration" class="control-label"></label>
@@ -69,7 +75,7 @@
                         <input asp-for="FraxiparinDosingTiming" class="form-control" />
                         <span asp-validation-for="FraxiparinDosingTiming" class="text-danger"></span>
                     </div>
-                    @if (!Model.initial)
+                    @if (!Model.Initial)
                     {
                         <div class="form-group">
                             <label asp-for="AntiXa" class="control-label"></label>
@@ -79,7 +85,7 @@
                     }
                     break;
                 case "Heparyna niefrakcjonowana":
-                    @if (Model.initial)
+                    @if (Model.Initial)
                     {
                         <div class="form-group">
                             <label asp-for="HeparinBolusDose" class="control-label"></label>
@@ -122,7 +128,7 @@
                 <input asp-for="Postdilution" class="form-control" />
                 <span asp-validation-for="Postdilution" class="text-danger"></span>
             </div>
-            @if (Model.initial)
+            @if (Model.Initial)
             {
                 <div class="form-group">
                     <label asp-for="UFDose" class="control-label"></label>

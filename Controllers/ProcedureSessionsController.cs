@@ -70,11 +70,11 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateInitial([Bind("HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
+        public async Task<IActionResult> CreateInitial([Bind("StartSessionDate,HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
         {
             procedureSession.ProcedureId = (int)TempData["procedureId"];
             procedureSession.SessionType = (string)TempData["anticoagulation"];
-            procedureSession.initial = true;
+            procedureSession.Initial = true;
 
             if (ModelState.IsValid)
             {
@@ -113,7 +113,7 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateNext([Bind("HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
+        public async Task<IActionResult> CreateNext([Bind("StartSessionDate,HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
         {
             procedureSession.ProcedureId = (int)TempData["procedureId"];
             procedureSession.SessionType = (string)TempData["anticoagulation"];
@@ -149,7 +149,7 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProcedureId,SessionType,HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProcedureId,SessionType,StartSessionDate,HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
         {
             if (id != procedureSession.Id)
             {
