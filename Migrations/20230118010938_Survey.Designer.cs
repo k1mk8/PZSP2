@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apka2.Data;
 
@@ -11,9 +12,11 @@ using apka2.Data;
 namespace apka2.Migrations
 {
     [DbContext(typeof(apka2Context))]
-    partial class apka2ContextModelSnapshot : ModelSnapshot
+    [Migration("20230118010938_Survey")]
+    partial class Survey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,16 +167,13 @@ namespace apka2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Anticoagulation")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("BloodReturn")
                         .HasColumnType("bit");
 
                     b.Property<string>("CitrateConcentrate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DeathDate")
+                    b.Property<DateTime>("DeathDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("ECMO")
@@ -191,7 +191,7 @@ namespace apka2.Migrations
                     b.Property<DateTime>("ProcedureDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal?>("ProcedureTime")
+                    b.Property<decimal>("ProcedureTime")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Remarks")
@@ -204,9 +204,6 @@ namespace apka2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("UnplanedTermination")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("WasEnded")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -285,9 +282,6 @@ namespace apka2.Migrations
                     b.Property<decimal>("UFDose")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<bool>("initial")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("ProcedureSession");
@@ -349,7 +343,7 @@ namespace apka2.Migrations
                     b.Property<bool>("SepticShock")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("SurveyDate")
+                    b.Property<DateTime>("ServeyDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("TypeOfVascularAccess")
@@ -363,7 +357,7 @@ namespace apka2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Survey");
+                    b.ToTable("Servey");
                 });
 #pragma warning restore 612, 618
         }

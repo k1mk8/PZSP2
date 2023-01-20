@@ -7,6 +7,7 @@ namespace apka2.Models
         public int Id { get; set; }
         public int ProcedureId { get; set; }
         public string? SessionType { get; set; }
+        public bool initial { get; set; }
 
 
         // Dla heparyny niefrakcjonowanej, początek

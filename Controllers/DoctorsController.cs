@@ -9,12 +9,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using apka2.Data;
 using apka2.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Numerics;
+using System.Security.Cryptography;
+using System.Text;
+using System.Net.Mail;
+using System.Net;
 
 namespace apka2.Controllers
 {
     public class DoctorsController : Controller
     {
         private readonly apka2Context _context;
+
+        private string hashPassword(string password)
+        {
+            var sha = SHA256.Create();
+            var hashedPassword = sha.ComputeHash(Encoding.Default.GetBytes(password));
+            return Convert.ToBase64String(hashedPassword);
+        }
 
         public DoctorsController(apka2Context context)
         {
@@ -58,8 +71,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,SecondName,Surname,IsAdmin,Username,Password,Description")] Doctor doctor)
         {
+
             if (ModelState.IsValid)
             {
+                doctor.Password = hashPassword(doctor.Password);
                 _context.Add(doctor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -85,9 +100,39 @@ namespace apka2.Controllers
 
             if (ModelState.IsValid)
             {
+                doctor.Password = hashPassword(doctor.Password);
+
+                var admins = _context.Doctor
+                    .Where(m => m.IsAdmin == true);
+                
+                if (admins != null)
+                {
+                    SmtpClient client = new SmtpClient("mion.elka.pw.edu.pl");
+                    client.Credentials = new NetworkCredential("login", "password");
+                    MailMessage mailMessage = new MailMessage();
+
+                    foreach (var admin in admins)
+                    {
+                        mailMessage.To.Add(admin.EmailAddress);
+                    }
+                    mailMessage.Subject = "Prośba o potwierdzenie rejestracji użytkownika";
+                    mailMessage.Body = "Do systemu wpłynęła prośba o rejestrację użytkownika " + doctor.Username;
+                    mailMessage.From = new MailAddress("noreply@continet", "ContiNET");
+
+                    try
+                    {
+                        client.Send(mailMessage);
+                        return RedirectToAction(nameof(ConfirmRegistration));
+
+                    }
+                    catch (SmtpException)
+                    {
+                        return RedirectToAction("LogIn");
+                    }
+                }
                 _context.Add(doctor);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(ConfirmRegistration));
+
             }
             return View(doctor);
         }
@@ -129,6 +174,7 @@ namespace apka2.Controllers
             {
                 try
                 {
+                    doctor.Password = hashPassword(doctor.Password);
                     _context.Update(doctor);
                     await _context.SaveChangesAsync();
                 }
@@ -202,7 +248,14 @@ namespace apka2.Controllers
             var person = await _context.Doctor
                 .FirstOrDefaultAsync(p => p.Username == Username);
 
-            if (person == null || Password != person.Password)
+            if (person == null)
+            {
+                ModelState.AddModelError(string.Empty, "Użytkownik nie istnieje");
+                return View();
+            }
+
+            Password = hashPassword(Password);
+            if (Password != person.Password)
             {
                 ModelState.AddModelError(string.Empty, "Błędny login lub hasło");
                 return View();
@@ -241,7 +294,7 @@ namespace apka2.Controllers
             return true;
         }
 
-        public async Task<IActionResult> LogOut()
+        public IActionResult LogOut()
         {
             HttpContext.Session.Remove(SessionData.SessionKeyUserId);
             HttpContext.Session.Remove(SessionData.SessionKeyIsAdmin);
