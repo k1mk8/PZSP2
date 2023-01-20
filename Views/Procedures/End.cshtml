@@ -8,7 +8,16 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="End">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Anticoagulation" />
+            <input type="hidden" asp-for="SurveyId" />
+            <input type="hidden" asp-for="ProcedureDate" />
+            <input type="hidden" asp-for="ECMO" />
+            <input type="hidden" asp-for="Filter" />
+            <input type="hidden" asp-for="ProcedureTime" />
+            <input type="hidden" asp-for="ExtracorporealClearingMethod" />
+            <input type="hidden" asp-for="CitrateConcentrate" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -36,19 +45,15 @@
                 <span asp-validation-for="DeathDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Remarks" class="control-label"></label>
-                <input asp-for="Remarks" class="form-control" />
-                <span asp-validation-for="Remarks" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Zakończ" class="btn btn-primary" />
             </div>
+            <input type="hidden" asp-for="Remarks" />
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Wróć</a>
+    <a asp-action="Details" asp-route-id="@Model.Id">Wróć</a>
 </div>
 
 @section Scripts {

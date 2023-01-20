@@ -10,85 +10,93 @@ using apka2.Models;
 
 namespace apka2.Controllers
 {
-    public class ServeysController : Controller
+    public class SurveysController : Controller
     {
         private readonly apka2Context _context;
 
-        public ServeysController(apka2Context context)
+        public SurveysController(apka2Context context)
         {
             _context = context;
         }
 
-        // GET: Serveys
+        // GET: Surveys
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Servey.ToListAsync());
+              return View(await _context.Survey.ToListAsync());
         }
 
-        // GET: Serveys/Details/5
+        // GET: Surveys/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Servey == null)
+            if (id == null || _context.Survey == null)
             {
                 return NotFound();
             }
 
-            var servey = await _context.Servey
+            var survey = await _context.Survey
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (servey == null)
+            if (survey == null)
             {
                 return NotFound();
             }
 
-            return View(servey);
+            return View(survey);
         }
 
-        // GET: Serveys/Create
+        // GET: Surveys/Create
         public IActionResult Create()
         {
+            IList<int> patients = new List<int>();
+            foreach (Patient patient in _context.Patient)
+            {
+                patients.Add(patient.Id);
+            }
+
+            ViewData["patients"] = patients;
+
             return View();
         }
 
-        // POST: Serveys/Create
+        // POST: Surveys/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PatientId,DoctorId,ServeyDate,ECMO,Anuria,ArterialHypertension,Overhydration,AKI,Creatinine,Urea,IonDisorder,MetabolicAcidosis,ExogenousPoison,SepticShock,LowerNephroneSyndrom,Anticoagulation,TypeOfVascularAccess,CatheterThickness,CatheterLength,VascularAccessSite")] Servey servey)
+        public async Task<IActionResult> Create([Bind("Id,PatientId,DoctorId,SurveyDate,ECMO,Anuria,ArterialHypertension,Overhydration,AKI,Creatinine,Urea,IonDisorder,MetabolicAcidosis,ExogenousPoison,SepticShock,LowerNephroneSyndrom,Anticoagulation,TypeOfVascularAccess,CatheterThickness,CatheterLength,VascularAccessSite")] Survey survey)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(servey);
+                _context.Add(survey);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(servey);
+            return View(survey);
         }
 
-        // GET: Serveys/Edit/5
+        // GET: Surveys/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Servey == null)
+            if (id == null || _context.Survey == null)
             {
                 return NotFound();
             }
 
-            var servey = await _context.Servey.FindAsync(id);
-            if (servey == null)
+            var survey = await _context.Survey.FindAsync(id);
+            if (survey == null)
             {
                 return NotFound();
             }
-            return View(servey);
+            return View(survey);
         }
 
-        // POST: Serveys/Edit/5
+        // POST: Surveys/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PatientId,DoctorId,ServeyDate,ECMO,Anuria,ArterialHypertension,Overhydration,AKI,Creatinine,Urea,IonDisorder,MetabolicAcidosis,ExogenousPoison,SepticShock,LowerNephroneSyndrom,Anticoagulation,TypeOfVascularAccess,CatheterThickness,CatheterLength,VascularAccessSite")] Servey servey)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PatientId,DoctorId,SurveyDate,ECMO,Anuria,ArterialHypertension,Overhydration,AKI,Creatinine,Urea,IonDisorder,MetabolicAcidosis,ExogenousPoison,SepticShock,LowerNephroneSyndrom,Anticoagulation,TypeOfVascularAccess,CatheterThickness,CatheterLength,VascularAccessSite")] Survey survey)
         {
-            if (id != servey.Id)
+            if (id != survey.Id)
             {
                 return NotFound();
             }
@@ -97,12 +105,12 @@ namespace apka2.Controllers
             {
                 try
                 {
-                    _context.Update(servey);
+                    _context.Update(survey);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServeyExists(servey.Id))
+                    if (!SurveyExists(survey.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +121,49 @@ namespace apka2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(servey);
+            return View(survey);
         }
 
-        // GET: Serveys/Delete/5
+        // GET: Surveys/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Servey == null)
+            if (id == null || _context.Survey == null)
             {
                 return NotFound();
             }
 
-            var servey = await _context.Servey
+            var survey = await _context.Survey
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (servey == null)
+            if (survey == null)
             {
                 return NotFound();
             }
 
-            return View(servey);
+            return View(survey);
         }
 
-        // POST: Serveys/Delete/5
+        // POST: Surveys/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Servey == null)
+            if (_context.Survey == null)
             {
-                return Problem("Entity set 'apka2Context.Servey'  is null.");
+                return Problem("Entity set 'apka2Context.Survey'  is null.");
             }
-            var servey = await _context.Servey.FindAsync(id);
-            if (servey != null)
+            var survey = await _context.Survey.FindAsync(id);
+            if (survey != null)
             {
-                _context.Servey.Remove(servey);
+                _context.Survey.Remove(survey);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ServeyExists(int id)
+        private bool SurveyExists(int id)
         {
-          return _context.Servey.Any(e => e.Id == id);
+          return _context.Survey.Any(e => e.Id == id);
         }
     }
 }

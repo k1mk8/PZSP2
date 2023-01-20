@@ -3,7 +3,7 @@ using System.Data;
 
 namespace apka2.Models
 {
-    public class Servey
+    public class Survey
     {
         public int Id { get; set; }
         public int PatientId  { get; set; }
@@ -12,7 +12,7 @@ namespace apka2.Models
 
         [DataType(DataType.Date)]
         [Display(Name = "Data przeprowadzenia ankiety")]
-        public DateTime ServeyDate { get; set; }
+        public DateTime SurveyDate { get; set; }
 
 
         [Display(Name = "ECMO")]

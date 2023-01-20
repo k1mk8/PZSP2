@@ -8,13 +8,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Start">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="SurveyId" class="control-label"></label>
-                <input asp-for="SurveyId" class="form-control" />
-                <span asp-validation-for="SurveyId" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="ProcedureDate" class="control-label"></label>
                 <input asp-for="ProcedureDate" class="form-control" />
@@ -35,11 +30,21 @@
                 <input asp-for="ProcedureTime" class="form-control" />
                 <span asp-validation-for="ProcedureTime" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ExtracorporealClearingMethod" class="control-label"></label>
-                <input asp-for="ExtracorporealClearingMethod" class="form-control" />
-                <span asp-validation-for="ExtracorporealClearingMethod" class="text-danger"></span>
-            </div>
+            @if ((string)@ViewData["anticoagulation"] == "Cytrynian")
+            {
+                <div class="form-group">
+                    <label asp-for="CitrateConcentrate" class="control-label"></label>
+                    <input asp-for="CitrateConcentrate" class="form-control" />
+                    <span asp-validation-for="CitrateConcentrate" class="text-danger"></span>
+                </div>
+            } else
+            {
+                <div class="form-group">
+                    <label asp-for="ExtracorporealClearingMethod" class="control-label"></label>
+                    <input asp-for="ExtracorporealClearingMethod" class="form-control" />
+                    <span asp-validation-for="ExtracorporealClearingMethod" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
                 <input type="submit" value="Rozpocznij" class="btn btn-primary" />
             </div>
@@ -48,7 +53,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Wróć do ankiety</a>
+    <a asp-controller="Surveys" asp-action="Index">Wróć do listy ankiet</a>
 </div>
 
 @section Scripts {

@@ -4,20 +4,16 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Procedure</h4>
+<h4>Edytuj dane zabiegu</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="SurveyId" class="control-label"></label>
-                <input asp-for="SurveyId" class="form-control" />
-                <span asp-validation-for="SurveyId" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="WasEnded" />
+            <input type="hidden" asp-for="Anticoagulation" />
+            <input type="hidden" asp-for="SurveyId" />
             <div class="form-group">
                 <label asp-for="ProcedureDate" class="control-label"></label>
                 <input asp-for="ProcedureDate" class="form-control" />
@@ -38,55 +34,64 @@
                 <input asp-for="ProcedureTime" class="form-control" />
                 <span asp-validation-for="ProcedureTime" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ExtracorporealClearingMethod" class="control-label"></label>
-                <input asp-for="ExtracorporealClearingMethod" class="form-control" />
-                <span asp-validation-for="ExtracorporealClearingMethod" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CitrateConcentrate" class="control-label"></label>
-                <input asp-for="CitrateConcentrate" class="form-control" />
-                <span asp-validation-for="CitrateConcentrate" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="UnplanedTermination" /> @Html.DisplayNameFor(model => model.UnplanedTermination)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="TerminationReason" class="control-label"></label>
-                <input asp-for="TerminationReason" class="form-control" />
-                <span asp-validation-for="TerminationReason" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="BloodReturn" /> @Html.DisplayNameFor(model => model.BloodReturn)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="PatientDeath" /> @Html.DisplayNameFor(model => model.PatientDeath)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeathDate" class="control-label"></label>
-                <input asp-for="DeathDate" class="form-control" />
-                <span asp-validation-for="DeathDate" class="text-danger"></span>
-            </div>
+            @if (Model.Anticoagulation != "Cytrynian")
+            {
+                <div class="form-group">
+                    <label asp-for="ExtracorporealClearingMethod" class="control-label"></label>
+                    <input asp-for="ExtracorporealClearingMethod" class="form-control" />
+                    <span asp-validation-for="ExtracorporealClearingMethod" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="CitrateConcentrate" />
+            } else {
+                <input type="hidden" asp-for="ExtracorporealClearingMethod" />
+                <div class="form-group">
+                    <label asp-for="CitrateConcentrate" class="control-label"></label>
+                    <input asp-for="CitrateConcentrate" class="form-control" />
+                    <span asp-validation-for="CitrateConcentrate" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.WasEnded)
+            {
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="UnplanedTermination" /> @Html.DisplayNameFor(model => model.UnplanedTermination)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TerminationReason" class="control-label"></label>
+                    <input asp-for="TerminationReason" class="form-control" />
+                    <span asp-validation-for="TerminationReason" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="BloodReturn" /> @Html.DisplayNameFor(model => model.BloodReturn)
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="PatientDeath" /> @Html.DisplayNameFor(model => model.PatientDeath)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DeathDate" class="control-label"></label>
+                    <input asp-for="DeathDate" class="form-control" />
+                    <span asp-validation-for="DeathDate" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
                 <label asp-for="Remarks" class="control-label"></label>
                 <input asp-for="Remarks" class="form-control" />
                 <span asp-validation-for="Remarks" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Zapisz zmiany" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Details" asp-route-id="@Model.Id">Powrót</a>
 </div>
 
 @section Scripts {

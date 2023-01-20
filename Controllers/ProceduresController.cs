@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using apka2.Data;
 using apka2.Models;
+using apka2.Migrations;
 
 namespace apka2.Controllers
 {
@@ -39,23 +40,43 @@ namespace apka2.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["sessions"] = _context.ProcedureSession.
+                Where(m => m.ProcedureId == id);
             return View(procedure);
         }
 
-        // GET: Procedures/Create
-        public IActionResult Create()
+        // GET: Procedures/Start/4
+        public async Task<IActionResult> Start(int? id)
         {
+            if (id == null || _context.Survey == null)
+            {
+                return NotFound();
+            }
+
+            var survery = await _context.Survey.FindAsync(id);
+            if (survery == null)
+            {
+                return NotFound();
+            }
+
+            TempData["surveyId"] = survery.Id;
+            TempData["anticoagulation"] = survery.Anticoagulation;
+            ViewData["anticoagulation"] = survery.Anticoagulation;
+
             return View();
         }
 
-        // POST: Procedures/Create
+        // POST: Procedures/Start
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
+        public async Task<IActionResult> Start([Bind("SurveyId,WasEnded,Anticoagulation,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
         {
+            procedure.SurveyId = (int)TempData["surveyId"];
+            procedure.WasEnded = false;
+            procedure.Anticoagulation = (string)TempData["anticoagulation"];
+
             if (ModelState.IsValid)
             {
                 _context.Add(procedure);
@@ -64,6 +85,60 @@ namespace apka2.Controllers
             }
             return View(procedure);
         }
+
+        // GET: Procedures/End/5
+        public async Task<IActionResult> End(int? id)
+        {
+            if (id == null || _context.Procedure == null)
+            {
+                return NotFound();
+            }
+
+            var procedure = await _context.Procedure.FindAsync(id);
+            if (procedure == null)
+            {
+                return NotFound();
+            }
+            return View(procedure);
+        }
+
+        // POST: Procedures/End/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> End(int id, [Bind("Id,Anticoagulation,SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
+        {
+
+            if (id != procedure.Id)
+            {
+                return NotFound();
+            }
+
+            procedure.WasEnded = true;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(procedure);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProcedureExists(procedure.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Details), new { id });
+            }
+            return View(procedure);
+        }
+
 
         // GET: Procedures/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -86,7 +161,7 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,WasEnded,Anticoagulation,SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
         {
             if (id != procedure.Id)
             {
@@ -111,7 +186,7 @@ namespace apka2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id });
             }
             return View(procedure);
         }
@@ -131,6 +206,9 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
+            ViewData["sessions"] = _context.ProcedureSession.
+                Where(m => m.ProcedureId == id);
+
             return View(procedure);
         }
 
@@ -147,6 +225,14 @@ namespace apka2.Controllers
             if (procedure != null)
             {
                 _context.Procedure.Remove(procedure);
+
+                var sessions = _context.ProcedureSession.
+                    Where(m => m.ProcedureId == id);
+
+                foreach (var session in sessions)
+                {
+                    _context.ProcedureSession.Remove(session);
+                }
             }
             
             await _context.SaveChangesAsync();
