@@ -107,7 +107,8 @@ namespace apka2.Controllers
                 
                 if (admins != null)
                 {
-                    SmtpClient client = new SmtpClient("smtpAddress");
+                    SmtpClient client = new SmtpClient("mion.elka.pw.edu.pl");
+                    client.Credentials = new NetworkCredential("login", "password");
                     MailMessage mailMessage = new MailMessage();
 
                     foreach (var admin in admins)
