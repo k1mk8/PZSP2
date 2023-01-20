@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    var procedureId = (int)ViewData["procedureId"];
 }
 
 <h1>Details</h1>
@@ -10,96 +11,108 @@
     <h4>ProcedureSession</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProcedureId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProcedureId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SessionType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SessionType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HeparinBolusDose)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HeparinBolusDose)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ACT)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ACT)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HeparinDose)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HeparinDose)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FraxiparinDose)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FraxiparinDose)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FraxiparinDosingTiming)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FraxiparinDosingTiming)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AntiXa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AntiXa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CitratesConcentration)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CitratesConcentration)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CalciumCompensationPercent)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CalciumCompensationPercent)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IonizedCalcium)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IonizedCalcium)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalCalcium)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalCalcium)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HCO3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HCO3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Citrate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Citrate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CalciumCompensationMol)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CalciumCompensationMol)
-        </dd>
+        @switch (Model.SessionType)
+        {
+            case "Cytrynian":
+                @if (Model.initial)
+                {
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.CitratesConcentration)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.CitratesConcentration)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.CalciumCompensationPercent)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.CalciumCompensationPercent)
+                    </dd>
+                }
+                else
+                {
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.IonizedCalcium)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.IonizedCalcium)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.TotalCalcium)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.TotalCalcium)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.HCO3)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.HCO3)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Citrate)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Citrate)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.CalciumCompensationMol)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.CalciumCompensationMol)
+                    </dd>
+                }
+                break;
+            case "Heparyna drobnocząsteczkowa":
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FraxiparinDose)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FraxiparinDose)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FraxiparinDosingTiming)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FraxiparinDosingTiming)
+                </dd>
+                @if (!Model.initial)
+                {
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.AntiXa)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.AntiXa)
+                    </dd>
+                }
+
+                break;
+            case "Heparyna niefrakcjonowana":
+                @if (Model.initial)
+                {
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.HeparinBolusDose)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.HeparinBolusDose)
+                    </dd>
+                } else
+                {
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.ACT)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.ACT)
+                    </dd>
+                }
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.HeparinDose)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HeparinDose)
+                </dd>
+                break;
+        }
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.QBDose)
         </dt>
@@ -124,21 +137,28 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Postdilution)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UFDose)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UFDose)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TMP)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TMP)
-        </dd>
+        @if (Model.initial)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.UFDose)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.UFDose)
+            </dd>
+        } else
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TMP)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TMP)
+            </dd>
+        }
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Procedures"
+       asp-action="Details"
+       asp-route-id="@procedureId">Wróć</a>
 </div>

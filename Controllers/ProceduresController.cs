@@ -40,7 +40,8 @@ namespace apka2.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["sessions"] = _context.ProcedureSession.
+                Where(m => m.ProcedureId == id);
             return View(procedure);
         }
 
@@ -221,6 +222,14 @@ namespace apka2.Controllers
             if (procedure != null)
             {
                 _context.Procedure.Remove(procedure);
+
+                var sessions = _context.ProcedureSession.
+                    Where(m => m.ProcedureId == id);
+
+                foreach (var session in sessions)
+                {
+                    _context.ProcedureSession.Remove(session);
+                }
             }
             
             await _context.SaveChangesAsync();

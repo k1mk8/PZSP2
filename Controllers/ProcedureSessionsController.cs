@@ -26,7 +26,7 @@ namespace apka2.Controllers
         }
 
         // GET: ProcedureSessions/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, int? procedureId)
         {
             if (id == null || _context.ProcedureSession == null)
             {
@@ -40,27 +40,92 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
+            ViewData["procedureId"] = procedureId;
+
             return View(procedureSession);
         }
 
-        // GET: ProcedureSessions/Create
-        public IActionResult Create()
+        // GET: ProcedureSessions/CreateInitial/4
+        public async Task<IActionResult> CreateInitialAsync(int? id)
         {
+            if (id == null || _context.Procedure == null)
+            {
+                return NotFound();
+            }
+
+            var procedure = await _context.Procedure.FindAsync(id);
+            if (procedure == null)
+            {
+                return NotFound();
+            }
+
+            TempData["procedureId"] = procedure.Id;
+            ViewData["procedureId"] = procedure.Id;
+            TempData["anticoagulation"] = procedure.Anticoagulation;
+            ViewData["anticoagulation"] = procedure.Anticoagulation;
+
             return View();
         }
 
-        // POST: ProcedureSessions/Create
+        // POST: ProcedureSessions/CreateInitial
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProcedureId,SessionType,HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
+        public async Task<IActionResult> CreateInitial([Bind("HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
         {
+            procedureSession.ProcedureId = (int)TempData["procedureId"];
+            procedureSession.SessionType = (string)TempData["anticoagulation"];
+            procedureSession.initial = true;
+
             if (ModelState.IsValid)
             {
                 _context.Add(procedureSession);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), "Procedures",
+                    new {id = procedureSession.ProcedureId});
+            }
+            return View(procedureSession);
+        }
+
+        // GET: ProcedureSessions/CreateNext/4
+        public async Task<IActionResult> CreateNextAsync(int? id)
+        {
+            if (id == null || _context.Procedure == null)
+            {
+                return NotFound();
+            }
+
+            var procedure = await _context.Procedure.FindAsync(id);
+            if (procedure == null)
+            {
+                return NotFound();
+            }
+
+            TempData["procedureId"] = procedure.Id;
+            ViewData["procedureId"] = procedure.Id;
+            TempData["anticoagulation"] = procedure.Anticoagulation;
+            ViewData["anticoagulation"] = procedure.Anticoagulation;
+
+            return View();
+        }
+
+        // POST: ProcedureSessions/CreateNext
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateNext([Bind("HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
+        {
+            procedureSession.ProcedureId = (int)TempData["procedureId"];
+            procedureSession.SessionType = (string)TempData["anticoagulation"];
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(procedureSession);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Details), "Procedures",
+                    new { id = procedureSession.ProcedureId });
             }
             return View(procedureSession);
         }
