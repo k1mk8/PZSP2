@@ -9,10 +9,16 @@
 <div>
     <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartSessionDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartSessionDate)
+        </dd>
         @switch (Model.SessionType)
         {
             case "Cytrynian":
-                @if (Model.initial)
+                @if (Model.Initial)
                 {
                     <dt class="col-sm-2">
                         @Html.DisplayNameFor(model => model.CitratesConcentration)
@@ -74,7 +80,7 @@
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.FraxiparinDosingTiming)
                 </dd>
-                @if (!Model.initial)
+                @if (!Model.Initial)
                 {
                     <dt class="col-sm-2">
                         @Html.DisplayNameFor(model => model.AntiXa)
@@ -86,7 +92,7 @@
 
                 break;
             case "Heparyna niefrakcjonowana":
-                @if (Model.initial)
+                @if (Model.Initial)
                 {
                     <dt class="col-sm-2">
                         @Html.DisplayNameFor(model => model.HeparinBolusDose)
@@ -135,7 +141,7 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Postdilution)
         </dd>
-        @if (Model.initial)
+        @if (Model.Initial)
         {
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.UFDose)
