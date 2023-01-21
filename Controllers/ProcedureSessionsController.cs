@@ -213,7 +213,8 @@ namespace apka2.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), "Procedures",
+                    new { id = procedureSession.ProcedureId });
         }
 
         private bool ProcedureSessionExists(int id)
