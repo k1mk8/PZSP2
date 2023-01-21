@@ -75,7 +75,7 @@ namespace apka2.Controllers
             _context.Update(doctor);
             await _context.SaveChangesAsync();
 
-            return View();
+            return RedirectToAction(nameof(Index);
         }
 
         // GET: Doctors/Create
@@ -139,7 +139,7 @@ namespace apka2.Controllers
 
                     foreach (var admin in admins)
                     {
-                        if (admin != null)
+                        if (admin.EmailAddress != null)
                         {
                             mailMessage.To.Add(admin.EmailAddress);
                         }
