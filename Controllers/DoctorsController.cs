@@ -75,7 +75,7 @@ namespace apka2.Controllers
             _context.Update(doctor);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Doctors/Create
