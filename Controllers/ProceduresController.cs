@@ -81,7 +81,8 @@ namespace apka2.Controllers
             {
                 _context.Add(procedure);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("CreateInitial", "ProcedureSessions",
+                    new { id = procedure.Id });
             }
             return View(procedure);
         }
