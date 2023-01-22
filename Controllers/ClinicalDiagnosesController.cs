@@ -22,12 +22,20 @@ namespace apka2.Controllers
         // GET: ClinicalDiagnoses
         public async Task<IActionResult> Index()
         {
-              return View(await _context.ClinicalDiagnosis.ToListAsync());
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
+            return View(await _context.ClinicalDiagnosis.ToListAsync());
         }
 
         // GET: ClinicalDiagnoses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.ClinicalDiagnosis == null)
             {
                 return NotFound();
@@ -56,6 +64,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Remarks")] ClinicalDiagnosis clinicalDiagnosis)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(clinicalDiagnosis);
@@ -68,6 +80,10 @@ namespace apka2.Controllers
         // GET: ClinicalDiagnoses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.ClinicalDiagnosis == null)
             {
                 return NotFound();
@@ -88,6 +104,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Remarks")] ClinicalDiagnosis clinicalDiagnosis)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id != clinicalDiagnosis.Id)
             {
                 return NotFound();
@@ -119,6 +139,10 @@ namespace apka2.Controllers
         // GET: ClinicalDiagnoses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.ClinicalDiagnosis == null)
             {
                 return NotFound();
@@ -139,6 +163,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (_context.ClinicalDiagnosis == null)
             {
                 return Problem("Entity set 'apka2Context.ClinicalDiagnosis'  is null.");
@@ -156,6 +184,16 @@ namespace apka2.Controllers
         private bool ClinicalDiagnosisExists(int id)
         {
           return _context.ClinicalDiagnosis.Any(e => e.Id == id);
+        }
+
+        private int getSessionUserId()
+        {
+            var sessionId = HttpContext.Session.GetInt32(SessionData.SessionKeyUserId);
+            if (sessionId == null)
+            {
+                return 0;
+            }
+            return (int)sessionId;
         }
     }
 }

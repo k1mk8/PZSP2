@@ -7,8 +7,10 @@ namespace apka2.Models
 	{
 		public int Id { get; set; }
 
+        public int DoctorId { get; set; }
 
-		[Display(Name = "Inicjały")]
+
+        [Display(Name = "Inicjały")]
 		public string? Initials { get; set; }
 
 

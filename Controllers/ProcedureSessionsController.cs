@@ -221,5 +221,15 @@ namespace apka2.Controllers
         {
           return _context.ProcedureSession.Any(e => e.Id == id);
         }
+
+        private int getSessionUserId()
+        {
+            var sessionId = HttpContext.Session.GetInt32(SessionData.SessionKeyUserId);
+            if (sessionId == null)
+            {
+                return 0;
+            }
+            return (int)sessionId;
+        }
     }
 }
