@@ -22,12 +22,20 @@ namespace apka2.Controllers
         // GET: ProcedureSessions
         public async Task<IActionResult> Index()
         {
-              return View(await _context.ProcedureSession.ToListAsync());
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
+            return View(await _context.ProcedureSession.ToListAsync());
         }
 
         // GET: ProcedureSessions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.ProcedureSession == null)
             {
                 return NotFound();
@@ -46,6 +54,10 @@ namespace apka2.Controllers
         // GET: ProcedureSessions/CreateInitial/4
         public async Task<IActionResult> CreateInitialAsync(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Procedure == null)
             {
                 return NotFound();
@@ -61,6 +73,8 @@ namespace apka2.Controllers
             ViewData["procedureId"] = procedure.Id;
             TempData["anticoagulation"] = procedure.Anticoagulation;
             ViewData["anticoagulation"] = procedure.Anticoagulation;
+            TempData["startingDate"] = procedure.ProcedureDate;
+            TempData["procedureTime"] = procedure.ProcedureTime;
 
             return View();
         }
@@ -70,17 +84,26 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateInitial([Bind("StartSessionDate,HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
+        public async Task<IActionResult> CreateInitial([Bind("HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             procedureSession.ProcedureId = (int)TempData["procedureId"];
             procedureSession.SessionType = (string)TempData["anticoagulation"];
             procedureSession.Initial = true;
+            procedureSession.StartSessionDate = (DateTime)TempData["startingDate"];
+            TempData["startingDate"] = TempData["startingDate"];
+            TempData["procedureTime"] = TempData["procedureTime"];
+            TempData["end"] = false;
+
 
             if (ModelState.IsValid)
             {
                 _context.Add(procedureSession);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Details), "Procedures",
+                return RedirectToAction(nameof(CreateNext),
                     new {id = procedureSession.ProcedureId});
             }
             return View(procedureSession);
@@ -89,6 +112,10 @@ namespace apka2.Controllers
         // GET: ProcedureSessions/CreateNext/4
         public async Task<IActionResult> CreateNextAsync(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Procedure == null)
             {
                 return NotFound();
@@ -100,10 +127,16 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
+            if ((bool)TempData["end"])
+                return RedirectToAction("End", "Procedures", new { id });
+            
+
             TempData["procedureId"] = procedure.Id;
             ViewData["procedureId"] = procedure.Id;
             TempData["anticoagulation"] = procedure.Anticoagulation;
             ViewData["anticoagulation"] = procedure.Anticoagulation;
+            TempData["startingDate"] = TempData["startingDate"];
+            TempData["procedureTime"] = TempData["procedureTime"];
 
             return View();
         }
@@ -113,16 +146,40 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateNext([Bind("StartSessionDate,HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
+        public async Task<IActionResult> CreateNext([Bind("HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             procedureSession.ProcedureId = (int)TempData["procedureId"];
             procedureSession.SessionType = (string)TempData["anticoagulation"];
+
+            IQueryable<ProcedureSession> sessions = _context.ProcedureSession.
+                Where(m => m.ProcedureId == procedureSession.ProcedureId);
+            int numOfSessions = sessions.Count();
+            DateTime start = (DateTime)TempData["startingDate"];
+            int procedureTime = (int)TempData["procedureTime"];
+
+            TempData["end"] = false;
+
+            if (procedureTime >= 6 && numOfSessions == 1)
+                procedureSession.StartSessionDate = start.AddHours(6);
+            else if (procedureTime >= 24 && numOfSessions == 2)
+                procedureSession.StartSessionDate = start.AddHours(24);
+            else if (procedureTime >= 48 && numOfSessions == 3)
+                procedureSession.StartSessionDate = start.AddHours(48);
+            else
+            {
+                procedureSession.StartSessionDate = start.AddHours(procedureTime);
+                TempData["end"] = true;
+            }
 
             if (ModelState.IsValid)
             {
                 _context.Add(procedureSession);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Details), "Procedures",
+                return RedirectToAction(nameof(CreateNext),
                     new { id = procedureSession.ProcedureId });
             }
             return View(procedureSession);
@@ -131,6 +188,10 @@ namespace apka2.Controllers
         // GET: ProcedureSessions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.ProcedureSession == null)
             {
                 return NotFound();
@@ -151,6 +212,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ProcedureId,SessionType,StartSessionDate,HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id != procedureSession.Id)
             {
                 return NotFound();
@@ -182,6 +247,10 @@ namespace apka2.Controllers
         // GET: ProcedureSessions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.ProcedureSession == null)
             {
                 return NotFound();
@@ -202,6 +271,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (_context.ProcedureSession == null)
             {
                 return Problem("Entity set 'apka2Context.ProcedureSession'  is null.");
@@ -220,6 +293,16 @@ namespace apka2.Controllers
         private bool ProcedureSessionExists(int id)
         {
           return _context.ProcedureSession.Any(e => e.Id == id);
+        }
+
+        private int getSessionUserId()
+        {
+            var sessionId = HttpContext.Session.GetInt32(SessionData.SessionKeyUserId);
+            if (sessionId == null)
+            {
+                return 0;
+            }
+            return (int)sessionId;
         }
     }
 }

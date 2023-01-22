@@ -7,12 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using apka2.Data;
 using apka2.Models;
+using Microsoft.AspNetCore.Authentication;
 
 namespace apka2.Controllers
 {
     public class SurveysController : Controller
     {
         private readonly apka2Context _context;
+
+        private int getSessionUserId()
+        {
+            var sessionId = HttpContext.Session.GetInt32(SessionData.SessionKeyUserId);
+            if (sessionId == null)
+            {
+                return 0;
+            }
+            return (int)sessionId;
+        }
 
         public SurveysController(apka2Context context)
         {
@@ -22,12 +33,20 @@ namespace apka2.Controllers
         // GET: Surveys
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Survey.ToListAsync());
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
+            return View(await _context.Survey.ToListAsync());
         }
 
         // GET: Surveys/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Survey == null)
             {
                 return NotFound();
@@ -46,6 +65,10 @@ namespace apka2.Controllers
         // GET: Surveys/Create
         public IActionResult Create()
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             IList<int> patients = new List<int>();
             foreach (Patient patient in _context.Patient)
             {
@@ -64,8 +87,14 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,PatientId,DoctorId,SurveyDate,ECMO,Anuria,ArterialHypertension,Overhydration,AKI,Creatinine,Urea,IonDisorder,MetabolicAcidosis,ExogenousPoison,SepticShock,LowerNephroneSyndrom,Anticoagulation,TypeOfVascularAccess,CatheterThickness,CatheterLength,VascularAccessSite")] Survey survey)
         {
+            int doctorId = getSessionUserId();
+            if (doctorId == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (ModelState.IsValid)
             {
+                survey.DoctorId = doctorId;
                 _context.Add(survey);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -76,6 +105,10 @@ namespace apka2.Controllers
         // GET: Surveys/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Survey == null)
             {
                 return NotFound();
@@ -96,6 +129,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,PatientId,DoctorId,SurveyDate,ECMO,Anuria,ArterialHypertension,Overhydration,AKI,Creatinine,Urea,IonDisorder,MetabolicAcidosis,ExogenousPoison,SepticShock,LowerNephroneSyndrom,Anticoagulation,TypeOfVascularAccess,CatheterThickness,CatheterLength,VascularAccessSite")] Survey survey)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id != survey.Id)
             {
                 return NotFound();
@@ -127,6 +164,10 @@ namespace apka2.Controllers
         // GET: Surveys/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Survey == null)
             {
                 return NotFound();
@@ -147,6 +188,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (_context.Survey == null)
             {
                 return Problem("Entity set 'apka2Context.Survey'  is null.");

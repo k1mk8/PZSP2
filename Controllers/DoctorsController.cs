@@ -37,12 +37,20 @@ namespace apka2.Controllers
 		// GET: Doctors
 		public async Task<IActionResult> Index()
         {
-              return View(await _context.Doctor.ToListAsync());
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
+            return View(await _context.Doctor.ToListAsync());
         }
 
         // GET: Doctors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Doctor == null)
             {
                 return NotFound();
@@ -60,6 +68,10 @@ namespace apka2.Controllers
 
         public async Task<IActionResult> Accept(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Doctor == null)
             {
                 return NotFound();
@@ -175,6 +187,10 @@ namespace apka2.Controllers
         // GET: Doctors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Doctor == null)
             {
                 return NotFound();
@@ -195,6 +211,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,SecondName,Surname,IsAdmin,Username,Password,Description")] Doctor doctor)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id != doctor.Id)
             {
                 return NotFound();
@@ -227,6 +247,10 @@ namespace apka2.Controllers
         // GET: Doctors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Doctor == null)
             {
                 return NotFound();
@@ -247,6 +271,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (_context.Doctor == null)
             {
                 return Problem("Entity set 'apka2Context.Doctor'  is null.");
@@ -336,6 +364,20 @@ namespace apka2.Controllers
             return RedirectToAction("LogIn");
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        private int getSessionUserId()
+        {
+            var sessionId = HttpContext.Session.GetInt32(SessionData.SessionKeyUserId);
+            if (sessionId == null)
+            {
+                return 0;
+            }
+            return (int)sessionId;
+        }
 
     }
 }

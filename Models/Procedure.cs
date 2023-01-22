@@ -15,7 +15,6 @@ namespace apka2.Models
         [Display(Name = "Id ankiety")]
         public int SurveyId { get; set; }
 
-        [DataType(DataType.Date)]
         [Display(Name = "Data rozpoczęcia zabiegu")]
         public DateTime ProcedureDate { get; set; }
 
@@ -26,7 +25,7 @@ namespace apka2.Models
         public string? Filter { get; set; }
 
         [Display(Name = "Czas trwania zabiegu [h]")]
-        public decimal? ProcedureTime { get; set; }
+        public int? ProcedureTime { get; set; }
 
 
         // Zależnie od metody jedno z pól do ukrycia

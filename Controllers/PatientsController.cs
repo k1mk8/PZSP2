@@ -22,12 +22,20 @@ namespace apka2.Controllers
         // GET: Patients
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Patient.ToListAsync());
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
+            return View(await _context.Patient.ToListAsync());
         }
 
         // GET: Patients/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Patient == null)
             {
                 return NotFound();
@@ -56,8 +64,14 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Initials,BirthDate,HospitalizationDate,StartOfCKRTDate,HasLiverFailure,Weight,Height,DateOfDeath,Remarks")] Patient patient)
         {
+            int doctorId = getSessionUserId();
+            if (doctorId == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (ModelState.IsValid)
             {
+                patient.DoctorId = doctorId;
                 _context.Add(patient);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -68,6 +82,10 @@ namespace apka2.Controllers
         // GET: Patients/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Patient == null)
             {
                 return NotFound();
@@ -88,6 +106,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Initials,BirthDate,HospitalizationDate,StartOfCKRTDate,HasLiverFailure,Weight,Height,DateOfDeath,Remarks")] Patient patient)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id != patient.Id)
             {
                 return NotFound();
@@ -119,6 +141,10 @@ namespace apka2.Controllers
         // GET: Patients/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Patient == null)
             {
                 return NotFound();
@@ -139,6 +165,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (_context.Patient == null)
             {
                 return Problem("Entity set 'apka2Context.Patient'  is null.");
@@ -156,6 +186,16 @@ namespace apka2.Controllers
         private bool PatientExists(int id)
         {
           return _context.Patient.Any(e => e.Id == id);
+        }
+
+        private int getSessionUserId()
+        {
+            var sessionId = HttpContext.Session.GetInt32(SessionData.SessionKeyUserId);
+            if (sessionId == null)
+            {
+                return 0;
+            }
+            return (int)sessionId;
         }
     }
 }

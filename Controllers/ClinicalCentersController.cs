@@ -22,12 +22,20 @@ namespace apka2.Controllers
         // GET: ClinicalCenters
         public async Task<IActionResult> Index()
         {
-              return View(await _context.ClinicalCenter.ToListAsync());
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
+            return View(await _context.ClinicalCenter.ToListAsync());
         }
 
         // GET: ClinicalCenters/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.ClinicalCenter == null)
             {
                 return NotFound();
@@ -56,6 +64,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Street,BuildingNumber,LocalNumber,City,PostalCode,CenterDescription")] ClinicalCenter clinicalCenter)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(clinicalCenter);
@@ -68,6 +80,10 @@ namespace apka2.Controllers
         // GET: ClinicalCenters/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.ClinicalCenter == null)
             {
                 return NotFound();
@@ -88,6 +104,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Street,BuildingNumber,LocalNumber,City,PostalCode,CenterDescription")] ClinicalCenter clinicalCenter)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id != clinicalCenter.Id)
             {
                 return NotFound();
@@ -119,6 +139,10 @@ namespace apka2.Controllers
         // GET: ClinicalCenters/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.ClinicalCenter == null)
             {
                 return NotFound();
@@ -139,6 +163,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (_context.ClinicalCenter == null)
             {
                 return Problem("Entity set 'apka2Context.ClinicalCenter'  is null.");
@@ -156,6 +184,16 @@ namespace apka2.Controllers
         private bool ClinicalCenterExists(int id)
         {
           return _context.ClinicalCenter.Any(e => e.Id == id);
+        }
+
+        private int getSessionUserId()
+        {
+            var sessionId = HttpContext.Session.GetInt32(SessionData.SessionKeyUserId);
+            if (sessionId == null)
+            {
+                return 0;
+            }
+            return (int)sessionId;
         }
     }
 }

@@ -110,29 +110,9 @@
     <a asp-action="Index">Powrót do listy zabiegów</a>
 </div>
 
-@if (!Model.WasEnded)
-{
-    <p><a asp-action="End" asp-route-id="@Model?.Id">Zakończ zabieg</a></p>
+<br>
 
-    <br>
-    @if (sessions.Count() == 0)
-    {
-        <p>
-            <a asp-controller="ProcedureSessions" asp-action="CreateInitial"
-               asp-route-id="@Model.Id">Dodaj sesję</a>
-        </p>
-    } else {
-        <p>
-            <a asp-controller="ProcedureSessions" asp-action="CreateNext"
-              asp-route-id="@Model.Id">Dodaj sesję</a>
-        </p>
-    }
-} else
-{
-    <br>
-}
-
-<h3>Sesje zabiegu</h3>
+<h3>Punkty kontrolne</h3>
 <hr>
 
 @if (sessions.Count() != 0)
