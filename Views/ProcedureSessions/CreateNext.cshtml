@@ -12,11 +12,6 @@
     <div class="col-md-4">
         <form asp-action="CreateNext">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="StartSessionDate" class="control-label"></label>
-                <input asp-for="StartSessionDate" class="form-control" />
-                <span asp-validation-for="StartSessionDate" class="text-danger"></span>
-            </div>
             @switch (anticoagulation)
             {
                 case "Cytrynian":
@@ -106,11 +101,6 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-controller="Procedures" asp-action="Details"
-       asp-route-id="@id">Wróć</a>
 </div>
 
 @section Scripts {

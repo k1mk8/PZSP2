@@ -61,6 +61,8 @@ namespace apka2.Controllers
             ViewData["procedureId"] = procedure.Id;
             TempData["anticoagulation"] = procedure.Anticoagulation;
             ViewData["anticoagulation"] = procedure.Anticoagulation;
+            TempData["startingDate"] = procedure.ProcedureDate;
+            TempData["procedureTime"] = procedure.ProcedureTime;
 
             return View();
         }
@@ -70,17 +72,23 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateInitial([Bind("StartSessionDate,HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
+        public async Task<IActionResult> CreateInitial([Bind("HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
         {
+
             procedureSession.ProcedureId = (int)TempData["procedureId"];
             procedureSession.SessionType = (string)TempData["anticoagulation"];
             procedureSession.Initial = true;
+            procedureSession.StartSessionDate = (DateTime)TempData["startingDate"];
+            TempData["startingDate"] = TempData["startingDate"];
+            TempData["procedureTime"] = TempData["procedureTime"];
+            TempData["end"] = false;
+
 
             if (ModelState.IsValid)
             {
                 _context.Add(procedureSession);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Details), "Procedures",
+                return RedirectToAction(nameof(CreateNext),
                     new {id = procedureSession.ProcedureId});
             }
             return View(procedureSession);
@@ -100,10 +108,16 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
+            if ((bool)TempData["end"])
+                return RedirectToAction("End", "Procedures", new { id });
+            
+
             TempData["procedureId"] = procedure.Id;
             ViewData["procedureId"] = procedure.Id;
             TempData["anticoagulation"] = procedure.Anticoagulation;
             ViewData["anticoagulation"] = procedure.Anticoagulation;
+            TempData["startingDate"] = TempData["startingDate"];
+            TempData["procedureTime"] = TempData["procedureTime"];
 
             return View();
         }
@@ -113,16 +127,36 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateNext([Bind("StartSessionDate,HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
+        public async Task<IActionResult> CreateNext([Bind("HeparinBolusDose,ACT,HeparinDose,FraxiparinDose,FraxiparinDosingTiming,AntiXa,CitratesConcentration,CalciumCompensationPercent,IonizedCalcium,TotalCalcium,HCO3,Citrate,CalciumCompensationMol,QBDose,QDDose,Predilution,Postdilution,UFDose,TMP")] ProcedureSession procedureSession)
         {
             procedureSession.ProcedureId = (int)TempData["procedureId"];
             procedureSession.SessionType = (string)TempData["anticoagulation"];
+
+            IQueryable<ProcedureSession> sessions = _context.ProcedureSession.
+                Where(m => m.ProcedureId == procedureSession.ProcedureId);
+            int numOfSessions = sessions.Count();
+            DateTime start = (DateTime)TempData["startingDate"];
+            int procedureTime = (int)TempData["procedureTime"];
+
+            TempData["end"] = false;
+
+            if (procedureTime >= 6 && numOfSessions == 1)
+                procedureSession.StartSessionDate = start.AddHours(6);
+            else if (procedureTime >= 24 && numOfSessions == 2)
+                procedureSession.StartSessionDate = start.AddHours(24);
+            else if (procedureTime >= 48 && numOfSessions == 3)
+                procedureSession.StartSessionDate = start.AddHours(48);
+            else
+            {
+                procedureSession.StartSessionDate = start.AddHours(procedureTime);
+                TempData["end"] = true;
+            }
 
             if (ModelState.IsValid)
             {
                 _context.Add(procedureSession);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Details), "Procedures",
+                return RedirectToAction(nameof(CreateNext),
                     new { id = procedureSession.ProcedureId });
             }
             return View(procedureSession);
