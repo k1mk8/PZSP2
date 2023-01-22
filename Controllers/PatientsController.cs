@@ -19,6 +19,13 @@ namespace apka2.Controllers
             _context = context;
         }
 
+
+        private double CountBSA(decimal Weight, decimal Height)
+        {
+            return Math.Sqrt((double)(Weight * Height / 3600));
+        }
+
+
         // GET: Patients
         public async Task<IActionResult> Index()
         {
@@ -72,6 +79,7 @@ namespace apka2.Controllers
             if (ModelState.IsValid)
             {
                 patient.DoctorId = doctorId;
+                patient.BSA = (decimal)CountBSA(patient.Weight, patient.Height);
                 _context.Add(patient);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -119,6 +127,7 @@ namespace apka2.Controllers
             {
                 try
                 {
+                    patient.BSA = (decimal)CountBSA(patient.Weight, patient.Height);
                     _context.Update(patient);
                     await _context.SaveChangesAsync();
                 }

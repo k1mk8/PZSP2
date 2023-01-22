@@ -47,6 +47,11 @@ namespace apka2.Models
 		public DateTime? DateOfDeath { get; set; }
 
 
+		[Display(Name = "BSA")]
+        [Column(TypeName = "decimal(6, 2)")]
+        public decimal BSA { get; set; }
+
+
 		[Display(Name = "Uwagi")]
 		public string? Remarks { get; set; }
 	}
