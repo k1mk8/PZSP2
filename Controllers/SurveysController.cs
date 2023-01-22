@@ -92,7 +92,7 @@ namespace apka2.Controllers
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
-            if (ModelState.IsValid && doctorId != 0)
+            if (ModelState.IsValid)
             {
                 survey.DoctorId = doctorId;
                 _context.Add(survey);
