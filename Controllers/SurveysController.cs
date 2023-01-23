@@ -89,10 +89,12 @@ namespace apka2.Controllers
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
-            IList<int> patients = new List<int>();
+
+            List<SelectListItem> patients = new List<SelectListItem>();
             foreach (Patient patient in _context.Patient)
             {
-                patients.Add(patient.Id);
+                patients.Add(
+                    new SelectListItem { Value = patient.Id.ToString(), Text = patient.Initials + " " + patient.BirthDate.ToShortDateString() });
             }
 
             ViewData["patients"] = patients;
