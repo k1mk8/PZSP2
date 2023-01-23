@@ -3,10 +3,10 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
+<body class="text-center">
 <h4>Edytuj dane ankiety</h4>
 <hr />
-<div class="row">
+    <div class="row" style="margin-left:40%;">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -111,6 +111,7 @@
 
     <div>
         <a asp-action="Index">Powrót do listy ankiet</a>
+    </div>
     </div>
 </body>
 @section Scripts {

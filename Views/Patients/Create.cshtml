@@ -5,10 +5,10 @@
     var clinicalCenters = ViewData["cliCents"] as List<SelectListItem>;
     var clinicalDiagnosis = ViewData["cliDiag"] as List<string>;
 }
-
+<body class="text-center">
 <h4>Dodaj pacjenta</h4>
 <hr />
-<div class="row">
+    <div class="row" style="margin-left:40%;">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -80,7 +80,7 @@
             </div>
         </form>
     </div>
-
+</div>
     <div>
         <a asp-action="Index">Powrót do listy pacjentów</a>
     </div>

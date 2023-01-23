@@ -4,10 +4,10 @@
     ViewData["Title"] = "Create";
     var patients = ViewData["patients"] as List<SelectListItem>;
 }
-
+<body class="text-center">
 <h4>Dodaj ankietę</h4>
 <hr />
-<div class="row">
+    <div class="row" style="margin-left:40%;">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -126,6 +126,7 @@
 
     <div>
         <a asp-action="Index">Powrót do listy ankiet</a>
+    </div>
     </div>
 </body>
 @section Scripts {
