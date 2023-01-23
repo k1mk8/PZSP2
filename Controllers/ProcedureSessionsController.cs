@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using apka2.Data;
 using apka2.Models;
+using apka2.Migrations;
+using System.Collections;
+using Microsoft.AspNetCore.Http;
 
 namespace apka2.Controllers
 {
@@ -136,7 +139,24 @@ namespace apka2.Controllers
             TempData["anticoagulation"] = procedure.Anticoagulation;
             ViewData["anticoagulation"] = procedure.Anticoagulation;
             TempData["startingDate"] = TempData["startingDate"];
-            TempData["procedureTime"] = TempData["procedureTime"];
+            int procedureTime = (int)TempData["procedureTime"];
+
+            IQueryable<ProcedureSession> sessions = _context.ProcedureSession.
+                Where(m => m.ProcedureId == id);
+            int numOfSessions = sessions.Count();
+            int hours;
+
+            if (procedureTime >= 6 && numOfSessions == 1)
+                hours = 6;
+            else if (procedureTime >= 24 && numOfSessions == 2)
+                hours = 24;
+            else if (procedureTime >= 48 && numOfSessions == 3)
+                hours = 48;
+            else
+                hours = procedureTime;
+
+            ViewData["hours"] = hours;
+            TempData["procedureTime"] = procedureTime;
 
             return View();
         }

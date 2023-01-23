@@ -4,9 +4,13 @@
     ViewData["Title"] = "Create";
     var id = (int)ViewData["procedureId"];
     var anticoagulation = (string)ViewData["anticoagulation"];
+    var hours = (int)ViewData["hours"];
 }
 
 <h4>Dodaj ustawienia i dane kontrolne</h4>
+@{
+    <p>Po @hours godzinach</p>
+}
 <hr />
 <div class="row">
     <div class="col-md-4">
