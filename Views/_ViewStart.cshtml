@@ -1,3 +1,10 @@
 ﻿@{
-    Layout = "_Layout";
+    if (ViewContext.HttpContext.Session.GetInt32(SessionData.SessionKeyIsAdmin) == 1)
+    {
+        Layout = "_Layout";
+    }
+    else
+    {
+        Layout = "_LayoutDoctor";
+    }
 }

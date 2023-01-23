@@ -22,8 +22,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Content\" />
     <Folder Include="Database\ERD-SQL_Developer_Data_Modeler\schemat_ERD\files\" />
     <Folder Include="Database\ERD-SQL_Developer_Data_Modeler\schemat_ERD\rel\F77F99E3-746CE7840648\arc\seg_0\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\image.jpeg" />
+    <None Include="wwwroot\css\logo_placeholder.jpg" />
   </ItemGroup>
 
 </Project>
