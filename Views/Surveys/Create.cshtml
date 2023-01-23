@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
-    var patients = ViewData["patients"] as IList<int>;
+    var patients = ViewData["patients"] as List<SelectListItem>;
 }
 
 <h4>Dodaj ankietę</h4>
@@ -15,7 +15,7 @@
                 <label asp-for="PatientId" class="control-label"></label>
                 <p class="form-control">
                     @Html.DropDownListFor(m => m.PatientId,
-                    new SelectList(patients),
+                    patients,
                     "Wybierz pacjenta")
                 </p>
                 <span asp-validation-for="PatientId" class="text-danger"></span>
