@@ -23,31 +23,54 @@ namespace apka2.Controllers
         // GET: Procedures
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Procedure.ToListAsync());
+            var doctorId = getSessionUserId();
+            if (doctorId == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
+            if (getIsAdmin() == 1)
+            {
+                return View(await _context.Procedure.ToListAsync());
+            }
+
+            var surveysIds = getSurveysIds(doctorId);
+            return View(_context.Procedure.Where(p => surveysIds.Contains(p.SurveyId)));
         }
 
         // GET: Procedures/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var doctorId = getSessionUserId();
+            if (doctorId == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Procedure == null)
             {
                 return NotFound();
             }
 
-            var procedure = await _context.Procedure
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var surveysIds = getSurveysIds(doctorId);
+            var procedure = getIsAdmin() == 1 ? await _context.Procedure
+                .FirstOrDefaultAsync(p => p.Id == id)
+                : await _context.Procedure
+                .FirstOrDefaultAsync(p => p.Id == id && surveysIds.Contains(p.SurveyId));
             if (procedure == null)
             {
                 return NotFound();
             }
             ViewData["sessions"] = _context.ProcedureSession.
-                Where(m => m.ProcedureId == id);
+                Where(ps => ps.ProcedureId == id);
             return View(procedure);
         }
 
         // GET: Procedures/Start/4
         public async Task<IActionResult> Start(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Survey == null)
             {
                 return NotFound();
@@ -73,6 +96,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Start([Bind("SurveyId,WasEnded,Anticoagulation,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             procedure.SurveyId = (int)TempData["surveyId"];
             procedure.WasEnded = false;
             procedure.Anticoagulation = (string)TempData["anticoagulation"];
@@ -81,7 +108,8 @@ namespace apka2.Controllers
             {
                 _context.Add(procedure);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("CreateInitial", "ProcedureSessions",
+                    new { id = procedure.Id });
             }
             return View(procedure);
         }
@@ -89,6 +117,10 @@ namespace apka2.Controllers
         // GET: Procedures/End/5
         public async Task<IActionResult> End(int? id)
         {
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Procedure == null)
             {
                 return NotFound();
@@ -109,7 +141,10 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> End(int id, [Bind("Id,Anticoagulation,SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
         {
-
+            if (getSessionUserId() == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id != procedure.Id)
             {
                 return NotFound();
@@ -143,6 +178,11 @@ namespace apka2.Controllers
         // GET: Procedures/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var doctorId = getSessionUserId();
+            if (doctorId == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Procedure == null)
             {
                 return NotFound();
@@ -153,6 +193,13 @@ namespace apka2.Controllers
             {
                 return NotFound();
             }
+
+            var surveysIds = getSurveysIds(doctorId);
+            if (getIsAdmin() == 0 && surveysIds.Contains(procedure.SurveyId))
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
+
             return View(procedure);
         }
 
@@ -163,6 +210,11 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,WasEnded,Anticoagulation,SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
         {
+            var surveysIds = getSurveysIds(getSessionUserId());
+            if (getIsAdmin() == 0 && surveysIds.Contains(procedure.SurveyId))
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id != procedure.Id)
             {
                 return NotFound();
@@ -194,6 +246,11 @@ namespace apka2.Controllers
         // GET: Procedures/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var doctorId = getSessionUserId();
+            if (doctorId == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (id == null || _context.Procedure == null)
             {
                 return NotFound();
@@ -204,6 +261,12 @@ namespace apka2.Controllers
             if (procedure == null)
             {
                 return NotFound();
+            }
+
+            var surveysIds = getSurveysIds(doctorId);
+            if (getIsAdmin() == 0 && surveysIds.Contains(procedure.SurveyId))
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
             }
 
             ViewData["sessions"] = _context.ProcedureSession.
@@ -217,6 +280,11 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var doctorId = getSessionUserId();
+            if (doctorId == 0)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             if (_context.Procedure == null)
             {
                 return Problem("Entity set 'apka2Context.Procedure'  is null.");
@@ -224,6 +292,11 @@ namespace apka2.Controllers
             var procedure = await _context.Procedure.FindAsync(id);
             if (procedure != null)
             {
+                var surveysIds = getSurveysIds(doctorId);
+                if (getIsAdmin() == 0 && surveysIds.Contains(procedure.SurveyId))
+                {
+                    return RedirectToAction("AccessDenied", "Doctors");
+                }
                 _context.Procedure.Remove(procedure);
 
                 var sessions = _context.ProcedureSession.
@@ -242,6 +315,38 @@ namespace apka2.Controllers
         private bool ProcedureExists(int id)
         {
           return _context.Procedure.Any(e => e.Id == id);
+        }
+
+        private int getSessionUserId()
+        {
+            var sessionId = HttpContext.Session.GetInt32(SessionData.SessionKeyUserId);
+            if (sessionId == null)
+            {
+                return 0;
+            }
+            return (int)sessionId;
+        }
+
+        private int getIsAdmin()
+        {
+            var isAdmin = HttpContext.Session.GetInt32(SessionData.SessionKeyIsAdmin);
+            if (isAdmin == null)
+            {
+                return 0;
+            }
+            return (int)isAdmin;
+        }
+
+        private List<int> getSurveysIds(int doctorId)
+        {
+            var surveys = _context.Survey.
+                Where(s => s.Id == doctorId).ToList();
+            var surveysIds = new List<int>();
+            foreach (var survey in surveys)
+            {
+                surveysIds.Add(survey.Id);
+            }
+            return surveysIds;
         }
     }
 }

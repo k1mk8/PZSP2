@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apka2.Data;
 
@@ -11,9 +12,11 @@ using apka2.Data;
 namespace apka2.Migrations
 {
     [DbContext(typeof(apka2Context))]
-    partial class apka2ContextModelSnapshot : ModelSnapshot
+    [Migration("20230122220556_ProcedureTime")]
+    partial class ProcedureTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,23 +127,11 @@ namespace apka2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("BSA")
-                        .HasColumnType("decimal(6, 2)");
-
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ClinicalCenterId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ClinicalDiagnose")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("DateOfDeath")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("HasLiverFailure")
                         .HasColumnType("bit");
@@ -203,8 +194,8 @@ namespace apka2.Migrations
                     b.Property<DateTime>("ProcedureDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ProcedureTime")
-                        .HasColumnType("int");
+                    b.Property<long?>("ProcedureTime")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");

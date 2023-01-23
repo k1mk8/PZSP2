@@ -6,6 +6,8 @@ namespace apka2.Models
     public class Survey
     {
         public int Id { get; set; }
+
+        [Display(Name = "Pacjent")]
         public int PatientId  { get; set; }
         public int DoctorId { get; set; }
 

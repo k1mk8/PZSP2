@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    var patients = (IQueryable<Patient>)ViewData["patients"];
 }
 
 <h1 class="text-center">Lista ankiet medycznych</h1>
@@ -29,12 +30,21 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+            var patient = "";
+            foreach(var p in patients)
+            {
+                if (p.Id == item.Id)
+                {
+                    patient = p.Initials + " " + p.BirthDate.ToShortDateString();
+                    break;
+                }
+            }
+            <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PatientId)
+                @Html.DisplayFor(modelItem => patient)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SurveyDate)
