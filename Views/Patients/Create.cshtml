@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Create";
+    var clinicalCenters = ViewData["cliCents"] as List<SelectListItem>;
+    var clinicalDiagnosis = ViewData["cliDiag"] as List<string>;
 }
 
 <h4>Dodaj pacjenta</h4>
@@ -29,6 +31,24 @@
                 <label asp-for="StartOfCKRTDate" class="control-label"></label>
                 <input asp-for="StartOfCKRTDate" class="form-control" />
                 <span asp-validation-for="StartOfCKRTDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClinicalCenterId" class="control-label"></label>
+                <p class="form-control">
+                    @Html.DropDownListFor(m => m.ClinicalCenterId,
+                    clinicalCenters,
+                    "Wybierz ośrodek")
+                </p>
+                <span asp-validation-for="ClinicalCenterId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClinicalDiagnose" class="control-label"></label>
+                <p class="form-control">
+                    @Html.DropDownListFor(m => m.ClinicalDiagnose,
+                    new SelectList(clinicalDiagnosis),
+                    "Wybierz rozpoznanie kliniczne")
+                </p>
+                <span asp-validation-for="ClinicalDiagnose" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

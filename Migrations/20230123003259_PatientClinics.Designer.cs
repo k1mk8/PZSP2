@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using apka2.Data;
 
@@ -11,9 +12,11 @@ using apka2.Data;
 namespace apka2.Migrations
 {
     [DbContext(typeof(apka2Context))]
-    partial class apka2ContextModelSnapshot : ModelSnapshot
+    [Migration("20230123003259_PatientClinics")]
+    partial class PatientClinics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

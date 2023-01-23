@@ -29,6 +29,13 @@ namespace apka2.Models
 		public DateTime StartOfCKRTDate { get; set; }
 
 
+		public int ClinicalCenterId { get; set; }
+
+
+		[Display(Name = "Rozpoznanie kliniczne")]
+		public string? ClinicalDiagnose { get; set; }
+
+
 		[Display(Name = "Niewydolność wątroby")]
 		public bool HasLiverFailure { get; set; }
 

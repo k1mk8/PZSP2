@@ -61,6 +61,21 @@ namespace apka2.Controllers
         // GET: Patients/Create
         public IActionResult Create()
         {
+            List<SelectListItem> clinicalCenters = new List<SelectListItem>();
+            foreach (ClinicalCenter clinicalCenter in _context.ClinicalCenter)
+            {
+                clinicalCenters.Add(
+                    new SelectListItem { Value = clinicalCenter.Id.ToString(), Text = clinicalCenter.City + " " + clinicalCenter.Street });
+            }
+
+            List<string> clinicalDiagnosis = new List<string>();
+            foreach (ClinicalDiagnosis cliDiag in _context.ClinicalDiagnosis)
+            {
+                clinicalDiagnosis.Add(cliDiag.Name);
+            }
+
+            ViewData["cliCents"] = clinicalCenters;
+            ViewData["cliDiag"] = clinicalDiagnosis;
             return View();
         }
 
@@ -69,7 +84,7 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Initials,BirthDate,HospitalizationDate,StartOfCKRTDate,HasLiverFailure,Weight,Height,DateOfDeath,Remarks")] Patient patient)
+        public async Task<IActionResult> Create([Bind("Id,Initials,BirthDate,HospitalizationDate,StartOfCKRTDate,ClinicalCenterId,ClinicalDiagnose,HasLiverFailure,Weight,Height,DateOfDeath,Remarks")] Patient patient)
         {
             int doctorId = getSessionUserId();
             if (doctorId == 0)
@@ -104,6 +119,23 @@ namespace apka2.Controllers
             {
                 return NotFound();
             }
+
+            List<SelectListItem> clinicalCenters = new List<SelectListItem>();
+            foreach (ClinicalCenter clinicalCenter in _context.ClinicalCenter)
+            {
+                clinicalCenters.Add(
+                    new SelectListItem { Value = clinicalCenter.Id.ToString(), Text = clinicalCenter.City + " " + clinicalCenter.Street });
+            }
+
+            List<string> clinicalDiagnosis = new List<string>();
+            foreach (ClinicalDiagnosis cliDiag in _context.ClinicalDiagnosis)
+            {
+                clinicalDiagnosis.Add(cliDiag.Name);
+            }
+
+            ViewData["cliCents"] = clinicalCenters;
+            ViewData["cliDiag"] = clinicalDiagnosis;
+
             return View(patient);
         }
 
@@ -112,7 +144,7 @@ namespace apka2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Initials,BirthDate,HospitalizationDate,StartOfCKRTDate,HasLiverFailure,Weight,Height,DateOfDeath,Remarks")] Patient patient)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Initials,BirthDate,HospitalizationDate,StartOfCKRTDate,ClinicalCenterId,ClinicalDiagnose,HasLiverFailure,Weight,Height,DateOfDeath,Remarks")] Patient patient)
         {
             if (getSessionUserId() == 0)
             {
