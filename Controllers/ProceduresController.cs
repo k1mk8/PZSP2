@@ -348,5 +348,10 @@ namespace apka2.Controllers
             }
             return surveysIds;
         }
+
+        public async Task<IActionResult> ExportDataToExcel()
+        {
+            return RedirectToAction("ExportDataToExcel", "Patients");
+        }
     }
 }

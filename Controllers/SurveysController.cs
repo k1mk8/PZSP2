@@ -238,5 +238,9 @@ namespace apka2.Controllers
         {
           return _context.Survey.Any(e => e.Id == id);
         }
+        public async Task<IActionResult> ExportDataToExcel()
+        {
+            return RedirectToAction("ExportDataToExcel", "Patients");
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace apka2.Models
         [Display(Name = "Dawka fraxaparyny [mg/h]")]
         public decimal? FraxiparinDose { get; set; }
 
-        [Display(Name = " Interwał czasowy podawania fraxaparyny")]
+        [Display(Name = "Interwał czasowy podawania fraxaparyny")]
         public decimal? FraxiparinDosingTiming { get; set; }
 
         // Dla fraxaparyny, kolejne
