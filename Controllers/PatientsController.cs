@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using apka2.Data;
 using apka2.Models;
+using apka2.Migrations;
 
 namespace apka2.Controllers
 {
@@ -22,17 +23,23 @@ namespace apka2.Controllers
         // GET: Patients
         public async Task<IActionResult> Index()
         {
-            if (getSessionUserId() == 0)
+            var doctorId = getSessionUserId();
+            if (doctorId == 0)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
-            return View(await _context.Patient.ToListAsync());
+            if (getIsAdmin() == 1)
+            {
+                return View(await _context.Patient.ToListAsync());
+            }
+            return View(_context.Patient.Where(s => s.DoctorId == doctorId));
         }
 
         // GET: Patients/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (getSessionUserId() == 0)
+            var doctorId = getSessionUserId();
+            if (doctorId == 0)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -41,8 +48,10 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
-            var patient = await _context.Patient
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var patient = getIsAdmin() == 1 ? await _context.Patient
+                .FirstOrDefaultAsync(m => m.Id == id)
+                : await _context.Patient
+                .FirstOrDefaultAsync(m => m.Id == id && m.DoctorId == doctorId);
             if (patient == null)
             {
                 return NotFound();
@@ -96,6 +105,11 @@ namespace apka2.Controllers
             {
                 return NotFound();
             }
+
+            if (getIsAdmin() == 0 && getSessionUserId() != patient.DoctorId)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
             return View(patient);
         }
 
@@ -106,7 +120,7 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Initials,BirthDate,HospitalizationDate,StartOfCKRTDate,HasLiverFailure,Weight,Height,DateOfDeath,Remarks")] Patient patient)
         {
-            if (getSessionUserId() == 0)
+            if (getIsAdmin() == 0 && getSessionUserId() != patient.DoctorId)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -157,6 +171,11 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
+            if (getIsAdmin() == 0 && getSessionUserId() != patient.DoctorId)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
+
             return View(patient);
         }
 
@@ -176,6 +195,10 @@ namespace apka2.Controllers
             var patient = await _context.Patient.FindAsync(id);
             if (patient != null)
             {
+                if (getIsAdmin() == 0 && getSessionUserId() != patient.DoctorId)
+                {
+                    return RedirectToAction("AccessDenied", "Doctors");
+                }
                 _context.Patient.Remove(patient);
             }
             
@@ -196,6 +219,16 @@ namespace apka2.Controllers
                 return 0;
             }
             return (int)sessionId;
+        }
+
+        private int getIsAdmin()
+        {
+            var isAdmin = HttpContext.Session.GetInt32(SessionData.SessionKeyIsAdmin);
+            if (isAdmin == null)
+            {
+                return 0;
+            }
+            return (int)isAdmin;
         }
     }
 }

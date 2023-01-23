@@ -22,7 +22,7 @@ namespace apka2.Controllers
         // GET: ClinicalDiagnoses
         public async Task<IActionResult> Index()
         {
-            if (getSessionUserId() == 0)
+            if (getIsAdmin() == 0)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -32,7 +32,7 @@ namespace apka2.Controllers
         // GET: ClinicalDiagnoses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (getSessionUserId() == 0)
+            if (getIsAdmin() == 0)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -64,7 +64,7 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Remarks")] ClinicalDiagnosis clinicalDiagnosis)
         {
-            if (getSessionUserId() == 0)
+            if (getIsAdmin() == 0)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -80,7 +80,7 @@ namespace apka2.Controllers
         // GET: ClinicalDiagnoses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (getSessionUserId() == 0)
+            if (getIsAdmin() == 0)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -104,7 +104,7 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Remarks")] ClinicalDiagnosis clinicalDiagnosis)
         {
-            if (getSessionUserId() == 0)
+            if (getIsAdmin() == 0)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -139,7 +139,7 @@ namespace apka2.Controllers
         // GET: ClinicalDiagnoses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (getSessionUserId() == 0)
+            if (getIsAdmin() == 0)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -163,7 +163,7 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (getSessionUserId() == 0)
+            if (getIsAdmin() == 0)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -186,14 +186,14 @@ namespace apka2.Controllers
           return _context.ClinicalDiagnosis.Any(e => e.Id == id);
         }
 
-        private int getSessionUserId()
+        private int getIsAdmin()
         {
-            var sessionId = HttpContext.Session.GetInt32(SessionData.SessionKeyUserId);
-            if (sessionId == null)
+            var isAdmin = HttpContext.Session.GetInt32(SessionData.SessionKeyIsAdmin);
+            if (isAdmin == null)
             {
                 return 0;
             }
-            return (int)sessionId;
+            return (int)isAdmin;
         }
     }
 }
