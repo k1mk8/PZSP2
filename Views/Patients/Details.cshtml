@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
-    var clinicalCenteres = (IQueryable<ClinicalCenter>)ViewData["clinicaCenters"];
+    var clinicalCenteres = (IQueryable<ClinicalCenter>)ViewData["clinicalCenters"];
 }
 <body class="text-center">
 <h4>Dane pacjenta</h4>
@@ -51,19 +51,13 @@
                 }
             }
 
-            <td>
-                @Html.DisplayFor(model => model.ClinicalCenterId)
-            </td>
-            <td>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ClinicalCenterId)
+            </dt>
+            <dd class="col-sm-10">
                 @Html.DisplayFor(model => clinicalCenter)
-            </td>
+            </dd>
         }
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ClinicalCenterId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ClinicalCenterId)
-        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ClinicalDiagnose)
         </dt>
