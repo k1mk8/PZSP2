@@ -5,10 +5,10 @@
     var patients = (IQueryable<Patient>)ViewData["patients"];
 }
 
-<h1>Lista ankiet medycznych</h1>
+<h1 class="text-center">Lista ankiet medycznych</h1>
 
-<p>
-    <a asp-action="Create">Dodaj nową ankietę</a>
+<p class="text-center">
+    <a asp-action="Create" class="btn btn-primary">Dodaj nową ankietę</a>
 </p>
 <table class="table">
     <thead>
@@ -63,3 +63,6 @@
 }
     </tbody>
 </table>
+<p class="text-center" style="padding:100px";>
+    <a class="btn btn-primary">Generuj dane do excela</a>
+</p>

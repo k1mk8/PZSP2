@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<body class="text-center">
 <h4>Dane pacjenta</h4>
 
 <div>
@@ -90,6 +90,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edytuj dane pacjenta</a> |
-    <a asp-action="Index">Powrót do listy pacjentów</a>
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edytuj dane pacjenta</a>
+        <a asp-action="Index" class="btn btn-primary">Powrót do listy pacjentów</a>
 </div>
+</body>

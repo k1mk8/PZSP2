@@ -80,12 +80,11 @@
             </div>
         </form>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Powrót do listy pacjentów</a>
-</div>
-
+    <div>
+        <a asp-action="Index">Powrót do listy pacjentów</a>
+    </div>
+</body>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

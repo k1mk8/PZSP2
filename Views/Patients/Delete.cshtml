@@ -3,70 +3,71 @@
 @{
     ViewData["Title"] = "Delete";
 }
-
-<h3>Czy napewno chcesz usunąć pacjenta?</h3>
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Initials)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Initials)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BirthDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BirthDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HospitalizationDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HospitalizationDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartOfCKRTDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartOfCKRTDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HasLiverFailure)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HasLiverFailure)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Weight)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Weight)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Height)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Height)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfDeath)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOfDeath)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Remarks)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Remarks)
-        </dd>
-    </dl>
+<body class="text-center">
+    <h3>Czy napewno chcesz usunąć pacjenta?</h3>
+    <div>
+        <hr />
+        <dl class="row" style="margin-left:20%;">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Initials)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Initials)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.BirthDate)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.HospitalizationDate)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.HospitalizationDate)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.StartOfCKRTDate)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.StartOfCKRTDate)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.HasLiverFailure)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.HasLiverFailure)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Weight)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Weight)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Height)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Height)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.DateOfDeath)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.DateOfDeath)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Remarks)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Remarks)
+            </dd>
+        </dl>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Usuń" class="btn btn-danger" /> |
-        <a asp-action="Index">Wróć</a>
-    </form>
-</div>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Usuń" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-primary">Wróć</a>
+        </form>
+    </div>
+</body>
