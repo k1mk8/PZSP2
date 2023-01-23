@@ -25,6 +25,16 @@ namespace apka2.Controllers
             return (int)sessionId;
         }
 
+        private int getIsAdmin()
+        {
+            var isAdmin = HttpContext.Session.GetInt32(SessionData.SessionKeyIsAdmin);
+            if (isAdmin == null)
+            {
+                return 0;
+            }
+            return (int)isAdmin;
+        }
+
         public SurveysController(apka2Context context)
         {
             _context = context;
@@ -33,17 +43,25 @@ namespace apka2.Controllers
         // GET: Surveys
         public async Task<IActionResult> Index()
         {
-            if (getSessionUserId() == 0)
+            var doctorId = getSessionUserId();
+            if (doctorId == 0)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
-            return View(await _context.Survey.ToListAsync());
+            ViewData["patients"] = _context.Patient;
+
+            if (getIsAdmin() == 1)
+            {
+                return View(await _context.Survey.ToListAsync());
+            }
+            return View(_context.Survey.Where(s => s.DoctorId == doctorId));
         }
 
         // GET: Surveys/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (getSessionUserId() == 0)
+            var doctorId = getSessionUserId();
+            if (doctorId == 0)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -52,8 +70,10 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
-            var survey = await _context.Survey
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var survey = getIsAdmin() == 1 ? await _context.Survey
+                .FirstOrDefaultAsync(m => m.Id == id)
+                : await _context.Survey
+                .FirstOrDefaultAsync(m => m.Id == id && m.DoctorId == doctorId);
             if (survey == null)
             {
                 return NotFound();
@@ -107,10 +127,7 @@ namespace apka2.Controllers
         // GET: Surveys/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (getSessionUserId() == 0)
-            {
-                return RedirectToAction("AccessDenied", "Doctors");
-            }
+            
             if (id == null || _context.Survey == null)
             {
                 return NotFound();
@@ -121,6 +138,12 @@ namespace apka2.Controllers
             {
                 return NotFound();
             }
+
+            if (getIsAdmin() == 0 && getSessionUserId() != survey.DoctorId)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
+
             return View(survey);
         }
 
@@ -131,7 +154,7 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,PatientId,DoctorId,SurveyDate,ECMO,Anuria,ArterialHypertension,Overhydration,AKI,Creatinine,Urea,IonDisorder,MetabolicAcidosis,ExogenousPoison,SepticShock,LowerNephroneSyndrom,Anticoagulation,TypeOfVascularAccess,CatheterThickness,CatheterLength,VascularAccessSite")] Survey survey)
         {
-            if (getSessionUserId() == 0)
+            if (getIsAdmin() == 0 && getSessionUserId() != survey.DoctorId)
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -166,10 +189,6 @@ namespace apka2.Controllers
         // GET: Surveys/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (getSessionUserId() == 0)
-            {
-                return RedirectToAction("AccessDenied", "Doctors");
-            }
             if (id == null || _context.Survey == null)
             {
                 return NotFound();
@@ -182,6 +201,11 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
+            if (getIsAdmin() == 0 && getSessionUserId() != survey.DoctorId)
+            {
+                return RedirectToAction("AccessDenied", "Doctors");
+            }
+
             return View(survey);
         }
 
@@ -190,10 +214,6 @@ namespace apka2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (getSessionUserId() == 0)
-            {
-                return RedirectToAction("AccessDenied", "Doctors");
-            }
             if (_context.Survey == null)
             {
                 return Problem("Entity set 'apka2Context.Survey'  is null.");
@@ -201,6 +221,10 @@ namespace apka2.Controllers
             var survey = await _context.Survey.FindAsync(id);
             if (survey != null)
             {
+                if (getIsAdmin() == 0 && getSessionUserId() != survey.DoctorId)
+                {
+                    return RedirectToAction("AccessDenied", "Doctors");
+                }
                 _context.Survey.Remove(survey);
             }
             
