@@ -195,7 +195,7 @@ namespace apka2.Controllers
             }
 
             var surveysIds = getSurveysIds(doctorId);
-            if (getIsAdmin() == 0 && surveysIds.Contains(procedure.SurveyId))
+            if (getIsAdmin() == 0 && !surveysIds.Contains(procedure.SurveyId))
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -211,7 +211,7 @@ namespace apka2.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("Id,WasEnded,Anticoagulation,SurveyId,ProcedureDate,ECMO,Filter,ProcedureTime,ExtracorporealClearingMethod,CitrateConcentrate,UnplanedTermination,TerminationReason,BloodReturn,PatientDeath,DeathDate,Remarks")] Procedure procedure)
         {
             var surveysIds = getSurveysIds(getSessionUserId());
-            if (getIsAdmin() == 0 && surveysIds.Contains(procedure.SurveyId))
+            if (getIsAdmin() == 0 && !surveysIds.Contains(procedure.SurveyId))
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -264,7 +264,7 @@ namespace apka2.Controllers
             }
 
             var surveysIds = getSurveysIds(doctorId);
-            if (getIsAdmin() == 0 && surveysIds.Contains(procedure.SurveyId))
+            if (getIsAdmin() == 0 && !surveysIds.Contains(procedure.SurveyId))
             {
                 return RedirectToAction("AccessDenied", "Doctors");
             }
@@ -293,7 +293,7 @@ namespace apka2.Controllers
             if (procedure != null)
             {
                 var surveysIds = getSurveysIds(doctorId);
-                if (getIsAdmin() == 0 && surveysIds.Contains(procedure.SurveyId))
+                if (getIsAdmin() == 0 && !surveysIds.Contains(procedure.SurveyId))
                 {
                     return RedirectToAction("AccessDenied", "Doctors");
                 }
@@ -340,7 +340,7 @@ namespace apka2.Controllers
         private List<int> getSurveysIds(int doctorId)
         {
             var surveys = _context.Survey.
-                Where(s => s.Id == doctorId).ToList();
+                Where(s => s.DoctorId == doctorId).ToList();
             var surveysIds = new List<int>();
             foreach (var survey in surveys)
             {

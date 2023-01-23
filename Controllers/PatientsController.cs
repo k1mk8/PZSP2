@@ -1,12 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using apka2.Data;
 using apka2.Models;
+using Excel = Microsoft.Office.Interop.Excel;
 using apka2.Migrations;
 
 namespace apka2.Controllers
@@ -272,6 +274,49 @@ namespace apka2.Controllers
                 return 0;
             }
             return (int)isAdmin;
+        }
+
+        // GET
+        [HttpGet]
+        public async Task<IActionResult> ExportPatientsDataToExcel()
+        {
+            Excel.Application excelApp;
+            Excel.Workbook excelWorkbook;
+            Excel.Worksheet excelWorksheet;
+            object missingValues = System.Reflection.Missing.Value;
+            excelApp = new Excel.Application();
+            excelApp.Visible = false;
+            excelWorkbook = (Excel.Workbook)(excelApp.Workbooks.Add(Missing.Value));
+            excelWorksheet = (Excel.Worksheet)excelWorkbook.ActiveSheet;
+
+            List<Patient> patients = await _context.Patient.ToListAsync();
+
+            excelWorksheet.Cells[1, 1] = "Inicjały";
+            excelWorksheet.Cells[1, 2] = "Data urodzenia";
+            excelWorksheet.Cells[1, 3] = "Data hospitalizacji";
+            excelWorksheet.Cells[1, 4] = "Data rozpoczęcia CKRT";
+            excelWorksheet.Cells[1, 5] = "Niewydolność wątroby";
+            excelWorksheet.Cells[1, 6] = "Masa ciała";
+            excelWorksheet.Cells[1, 7] = "Wzrost";
+            excelWorksheet.Cells[1, 8] = "Data zgonu";
+            excelWorksheet.Cells[1, 9] = "Uwagi";
+
+            for (int rowNumber = 0 ; rowNumber < patients.Count; rowNumber++)
+            {
+                excelWorksheet.Cells[rowNumber + 2, 1] = patients[rowNumber].Initials;
+                excelWorksheet.Cells[rowNumber + 2, 2] = patients[rowNumber].BirthDate;
+                excelWorksheet.Cells[rowNumber + 2, 3] = patients[rowNumber].HospitalizationDate;
+                excelWorksheet.Cells[rowNumber + 2, 4] = patients[rowNumber].StartOfCKRTDate;
+                excelWorksheet.Cells[rowNumber + 2, 5] = patients[rowNumber].HasLiverFailure;
+                excelWorksheet.Cells[rowNumber + 2, 6] = patients[rowNumber].Weight;
+                excelWorksheet.Cells[rowNumber + 2, 7] = patients[rowNumber].Height;
+                excelWorksheet.Cells[rowNumber + 2, 8] = patients[rowNumber].DateOfDeath;
+                excelWorksheet.Cells[rowNumber + 2, 9] = patients[rowNumber].Remarks;
+            }
+
+            excelWorkbook.Close(true, missingValues, missingValues);
+            excelApp.Quit();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
