@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    var clinicalCenteres = (IQueryable<ClinicalCenter>)ViewData["clinicaCenters"];
 }
 <body class="text-center">
 <h4>Dane pacjenta</h4>
@@ -39,6 +40,24 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.StartOfCKRTDate)
         </dd>
+        @{
+            var clinicalCenter = "";
+            foreach (ClinicalCenter c in clinicalCenteres)
+            {
+                if (c.Id == Model.ClinicalCenterId)
+                {
+                    clinicalCenter = c.City + " " + c.Street;
+                    break;
+                }
+            }
+
+            <td>
+                @Html.DisplayFor(model => model.ClinicalCenterId)
+            </td>
+            <td>
+                @Html.DisplayFor(model => clinicalCenter)
+            </td>
+        }
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ClinicalCenterId)
         </dt>

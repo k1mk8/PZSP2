@@ -55,6 +55,8 @@ namespace apka2.Controllers
                 return NotFound();
             }
 
+            ViewData["clinicalCenters"] = _context.ClinicalCenter;
+
             var patient = getIsAdmin() == 1 ? await _context.Patient
                 .FirstOrDefaultAsync(m => m.Id == id)
                 : await _context.Patient

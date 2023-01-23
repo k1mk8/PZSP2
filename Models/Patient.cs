@@ -29,6 +29,7 @@ namespace apka2.Models
 		public DateTime StartOfCKRTDate { get; set; }
 
 
+		[Display(Name = "Ośrodek kliniczny")]
 		public int ClinicalCenterId { get; set; }
 
 
