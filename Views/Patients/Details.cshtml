@@ -3,12 +3,12 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<body class="text-center">
 <h4>Dane pacjenta</h4>
 
 <div>
     <hr />
-    <dl class="row">
+        <dl class="row" style="margin-left:20%;">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Initials)
         </dt>
@@ -66,6 +66,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edytuj dane pacjenta</a> |
-    <a asp-action="Index">Powrót do listy pacjentów</a>
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edytuj dane pacjenta</a>
+        <a asp-action="Index" class="btn btn-primary">Powrót do listy pacjentów</a>
 </div>
+</body>

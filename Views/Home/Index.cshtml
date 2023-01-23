@@ -2,13 +2,21 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_LogInLayout.cshtml";
 }
-
-<div class="text-center">
-    <h2>Witamy na stronie projektu "Ogólnopolski Rejest Ciągłych Metod Nerkozastępczych u Dzieci"</h2>
-    <p>
-        <a asp-controller="Doctors" asp-action="LogIn" methods="get">Zaloguj się</a>
-    </p>
-    <p>
-        <a asp-controller="Doctors" asp-action="CreateAccount" methods="get">Załóż konto</a>
-    </p>
-</div>
+<html>
+    <head>
+        <link rel="stylesheet" href="../Content/Home.css" />
+        <link rel="stylesheet" href="/lib/bootstrap/dist/css/boostrap.css" />
+    </head>
+<body>
+    <div class="text-center">
+            <p></p>
+            <h2 class="align-content-xxl-center" style="padding:100px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" >Witamy na stronie projektu "Ogólnopolski Rejestr Ciągłych Metod Nerkozastępczych u Dzieci"</h2>
+            <p>
+                <a asp-controller="Doctors" asp-action="LogIn" methods="get" class="btn btn-primary btn-lg">Zaloguj się</a>
+            </p>
+            <p>
+                <a asp-controller="Doctors" asp-action="CreateAccount" class="btn btn-primary" methods="get">Załóż konto</a>
+            </p>
+        </div>
+    </body>
+</html>
